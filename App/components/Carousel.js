@@ -11,19 +11,19 @@ function infiniteScroll(dataList){
     const numberOfData = dataList.length
     let scrollValue = 0, scrolled = 0
 
-    setInterval(function() {
-        scrolled ++
-        if(scrolled < numberOfData)
-        scrollValue = scrollValue + width
+    // setInterval(function() {
+    //     scrolled ++
+    //     if(scrolled < numberOfData)
+    //     scrollValue = scrollValue + width
 
-        else{
-            scrollValue = 0
-            scrolled = 0
-        }
+    //     else{
+    //         scrollValue = 0
+    //         scrolled = 0
+    //     }
 
-        this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
+    //     this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
         
-    }, 10000)
+    // }, 10000)
 }
 
 

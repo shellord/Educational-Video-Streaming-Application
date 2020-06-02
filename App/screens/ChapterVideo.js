@@ -23,11 +23,11 @@ const ChapterVideo = ({ route }) => {
       <Card
           title='Description'
           >
-      <Text style={{marginBottom: 10}}>
-          {route.params.description}
-      </Text>
+        <Text style={{marginBottom: 10}}>
+            {route.params.description}
+        </Text>
      
-            </Card>
+      </Card>
       </View>
     </View>
   )
