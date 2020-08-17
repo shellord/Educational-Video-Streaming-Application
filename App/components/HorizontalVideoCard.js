@@ -9,7 +9,7 @@ const HorizontalVideoCard = (props) =>{
             <Image source={props.imageUri} style={styles.subjectImage}/>
         </View>
         <View style={styles.subjectText}>
-            <Text numberOfLines={3}>{props.name}</Text>
+            <Text numberOfLines={1}>{props.name}</Text>
             <View style={styles.tagcontainer}>
             <View style={styles.tagTextContainer}>
                         <View style={styles.tagStyle}>

@@ -2,11 +2,14 @@ import React,{useState,useEffect} from 'react'
 import {StyleSheet,Text,FlatList,View} from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import TopicCard from '../components/TopicCard'
+import { AuthContext } from "../context"
 
 const TopicList = ({route}) => {
+
+    const {API_URL} = React.useContext(AuthContext)
     const [topics,setTopics] = useState([{}]);
     useEffect(() => {
-        fetch(`http://3.134.99.150:3000/api/topics/${route.params.name}`)
+        fetch(API_URL+`/api/topics/${route.params.name}`)
         .then((response) => response.json())
         .then((json) => {
               setTopics(json.response)

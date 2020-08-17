@@ -17,6 +17,7 @@ import {Icon} from 'react-native-elements'
 import TopicList from "./screens/TopicList"
 import ChapterVideo from "./screens/ChapterVideo"
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import DrawerProfile from './components/DrawerProfile'
 
 const AuthStack = createStackNavigator()
 
@@ -131,6 +132,7 @@ const Logout = ()=>{
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
+      <DrawerProfile />
       <DrawerItemList {...props} />
       <DrawerItem
         label="Logout"
@@ -213,7 +215,11 @@ export default () => {
       },
       signOut: () => {
         Firebase.auth().signOut()
-      }
+      },
+      blah: () => {
+        Firebase.auth().signOut()
+      },
+      API_URL:'http://192.168.1.11:3000'
     }
   }, [])
 

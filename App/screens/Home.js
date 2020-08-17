@@ -4,14 +4,16 @@ import Carousel from '../components/Carousel'
 import HorizontalScroll from '../components/HorizontalScroll'
 import LatestVideos from '../components/LatestVideos'
 import { ScrollView } from 'react-native-gesture-handler'
+import { AuthContext } from "../context"
 
 const Home = ({ navigation }) =>{
+    const {API_URL} = React.useContext(AuthContext)
     const [subjects,setSubjects] = useState([{}])
     const [featuredvids,setFeaturedvids] = useState([{}])
     const [latestvids,setLatestvids] = useState([{}])
 
     useEffect(() => {
-      fetch('http://3.134.99.150:3000/api/subjects')
+      fetch(API_URL+'/api/subjects')
       .then((response) => response.json())
       .then((json) => {
             setSubjects(json.response)
@@ -19,7 +21,7 @@ const Home = ({ navigation }) =>{
       .catch((error) => {
         alert("Network Issue!.Check your internet connection")
       })
-      fetch('http://3.134.99.150:3000/api/videos/featured')
+      fetch(API_URL+'/api/videos/featured')
       .then((response) => response.json())
       .then((json) => {
             setFeaturedvids(json.response)
@@ -27,7 +29,7 @@ const Home = ({ navigation }) =>{
       .catch((error) => {
         alert("Network Issue!.Check your internet connection")
       })      
-      fetch('http://3.134.99.150:3000/api/videos/latest')
+      fetch(API_URL+'/api/videos/latest')
       .then((response) => response.json())
       .then((json) => {
             setLatestvids(json.response) 
@@ -50,4 +52,5 @@ const Home = ({ navigation }) =>{
           backgroundColor:'white'
         }
   })
+  
   export default Home

@@ -3,13 +3,12 @@ import {Text,TouchableOpacity,useContext,View,StyleSheet,TextInput} from 'react-
 import { AuthContext } from "../context"
 
 const Signin = ({ navigation }) => {
-    const { signIn } = React.useContext(AuthContext)
+    const { signIn,API_URL } = React.useContext(AuthContext)
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
-
     return (
-      <View style={styles.container}>                
+      <View style={styles.container}> 
 
       <TextInput style={styles.inputText}                 
           onChangeText={text => setEmail(text)}    

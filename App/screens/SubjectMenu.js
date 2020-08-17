@@ -2,13 +2,15 @@ import React,{useEffect,useState} from 'react'
 import {Text,Button,useContext,View,FlatList} from 'react-native'
 import VideoCard from '../components/VideoCard'
 import VideoCardModel from '../components/VideoCardModel'
+import { AuthContext } from "../context"
 
 const SubjectMenu = ({ route }) => {
+  const {API_URL} = React.useContext(AuthContext)
   const [videos,setVideos] =  useState([{}])
   const [isLoaded,setIsLoaded] = useState(0)
   
   useEffect(() => {
-    fetch(`http://3.134.99.150:3000/api/videos/${route.params.subject}/${route.params.name}`)
+    fetch(API_URL+`/api/videos/${route.params.subject}/${route.params.name}`)
     .then((response) => response.json())
     .then((json) => {
           setVideos(json.response)

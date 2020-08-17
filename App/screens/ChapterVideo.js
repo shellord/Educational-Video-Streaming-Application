@@ -1,5 +1,7 @@
 import React,{useRef} from 'react'
 import {View,StyleSheet} from 'react-native'
+import { WebView } from 'react-native-webview';
+
 import { Video } from 'expo-av'
 import { Text,Card, ListItem, Icon } from 'react-native-elements'
 
@@ -26,9 +28,17 @@ const ChapterVideo = ({ route }) => {
         <Text style={{marginBottom: 10}}>
             {route.params.description}
         </Text>
-     
       </Card>
       </View>
+      <WebView
+        javaScriptEnabled={true}
+        scrollEnabled={false}
+        allowsFullscreenVideo={true}
+        source={{
+          uri: 'https://smnbbrv.github.io/ngx-plyr/'
+        }}
+        style={{ marginTop: 20 }}
+      />
     </View>
   )
 }
