@@ -9,7 +9,7 @@ const ChapterVideo = ({ route }) => {
   const videoRef = useRef();
   return(
     <View style={styles.container}>
-      <Video
+      {/* <Video
         source={{ uri: route.params.url }}
         rate={1.0}
         volume={1.0}
@@ -29,13 +29,13 @@ const ChapterVideo = ({ route }) => {
             {route.params.description}
         </Text>
       </Card>
-      </View>
+      </View> */}
       <WebView
         javaScriptEnabled={true}
-        scrollEnabled={false}
+        scrollEnabled={true}
         allowsFullscreenVideo={true}
         source={{
-          uri: 'https://smnbbrv.github.io/ngx-plyr/'
+          uri: 'http://192.168.1.12'
         }}
         style={{ marginTop: 20 }}
       />

@@ -18,6 +18,7 @@ import TopicList from "./screens/TopicList"
 import ChapterVideo from "./screens/ChapterVideo"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DrawerProfile from './components/DrawerProfile'
+import MobileAuth from './screens/MobileAuth'
 
 const AuthStack = createStackNavigator()
 
@@ -25,7 +26,8 @@ const AuthStackScreen = () => (
   <AuthStack.Navigator>
     <AuthStack.Screen
       name="Signin"
-      component={Signin}
+      // component={Signin}
+      component={MobileAuth}
       options={{ title: "Sign In" }}
     />
     <AuthStack.Screen
@@ -198,7 +200,7 @@ export default () => {
   }
 
   const handleSignIn =(email,password) =>{
-    Firebase.auth().signInWithEmailAndPassword(email,password)
+    Firebase.auth().signInWithPhoneNumber('+918592800500')
             .then(() =>setUserToken(Firebase.auth().currentUser))
             .catch(error =>{
                 alert(error.message)
@@ -219,7 +221,7 @@ export default () => {
       blah: () => {
         Firebase.auth().signOut()
       },
-      API_URL:'http://192.168.1.11:3000'
+      API_URL:'http://192.168.1.12:3000'
     }
   }, [])
 

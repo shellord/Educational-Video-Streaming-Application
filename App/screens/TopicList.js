@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import {StyleSheet,Text,FlatList,View} from 'react-native'
+import {StyleSheet,Text,FlatList,View,SafeAreaView} from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import TopicCard from '../components/TopicCard'
 import { AuthContext } from "../context"
+
 
 const TopicList = ({route}) => {
 
@@ -20,7 +21,7 @@ const TopicList = ({route}) => {
 
       }, [])
     return(
-        <View>
+        <SafeAreaView>
             <FlatList
             data={topics}
             renderItem={({ item }) => (
@@ -36,7 +37,7 @@ const TopicList = ({route}) => {
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
             />
-        </View>
+        </SafeAreaView>
     )
 }
 

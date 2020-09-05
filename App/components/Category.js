@@ -19,8 +19,8 @@ const Category = (props) =>{
 
 const styles=StyleSheet.create({
     subjectList:{
-        height:130,
-        width:130,
+        height:140,
+        width:148,
         marginLeft:20,
         borderWidth:0,
         borderColor:'#dddddd'
@@ -33,6 +33,7 @@ const styles=StyleSheet.create({
       },
       subjectImage:{
         flex:2,
+        borderRadius:10,
         resizeMode:'cover'
       }
 })

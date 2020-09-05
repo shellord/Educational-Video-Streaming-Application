@@ -15,7 +15,7 @@ const VideoCardModel = (props) => {
                     <Text style={styles.headingTextStyle} numberOfLines={2}>{props.title} </Text>
                     </View>
                     <View style={styles.descriptionTextContainer}>
-                        <Text  style={styles.descriptionTextStyle} numberOfLines={3}>{props.description}</Text>
+                        <Text  style={styles.descriptionTextStyle} numberOfLines={2}>{props.description}</Text>
                     </View>
                     <View style={styles.tagTextContainer}>
                         <View style={styles.tagStyle}>
