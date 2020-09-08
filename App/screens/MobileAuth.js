@@ -1,20 +1,19 @@
-import * as React from "react";
-import Constants from 'expo-constants';
+import * as React from "react"
+import Constants from 'expo-constants'
 import {
   Text,
   View,
   StyleSheet,
   TextInput,
-  Button,
-  Alert,
   ActivityIndicator,
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard
-} from "react-native";
-import * as FirebaseRecaptcha from "expo-firebase-recaptcha";
-import * as firebase from "firebase";
+} from "react-native"
+import * as FirebaseRecaptcha from "expo-firebase-recaptcha"
+import * as firebase from "firebase"
+
 
 // PROVIDE VALID FIREBASE CONFIG HERE
 // https://firebase.google.com/docs/web/setup
@@ -32,23 +31,24 @@ const FIREBASE_CONFIG = {
 
 try {
   if (FIREBASE_CONFIG.apiKey) {
-    firebase.initializeApp(FIREBASE_CONFIG);
+    firebase.initializeApp(FIREBASE_CONFIG)
   }
 } catch (err) {
   // ignore app already initialized error on snack
 }
 
 export default function PhoneAuthScreen() {
-  const recaptchaVerifier = React.useRef(null);
-  const verificationCodeTextInput = React.useRef(null);
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [verificationId, setVerificationId] = React.useState("");
-  const [verifyError, setVerifyError] = React.useState();
-  const [verifyInProgress, setVerifyInProgress] = React.useState(false);
-  const [verificationCode, setVerificationCode] = React.useState("");
-  const [confirmError, setConfirmError] = React.useState();
-  const [confirmInProgress, setConfirmInProgress] = React.useState(false);
-  const isConfigValid = !!FIREBASE_CONFIG.apiKey;
+  const recaptchaVerifier = React.useRef(null)
+  const verificationCodeTextInput = React.useRef(null)
+  const [phoneNumber, setPhoneNumber] = React.useState("")
+  const [verificationId, setVerificationId] = React.useState("")
+  const [verifyError, setVerifyError] = React.useState()
+  const [verifyInProgress, setVerifyInProgress] = React.useState(false)
+  const [verificationCode, setVerificationCode] = React.useState("")
+  const [confirmError, setConfirmError] = React.useState()
+  const [confirmInProgress, setConfirmInProgress] = React.useState(false)
+  const isConfigValid = !!FIREBASE_CONFIG.apiKey
+
 
   return (
     <TouchableWithoutFeedback 
@@ -72,29 +72,29 @@ export default function PhoneAuthScreen() {
           textContentType="telephoneNumber"
           placeholder="Enter Phone Number"
           editable={!verificationId}
-          onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
+          onChangeText={(phoneNumber) => setPhoneNumber("+91"+phoneNumber)}
         />
         <TouchableOpacity
           style={styles.appButtonContainer}
           title={`${verificationId ? "Resend" : "Send"} Verification Code`}
           disabled={!phoneNumber}
           onPress={async () => {
-            const phoneProvider = new firebase.auth.PhoneAuthProvider();
+            const phoneProvider = new firebase.auth.PhoneAuthProvider()
             try {
-              setVerifyError(undefined);
-              setVerifyInProgress(true);
-              setVerificationId("");
+              setVerifyError(undefined)
+              setVerifyInProgress(true)
+              setVerificationId("")
               const verificationId = await phoneProvider.verifyPhoneNumber(
                 phoneNumber,
                 // @ts-ignore
                 recaptchaVerifier.current
-              );
-              setVerifyInProgress(false);
-              setVerificationId(verificationId);
-              verificationCodeTextInput.current?.focus();
+              )
+              setVerifyInProgress(false)
+              setVerificationId(verificationId)
+              verificationCodeTextInput.current?.focus()
             } catch (err) {
-              setVerifyError(err);
-              setVerifyInProgress(false);
+              setVerifyError(err)
+              setVerifyInProgress(false)
             }
           }}
         >
@@ -125,23 +125,22 @@ export default function PhoneAuthScreen() {
           disabled={!verificationCode}
           onPress={async () => {
             try {
-              setConfirmError(undefined);
-              setConfirmInProgress(true);
+              setConfirmError(undefined)
+              setConfirmInProgress(true)
               const credential = firebase.auth.PhoneAuthProvider.credential(
                 verificationId,
                 verificationCode
-              );
+              )
               const authResult = await firebase
                 .auth()
-                .signInWithCredential(credential);
-              setConfirmInProgress(false);
-              setVerificationId("");
-              setVerificationCode("");
-              verificationCodeTextInput.current?.clear();
-              Alert.alert("Phone authentication successful!");
+                .signInWithCredential(credential)
+              setConfirmInProgress(false)
+              setVerificationId("")
+              setVerificationCode("")
+              verificationCodeTextInput.current?.clear()
             } catch (err) {
-              setConfirmError(err);
-              setConfirmInProgress(false);
+              setConfirmError(err)
+              setConfirmInProgress(false)
             }
           }}
         >
@@ -161,7 +160,7 @@ export default function PhoneAuthScreen() {
       )}
     </View>
     </TouchableWithoutFeedback>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -248,4 +247,4 @@ const styles = StyleSheet.create({
   overlayText: {
     fontWeight: "bold",
   },
-});
+})

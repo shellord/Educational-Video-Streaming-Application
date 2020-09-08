@@ -1,19 +1,30 @@
 import React,{useState,useEffect} from 'react'
-import {View, StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 import Carousel from '../components/Carousel'
 import HorizontalScroll from '../components/HorizontalScroll'
 import LatestVideos from '../components/LatestVideos'
 import { ScrollView } from 'react-native-gesture-handler'
 import { AuthContext } from "../context"
+import  Firebase from '../../config/Firebase'
 
 const Home = ({ navigation }) =>{
     const {API_URL} = React.useContext(AuthContext)
     const [subjects,setSubjects] = useState([{}])
     const [featuredvids,setFeaturedvids] = useState([{}])
     const [latestvids,setLatestvids] = useState([{}])
+    const [userclass,setUserClass] = useState(1)
 
     useEffect(() => {
-      fetch(API_URL+'/api/subjects')
+      fetch(API_URL+`/api/users/${Firebase.auth().currentUser.phoneNumber}`)
+      .then((response) => response.json())
+      .then((json) => {
+           setUserClass(json.response[0]['class'])
+      })
+      .catch((error) => {
+      alert("Error!")
+      })
+
+      fetch(API_URL+'/api/subjects/'+userclass)
       .then((response) => response.json())
       .then((json) => {
             setSubjects(json.response)
@@ -21,7 +32,7 @@ const Home = ({ navigation }) =>{
       .catch((error) => {
         alert("Network Issue!.Check your internet connection")
       })
-      fetch(API_URL+'/api/videos/featured')
+      fetch(API_URL+'/api/videos/featured/'+userclass)
       .then((response) => response.json())
       .then((json) => {
             setFeaturedvids(json.response)
@@ -29,20 +40,21 @@ const Home = ({ navigation }) =>{
       .catch((error) => {
         alert("Network Issue!.Check your internet connection")
       })      
-      fetch(API_URL+'/api/videos/latest')
+      fetch(API_URL+'/api/videos/latest/'+userclass)
       .then((response) => response.json())
       .then((json) => {
             setLatestvids(json.response) 
       })
       .catch((error) => {
         alert("Network Issue!.Check your internet connection")
-      })      
-    }, [])
+      })    
+        
+    }, [userclass])
     return (
         <ScrollView style={styles.container}>
-          <Carousel data={featuredvids} nav={navigation}/>
-          <HorizontalScroll subjects={subjects} navigation={navigation} />
-          <LatestVideos data={latestvids} navigation={navigation} />
+          <Carousel data={featuredvids} nav={navigation} userclass={userclass}/>
+          <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
+          <LatestVideos data={latestvids} navigation={navigation} userclass={userclass} />
         </ScrollView>
       )
     }

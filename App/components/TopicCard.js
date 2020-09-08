@@ -1,11 +1,10 @@
 import React from 'react'
-import { ScrollView,View, Text, Image,StyleSheet,ImageBackground} from 'react-native'
+import { View, Text,StyleSheet,ImageBackground} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import SubjectMenu from '../screens/SubjectMenu'
 
 const TopicCard = (props) => {
     return(
-            <TouchableOpacity onPress={()=>{props.navigation.push('subject',{name:props.item.name,subject:props.subject,nav:props.navigation})}}>
+            <TouchableOpacity onPress={()=>{props.navigation.push('subject',{name:props.item.name,subject:props.subject,nav:props.navigation,userclass:props.userclass})}}>
                 <View style={styles.container}>
                     <ImageBackground source={{uri:props.item.imguri}} style={styles.ImageBackgroundStyle}>
                         <View style={styles.textContainer}>
@@ -21,6 +20,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         margin:5,
+        padding:10
     },  
     textContainer:{
         flex:1,

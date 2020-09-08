@@ -9,7 +9,7 @@ const HorizontalVideoCard = (props) =>{
             <Image source={props.imageUri} style={styles.subjectImage}/>
         </View>
         <View style={styles.subjectText}>
-            <Text numberOfLines={1}>{props.name}</Text>
+            <Text numberOfLines={2} style={styles.titleStyle}>{props.name}</Text>
             <View style={styles.tagcontainer}>
             <View style={styles.tagTextContainer}>
                         <View style={styles.tagStyle}>
@@ -32,9 +32,11 @@ const styles=StyleSheet.create({
         width:120,
         marginLeft:20,
         borderWidth:0,
-        borderColor:'#dddddd'
+        borderColor:'#dddddd',
       },
-
+      titleStyle:{
+        fontSize:12
+      },
       subjectText:{
         flex:1,
         paddingLeft:10,
@@ -54,7 +56,6 @@ const styles=StyleSheet.create({
           marginTop:5,
           flexDirection:'row',
           alignItems:'center',
-          marginBottom:10,
       },
       tagTextStyle:{
           color:'#607d8b',

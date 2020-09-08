@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -6,9 +6,7 @@ import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem
 import Firebase from '../config/Firebase'
 import { AuthContext } from "./context"
 import Signup from './screens/Signup'
-import Signin from './screens/Signin'
 import Profile from './screens/Profile'
-import Search2 from './screens/Search2'
 import Search from "./screens/Search";
 import SubjectMenu from './screens/SubjectMenu'
 import Home from './screens/Home'
@@ -19,16 +17,23 @@ import ChapterVideo from "./screens/ChapterVideo"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DrawerProfile from './components/DrawerProfile'
 import MobileAuth from './screens/MobileAuth'
+import PostLogin from './screens/PostLogin'
 
 const AuthStack = createStackNavigator()
+const Tabs = createBottomTabNavigator()
+const HomeStack = createStackNavigator()
+const SearchStack = createStackNavigator()
+const ProfileStack = createStackNavigator()
+const Drawer = createDrawerNavigator()
+const RootStack = createStackNavigator()
+const API_URL='http://192.168.1.12:3000'
 
 const AuthStackScreen = () => (
   <AuthStack.Navigator>
     <AuthStack.Screen
       name="Signin"
-      // component={Signin}
       component={MobileAuth}
-      options={{ title: "Sign In" }}
+      options={{ title: "Log in" }}
     />
     <AuthStack.Screen
       name="Signup"
@@ -38,15 +43,14 @@ const AuthStackScreen = () => (
   </AuthStack.Navigator>
 )
 
-const Tabs = createBottomTabNavigator()
-const HomeStack = createStackNavigator()
-const SearchStack = createStackNavigator()
-
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={Home} 
+    <HomeStack.Screen name="Marvel Creative Learning App" component={Home} 
       options={{
-        
+        headerTitleStyle:{
+          fontSize:16,
+          color:'#3f51b5'
+        },
         headerLeft: () => (
           <Icon name='menu'
             size={34}
@@ -74,20 +78,28 @@ const HomeStackScreen = ({navigation}) => (
       name="chaptervideo"
       component={ChapterVideo}
       options={({ route }) => ({
-        title: route.params.name
+        title: route.params.name,
+        headerShown:false
       })}    
       />
   </HomeStack.Navigator>
 )
 
 const SearchStackScreen = () => (
-  <SearchStack.Navigator>
+  <SearchStack.Navigator
+  headerMode='none'
+  >
     <SearchStack.Screen name="Search" component={Search} />
-    <SearchStack.Screen name="Search2" component={Search2} />
+    <SearchStack.Screen
+      name="chaptervideo"
+      component={ChapterVideo}
+      options={({ route }) => ({
+        title: route.params.name
+      })}    
+      />
   </SearchStack.Navigator>
 )
 
-const ProfileStack = createStackNavigator()
 const ProfileStackScreen = () => (
   <ProfileStack.Navigator>
     <ProfileStack.Screen name="Profile" component={Profile} />
@@ -143,7 +155,6 @@ function CustomDrawerContent(props) {
     </DrawerContentScrollView>
   );
 }
-const Drawer = createDrawerNavigator()
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
     <Drawer.Screen name="Home" component={TabsScreen} />
@@ -151,17 +162,25 @@ const DrawerScreen = () => (
   </Drawer.Navigator>
 )
 
-const RootStack = createStackNavigator()
-const RootStackScreen = ({ userToken }) => (
+const RootStackScreen = ({ userToken,isFinishedSignup }) => (
   <RootStack.Navigator headerMode="none">
-    {userToken ? (
-      <RootStack.Screen
-        name="App"
-        component={DrawerScreen}
-        options={{
-          animationEnabled: false
-        }}
-      />
+    {
+
+    userToken ?(isFinishedSignup?( 
+    <RootStack.Screen
+      name="App"
+      component={DrawerScreen}
+      options={{
+        animationEnabled: false
+      }}
+    />):( 
+    <RootStack.Screen
+      name="PostLogin"
+      component={PostLogin}
+      options={{
+        animationEnabled: false
+      }}
+    />)
     ) : (
       <RootStack.Screen
         name="Auth"
@@ -170,7 +189,9 @@ const RootStackScreen = ({ userToken }) => (
           animationEnabled: false
         }}
       />
-    )}
+    )
+
+    }
   </RootStack.Navigator>
 )
 
@@ -179,59 +200,80 @@ export default () => {
 
   const [userToken, setUserToken] = useState(null)
   const [initializing, setInitializing] = useState(true)
+  const [isFinishedSignup, setisFinishedSignup] = useState(0)
+
+  const checkReg = (user)=>{
+     fetch(API_URL+`/api/users/${user.phoneNumber}`)
+    .then((response) => response.json())
+    .then((json) => {
+      if(Object.keys(json.response).length!=0){
+        setisFinishedSignup(1)
+      }
+      setInitializing(false)
+     })
+    .catch((error) => {
+      alert("error")
+    })
+  }
+
+
 
   Firebase.auth().onAuthStateChanged((user) => {
-    if(user){
-      setUserToken(user)
-    } else {
-      setUserToken(null)
-    }
-    setInitializing(false)
-})
+      if(user){
+        checkReg(user)
+        setUserToken(user)
+      } else {
+        setUserToken(null)
+        setInitializing(false)
 
+      }
+  })
+  
+   
+ 
 
-  const handleSignUp = (email,password) => {     
-    Firebase.auth()
-        .createUserWithEmailAndPassword(email,password)
-        .then(()=>setUserToken(Firebase.auth().currentUser))
-        .catch(error => {
-                alert(error.message)
-        })            
-  }
+  // const handleSignUp = (email,password) => {     
+  //   Firebase.auth()
+  //       .createUserWithEmailAndPassword(email,password)
+  //       .then(()=>setUserToken(Firebase.auth().currentUser))
+  //       .catch(error => {
+  //               alert(error.message)
+  //       })            
+  // }
 
-  const handleSignIn =(email,password) =>{
-    Firebase.auth().signInWithPhoneNumber('+918592800500')
-            .then(() =>setUserToken(Firebase.auth().currentUser))
-            .catch(error =>{
-                alert(error.message)
-            })
-  }
+  // const handleSignIn =(email,password) =>{
+  //   Firebase.auth().signInWithPhoneNumber('+918592800500')
+  //           .then(() =>setUserToken(Firebase.auth().currentUser))
+  //           .catch(error =>{
+  //               alert(error.message)
+  //           })
+  // }
 
   const authContext = React.useMemo(() => {
     return {
-      signIn: (email,password) => {
-        handleSignIn(email,password)
-      },
-      signUp: (email,password) => {
-        handleSignUp(email,password)
-      },
+      // signIn: (email,password) => {
+      //   handleSignIn(email,password)
+      // },
+      // signUp: (email,password) => {
+      //   handleSignUp(email,password)
+      // },
       signOut: () => {
         Firebase.auth().signOut()
       },
-      blah: () => {
-        Firebase.auth().signOut()
+      finishLogin:() =>{
+        setisFinishedSignup(1)
       },
-      API_URL:'http://192.168.1.12:3000'
+      API_URL:API_URL,
     }
   }, [])
-
+  
   if(initializing){
     return(<Splash/>)
   }
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <RootStackScreen userToken={userToken} />
+        <RootStackScreen userToken={userToken} isFinishedSignup={isFinishedSignup} />
       </NavigationContainer>
     </AuthContext.Provider>
   )

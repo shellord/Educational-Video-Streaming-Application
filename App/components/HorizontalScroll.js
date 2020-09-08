@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text,ScrollView,TouchableOpacity,StyleSheet} from 'react-native'
 import Category from './Category'
 
-const HorizontalScroll = ({subjects,navigation}) => {
+const HorizontalScroll = ({subjects,navigation,userclass}) => {
     return (
       <View>
         <ScrollView
@@ -16,7 +16,7 @@ const HorizontalScroll = ({subjects,navigation}) => {
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {subjects.map((subject,key) => {   
                       return( 
-                        <TouchableOpacity key={key} onPress={() => navigation.push('topiclist',{name:subject.name,nav:navigation})}>
+                        <TouchableOpacity key={key} onPress={() => navigation.push('topiclist',{name:subject.name,nav:navigation,userclass:userclass})}>
                           <Category 
                           key={key}
                           name={subject.name}

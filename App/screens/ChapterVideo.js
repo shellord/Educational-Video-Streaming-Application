@@ -1,44 +1,59 @@
-import React,{useRef} from 'react'
-import {View,StyleSheet} from 'react-native'
-import { WebView } from 'react-native-webview';
-
+import React,{useRef,useEffect,useState} from 'react'
+import {View,StyleSheet,ActivityIndicator} from 'react-native'
 import { Video } from 'expo-av'
-import { Text,Card, ListItem, Icon } from 'react-native-elements'
+import { Text,Card } from 'react-native-elements'
+import { useIsFocused } from '@react-navigation/native';
+import {NavigationActions} from '@react-navigation/bottom-tabs'
+import { PlatformColor } from 'react-native';
 
 const ChapterVideo = ({ route }) => {
-  const videoRef = useRef();
+  
+  const isFocused = useIsFocused();
+  const videoRef = useRef()
+  const [loaded, setLoaded] = useState(false);
+  if(!isFocused){
+    videoRef.current.pauseAsync()
+  }
+
+  const _onPlaybackStatusUpdate = playbackStatus => {
+  if(playbackStatus.isBuffering){ 
+
+    if(loaded){
+      setLoaded(false); 
+      }
+    } else {
+      if(!loaded){
+        setLoaded(true); 
+      }
+    }
+}
+
   return(
     <View style={styles.container}>
-      {/* <Video
+      {!loaded?(<ActivityIndicator size="large" color="#00ff00" style={{top:150,zIndex:2,padding:0,marginTop:-36}}/>):false}
+      <Video
         source={{ uri: route.params.url }}
         rate={1.0}
         volume={1.0}
         isMuted={false}
         resizeMode={Video.RESIZE_MODE_CONTAIN}
         shouldPlay
-        isLooping
+        usePoster={true}
+        isLooping={false}
         useNativeControls
-        style={{ width: '100%', height: 300,marginTop:-36 }}
+        onPlaybackStatusUpdate={_onPlaybackStatusUpdate}
+        style={{ width: '100%', height: 300,marginTop:0,zIndex:1,backgroundColor:'black' }}
         ref={videoRef}
       />
       <View style={styles.description}>
       <Card
-          title='Description'
+          title={route.params.name}
           >
         <Text style={{marginBottom: 10}}>
             {route.params.description}
         </Text>
       </Card>
-      </View> */}
-      <WebView
-        javaScriptEnabled={true}
-        scrollEnabled={true}
-        allowsFullscreenVideo={true}
-        source={{
-          uri: 'http://192.168.1.12'
-        }}
-        style={{ marginTop: 20 }}
-      />
+      </View>
     </View>
   )
 }

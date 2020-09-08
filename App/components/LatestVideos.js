@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     subjectListHeader:{
-      flex:1,
+      // flex:1,
       paddingTop:10
     },
     subjectListText:{
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
       paddingHorizontal:20
     },
     subjectListView:{
-      height:230,
+      height:250,
       marginTop:20
     }
 

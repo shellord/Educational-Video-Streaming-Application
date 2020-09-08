@@ -3,10 +3,9 @@ import { View, Text ,StyleSheet,Image} from 'react-native'
 import {TouchableOpacity } from 'react-native-gesture-handler'
 
 const VideoCardModel = (props) => {
-    console.log(props)
     return (
-        <TouchableOpacity onPress={()=>props.navigation.push('chaptervideo',{name:props.title,description:props.description,url:props.url})}>
-            <View style={styles.container} onPress={()=>props.navigation.push('chaptervideo',{name:props.title,description:props.description,url:props.url})}>
+        <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation})}>
+            <View style={styles.container} onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation})}>
                 <View>
                 <Image source={{uri:props.image}} style={styles.imageStyle}/>
                 </View>

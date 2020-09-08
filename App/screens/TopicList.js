@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {StyleSheet,Text,FlatList,View,SafeAreaView} from 'react-native'
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import {StyleSheet,FlatList,View,SafeAreaView,ActivityIndicator} from 'react-native'
 import TopicCard from '../components/TopicCard'
 import { AuthContext } from "../context"
 
@@ -10,7 +9,7 @@ const TopicList = ({route}) => {
     const {API_URL} = React.useContext(AuthContext)
     const [topics,setTopics] = useState([{}]);
     useEffect(() => {
-        fetch(API_URL+`/api/topics/${route.params.name}`)
+        fetch(API_URL+`/api/topics/${route.params.name}/${route.params.userclass}`)
         .then((response) => response.json())
         .then((json) => {
               setTopics(json.response)
@@ -20,8 +19,16 @@ const TopicList = ({route}) => {
         })
 
       }, [])
+    if(Object.keys(topics).length==1){
+        return(
+            <ActivityIndicator 
+            size="large"
+            style={{flex:1,justifyContent:'center',alignItems:'center'}}
+            />
+        )
+    }
     return(
-        <SafeAreaView>
+        <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
             <FlatList
             data={topics}
             renderItem={({ item }) => (
@@ -30,13 +37,15 @@ const TopicList = ({route}) => {
                     <TopicCard
                         subject={route.params.name}
                         item={item}  
-                        navigation={route.params.nav}         
+                        navigation={route.params.nav}   
+                        userclass={route.params.userclass}      
                     />
                 </View>
             )}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
             />
+             
         </SafeAreaView>
     )
 }

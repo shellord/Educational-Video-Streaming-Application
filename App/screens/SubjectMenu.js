@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {Text,Button,useContext,View,FlatList} from 'react-native'
-import VideoCard from '../components/VideoCard'
+import {Text,Button,useContext,View,FlatList,ActivityIndicator} from 'react-native'
 import VideoCardModel from '../components/VideoCardModel'
 import { AuthContext } from "../context"
 
@@ -10,7 +9,8 @@ const SubjectMenu = ({ route }) => {
   const [isLoaded,setIsLoaded] = useState(0)
   
   useEffect(() => {
-    fetch(API_URL+`/api/videos/${route.params.subject}/${route.params.name}`)
+   
+    fetch(API_URL+`/api/videos/${route.params.subject}/${route.params.name}/${route.params.userclass}`)
     .then((response) => response.json())
     .then((json) => {
           setVideos(json.response)
@@ -23,25 +23,15 @@ const SubjectMenu = ({ route }) => {
 
   if(!isLoaded){
     return(
-      <Text>Loading</Text>
-    )
+      <ActivityIndicator 
+      size="large"
+      style={{flex:1,justifyContent:'center',alignItems:'center'}}
+      />    
+      )
   }
   
   return(
     <View>
-      {/* {videos.map((video,key)=>{
-          return(
-            <VideoCard 
-            key = {key}
-            id={video.id}
-            url={video.url}
-            title = {video.title}
-            description = {video.description}
-            image={video.image}
-            navigation={route.params.nav}
-          />
-          )
-      })} */}
         <FlatList
           data={videos}
           renderItem={( {item} ) => 
