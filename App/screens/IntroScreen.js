@@ -28,10 +28,7 @@ const data = [
 
 
 const IntroScreen = () => {
-    
     const {IntroDone} = React.useContext(AuthContext)
-
-    AsyncStorage.setItem('showIntro','false')
     const _renderNextButton = () => {
         return (
           <View style={styles.buttonCircle}>

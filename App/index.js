@@ -276,6 +276,7 @@ export default () => {
       },
       IntroDone:() =>{
         setShowIntroScreen(0)
+        AsyncStorage.setItem('showIntro','false')
       },
       API_URL:API_URL,
     }
