@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from "react"
+import React,{useState} from "react"
+import {AsyncStorage} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -14,10 +15,11 @@ import Splash from './screens/Splash'
 import {Icon} from 'react-native-elements'
 import TopicList from "./screens/TopicList"
 import ChapterVideo from "./screens/ChapterVideo"
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import DrawerProfile from './components/DrawerProfile'
 import MobileAuth from './screens/MobileAuth'
 import PostLogin from './screens/PostLogin'
+import IntroScreen from './screens/IntroScreen'
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -123,7 +125,6 @@ const TabsScreen = () => (
         iconName = focused ? 'ios-person' : 'ios-person';
       }
 
-      // You can return any component that you like here!
       return <Ionicons name={iconName} size={size} color={color} />;
     },
   })}
@@ -162,34 +163,40 @@ const DrawerScreen = () => (
   </Drawer.Navigator>
 )
 
-const RootStackScreen = ({ userToken,isFinishedSignup }) => (
+const RootStackScreen = ({ userToken,isFinishedSignup,showIntroScreen }) => (
   <RootStack.Navigator headerMode="none">
     {
 
-    userToken ?(isFinishedSignup?( 
-    <RootStack.Screen
-      name="App"
-      component={DrawerScreen}
-      options={{
-        animationEnabled: false
-      }}
-    />):( 
-    <RootStack.Screen
-      name="PostLogin"
-      component={PostLogin}
-      options={{
-        animationEnabled: false
-      }}
-    />)
-    ) : (
-      <RootStack.Screen
-        name="Auth"
-        component={AuthStackScreen}
-        options={{
-          animationEnabled: false
-        }}
-      />
-    )
+      showIntroScreen?(
+        <RootStack.Screen
+          name="IntroScreen"
+          component={IntroScreen}
+        />
+        ):( userToken ?(isFinishedSignup?( 
+        <RootStack.Screen
+          name="App"
+          component={DrawerScreen}
+          options={{
+            animationEnabled: false
+          }}
+        />):( 
+        <RootStack.Screen
+          name="PostLogin"
+          component={PostLogin}
+          options={{
+            animationEnabled: false
+          }}
+        />)
+        ) : (
+          <RootStack.Screen
+            name="Auth"
+            component={AuthStackScreen}
+            options={{
+              animationEnabled: false
+            }}
+          />
+        ))
+   
 
     }
   </RootStack.Navigator>
@@ -201,6 +208,12 @@ export default () => {
   const [userToken, setUserToken] = useState(null)
   const [initializing, setInitializing] = useState(true)
   const [isFinishedSignup, setisFinishedSignup] = useState(0)
+  const [showIntroScreen, setShowIntroScreen] = useState(1)
+
+  AsyncStorage.getItem('showIntro')
+  .then(val => {
+    if (val !== null) setShowIntroScreen(0)
+  })
 
   const checkReg = (user)=>{
      fetch(API_URL+`/api/users/${user.phoneNumber}`)
@@ -215,8 +228,6 @@ export default () => {
       alert("error")
     })
   }
-
-
 
   Firebase.auth().onAuthStateChanged((user) => {
       if(user){
@@ -263,17 +274,23 @@ export default () => {
       finishLogin:() =>{
         setisFinishedSignup(1)
       },
+      IntroDone:() =>{
+        setShowIntroScreen(0)
+      },
       API_URL:API_URL,
     }
   }, [])
   
+
   if(initializing){
     return(<Splash/>)
   }
+
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <RootStackScreen userToken={userToken} isFinishedSignup={isFinishedSignup} />
+        <RootStackScreen userToken={userToken} isFinishedSignup={isFinishedSignup} showIntroScreen={showIntroScreen}/>
       </NavigationContainer>
     </AuthContext.Provider>
   )

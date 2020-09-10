@@ -7,7 +7,6 @@ import VideoCardModel from '../components/VideoCardModel'
 import  Firebase from '../../config/Firebase'
 
 const Search = ({ navigation }) => {
-
   const {API_URL} = React.useContext(AuthContext)
   const [search, setsearch] = useState('')
   const [results, setResults] = useState('')
@@ -38,20 +37,6 @@ const Search = ({ navigation }) => {
   }, [search])
 
   return(
-    // <View
-    //   <Text>Search Screen</Text>
-    //   <Button title="Search 2" onPress={() => navigation.push("Search2")} />
-    //   <Button
-    //     title="React Native School"
-    //     onPress={() => {
-    //       navigation.navigate("Home", {
-    //         screen: "Details",
-    //         params: { name: "React Native School" }
-    //       })
-    //     }}
-    //   />
-    // </View>
-
     <View style={styles.container}>
       <SearchBar 
       value={search}
