@@ -61,7 +61,6 @@ export default function PhoneAuthScreen() {
         />
         <Image source={require('../../assets/logo.jpeg')} style={styles.logo}/>
         {/* <Text style={styles.subtitle}>Welcome to,</Text> */}
-        <Text style={styles.title}>Login</Text>
         
         {/* <Text style={styles.text}>Enter phone number</Text> */}
         <TextInput
@@ -190,12 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 0, 
     alignItems:'center' 
   },
-  title: {
-    marginBottom: 2,
-    fontSize: 0,
-    fontWeight: "bold",
-    letterSpacing:3
-  },
+
   logo:{
     width:150,
     height:150,
@@ -223,7 +217,8 @@ const styles = StyleSheet.create({
     paddingLeft:30,
     paddingRight:30,
     backgroundColor:'#fafafa',
-    marginTop:10
+    marginTop:10,
+    width:300
   },
   error: {
     marginTop: 10,
