@@ -1,13 +1,91 @@
 import React,{useRef,useEffect,useState} from 'react'
-import {View,StyleSheet,ActivityIndicator} from 'react-native'
+import {View,StyleSheet,ActivityIndicator,Alert,AsyncStorage} from 'react-native'
 import { Video } from 'expo-av'
 import { Text,Card } from 'react-native-elements'
 import { useIsFocused } from '@react-navigation/native';
-import {NavigationActions} from '@react-navigation/bottom-tabs'
-import { PlatformColor } from 'react-native';
+import Constants from 'expo-constants'
+import  Firebase from '../../config/Firebase'
+import { AuthContext } from "../context"
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ChapterVideo = ({ route }) => {
-  
+  const {API_URL} = React.useContext(AuthContext)
+  const [subscriptionStatus, setsubscriptionStatus] = useState(null)
+  const [addView, setaddView] = useState(0)
+
+  useEffect(() => {
+    if(addView==1){
+      fetch(API_URL+'/api/addview/'+route.params.id)
+      .catch((error)=>{
+        alert("Network Error")
+      })
+   }
+  }, [addView])
+
+  useEffect(() => {
+    
+    const watchedVideo ={
+      id:route.params.id,
+      url:route.params.url,
+      title:route.params.name,
+      description:route.params.description,
+      subject:route.params.subject,
+      topic:route.params.topic,
+      image:route.params.image,
+      isfree:route.params.isfree
+    }
+
+    let watchHistory=watchedVideo
+
+    AsyncStorage.getItem('watchHistory')
+    .then(val => {    
+      if (val !== null){
+        let valJson = JSON.parse(val)
+        if(!valJson.find(elem => elem.title === route.params.name)) {
+          watchHistory = [...valJson,watchedVideo]
+          AsyncStorage.setItem('watchHistory', JSON.stringify(watchHistory) )
+          .then( ()=>{
+            console.log('added to history')
+          } )
+          .catch( (error)=>{
+            console.log(error)
+          } )  
+         }      
+      }  
+      else {
+        AsyncStorage.setItem('watchHistory', JSON.stringify([watchHistory]) )
+        .then( ()=>{
+          console.log('first entry to history')
+        } )
+        .catch( (error)=>{
+          console.log(error)
+        } )  
+    }
+    })
+  }, [])
+
+  useEffect(() => {
+    fetch(API_URL+`/api/users/${Firebase.auth().currentUser.phoneNumber}`)
+        .then((response) => response.json())
+        .then((json) => {
+          setsubscriptionStatus(json.response[0].subscription_status)
+          if(subscriptionStatus==0 && !route.params.isfree){
+            videoRef.current.pauseAsync()
+            Alert.alert(
+              "PREMIUM VIDEO",
+              "You need to subscribe to Marvel Creative Learning Application to watch this lesson",
+              [
+                { text: "OK", onPress: () => route.params.nav.goBack() }
+              ],
+              { cancelable: false }
+            )
+          }
+        })
+        .catch((error) => {
+        alert("Network Error!")
+        })
+
+  }, [subscriptionStatus])
   const isFocused = useIsFocused();
   const videoRef = useRef()
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +94,11 @@ const ChapterVideo = ({ route }) => {
   }
 
   const _onPlaybackStatusUpdate = playbackStatus => {
+
+  if(playbackStatus.positionMillis>=10000 && !addView){
+    setaddView(1)
+  }
+  
   if(playbackStatus.isBuffering){ 
 
     if(loaded){
@@ -29,8 +112,8 @@ const ChapterVideo = ({ route }) => {
 }
 
   return(
-    <View style={styles.container}>
-      {!loaded?(<ActivityIndicator size="large" color="#00ff00" style={{top:150,zIndex:2,padding:0,marginTop:-36}}/>):false}
+    <ScrollView style={styles.container}>
+      {!loaded?(<ActivityIndicator size="large" color="#00ff00" style={{top:140,zIndex:2,padding:0,marginTop:-36}}/>):false}
       <Video
         source={{ uri: route.params.url }}
         rate={1.0}
@@ -42,7 +125,7 @@ const ChapterVideo = ({ route }) => {
         isLooping={false}
         useNativeControls
         onPlaybackStatusUpdate={_onPlaybackStatusUpdate}
-        style={{ width: '100%', height: 300,marginTop:0,zIndex:1,backgroundColor:'black' }}
+        style={{ width: '100%', height: 280,marginTop:0,zIndex:1,backgroundColor:'black' }}
         ref={videoRef}
       />
       <View style={styles.description}>
@@ -52,21 +135,44 @@ const ChapterVideo = ({ route }) => {
         <Text style={{marginBottom: 10}}>
             {route.params.description}
         </Text>
+        <View style={styles.tagTextContainer}>
+                        <View style={styles.tagStyle}>
+                            <Text style={styles.tagTextStyle}> {route.params.subject.toLowerCase()} </Text>
+                            <Text style={styles.tagTextStyle}> {route.params.topic.toLowerCase()} </Text>
+                        </View>
+                    </View>          
       </Card>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container:{
+    top:Constants.statusBarHeight,
     marginTop:0,
     flex:1
   },
   description:{
-    backgroundColor:'white',
-    marginTop:0
-  
+    
+  },
+  tagTextContainer:{
+     marginTop:10,
+     alignItems:'flex-end'
+  },
+  tagStyle:{
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    marginBottom:10,
+  },
+  tagTextStyle:{
+    color:'#607d8b',
+    fontSize:12,
+    backgroundColor:'#eceff1',
+    borderRadius:100,
+    padding:3,
+    marginRight:5
   }
 })
 

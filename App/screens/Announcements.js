@@ -2,30 +2,14 @@ import React,{useState,useRef,useEffect} from 'react'
 import {View,StyleSheet,ActivityIndicator} from 'react-native'
 import { WebView } from 'react-native-webview'
 import Constants from 'expo-constants'
-import  Firebase from '../../config/Firebase'
 
  const Profile = ({ navigation }) => {
-
     return (
-        // <View style={styles.container}>
-        //   <Image source={{uri:'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'}} style={styles.avatar}/>
-        //     <Text style={styles.nameStyle}>Jon Doe</Text> 
-        //     <Text>{Firebase.auth().currentUser.email}</Text>
-        //     <Text>Account Status : Free</Text> 
-        //     <TouchableOpacity style={styles.button}  onPress={() => alert(Firebase.auth().currentUser.email)} >
-        //       <Text>Subscribe </Text> 
-        //     </TouchableOpacity>
-        //     <TouchableOpacity style={styles.button}  onPress={() => signOut()} >
-        //       <Text>Sign Out</Text>
-        //     </TouchableOpacity>
-        // </View>
-
         <View style={styles.container}>
           <WebView
-          pointerEvents="none"
-          source={{
-            uri: `http://192.168.1.12/marvelprofile/index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
-          }}
+        source={{
+          uri: 'http://192.168.1.12/marvelprofile/'
+        }}
         startInLoadingState={true}
           renderLoading={() => (
             <ActivityIndicator
@@ -54,6 +38,7 @@ import  Firebase from '../../config/Firebase'
     },
     container:{
         flex:1,
+        top:Constants.statusBarHeight
 
     },
     button:{

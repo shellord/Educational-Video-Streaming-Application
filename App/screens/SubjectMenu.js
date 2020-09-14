@@ -45,6 +45,7 @@ const SubjectMenu = ({ route }) => {
               subject={item.subject}
               topic={item.topic}
               navigation={route.params.nav}
+              isfree={item.isfree}
           />
 
           )

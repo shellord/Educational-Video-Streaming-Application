@@ -20,15 +20,20 @@ import DrawerProfile from './components/DrawerProfile'
 import MobileAuth from './screens/MobileAuth'
 import PostLogin from './screens/PostLogin'
 import IntroScreen from './screens/IntroScreen'
+import Announcements from './screens/Announcements'
+import WatchHistory from './screens/WatchHistory'
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
 const HomeStack = createStackNavigator()
 const SearchStack = createStackNavigator()
+const WatchHistoryStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
+
 const API_URL='http://192.168.1.12:3000'
+const ASSETS_URL='http://192.168.1.12/marvelprofile/uploads/'
 
 const AuthStackScreen = () => (
   <AuthStack.Navigator>
@@ -102,6 +107,20 @@ const SearchStackScreen = () => (
   </SearchStack.Navigator>
 )
 
+const WatchHistoryStackScreen = () => (
+  <WatchHistoryStack.Navigator >
+    <WatchHistoryStack.Screen name="Watch History" component={WatchHistory} />
+    <WatchHistoryStack.Screen
+      name="chaptervideo"
+      component={ChapterVideo}
+      options={({ route }) => ({
+        title: route.params.name,
+        headerShown:false
+      })}    
+      />
+  </WatchHistoryStack.Navigator>
+)
+
 const ProfileStackScreen = () => (
   <ProfileStack.Navigator>
     <ProfileStack.Screen name="Profile" component={Profile} />
@@ -118,9 +137,13 @@ const TabsScreen = () => (
         iconName = focused
           ? 'ios-home'
           : 'ios-home';
-      } else if (route.name === 'Search') {
+        } 
+      else if (route.name === 'Search') {
         iconName = focused ? 'ios-search' : 'ios-search';
-      }
+     }
+     else if (route.name === 'History') {
+      iconName = focused ? 'ios-time' : 'ios-time';
+     }
       else if (route.name === 'Account') {
         iconName = focused ? 'ios-person' : 'ios-person';
       }
@@ -135,7 +158,9 @@ const TabsScreen = () => (
   >
     <Tabs.Screen name="Home" component={HomeStackScreen} />
     <Tabs.Screen name="Search" component={SearchStackScreen} />
+    <Tabs.Screen name="History" component={WatchHistoryStackScreen} />
     <Tabs.Screen name="Account" component={ProfileStackScreen} />
+
   </Tabs.Navigator>
 )
 
@@ -152,14 +177,26 @@ function CustomDrawerContent(props) {
       <DrawerItem
         label="Logout"
         onPress={() => Logout()}
+        icon={() => <Ionicons name="md-log-out" size={24}/>}
       />
     </DrawerContentScrollView>
   );
 }
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
-    <Drawer.Screen name="Home" component={TabsScreen} />
-    <Drawer.Screen name="Profile" component={ProfileStackScreen} />
+    <Drawer.Screen name="Home" component={TabsScreen} options={{
+      drawerIcon: () => <Ionicons name="md-home" size={24}/>
+    }}/>
+    <Drawer.Screen name="Announcements" component={Announcements} options={{
+      drawerIcon: () => <Ionicons name="md-notifications" size={24}/>
+     
+    }} />
+
+    <Drawer.Screen name="Profile" component={ProfileStackScreen} options={{
+      drawerIcon: () => <Ionicons name="md-person" size={24}/> 
+
+    }} 
+    />
   </Drawer.Navigator>
 )
 
@@ -279,6 +316,7 @@ export default () => {
         AsyncStorage.setItem('showIntro','false')
       },
       API_URL:API_URL,
+      ASSETS_URL:ASSETS_URL
     }
   }, [])
   

@@ -3,7 +3,7 @@ import { View, Text,StyleSheet,ScrollView} from 'react-native'
 import HorizontalVideoCard from './HorizontalVideoCard'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
-const LatestVideos = ({data,navigation}) => {
+const VideoList = ({data,navigation,title}) => {
     return (
         <View>
         <ScrollView
@@ -11,13 +11,13 @@ const LatestVideos = ({data,navigation}) => {
           >
               <View style={styles.subjectListHeader}>
                 <Text style={styles.subjectListText}>
-                  Latest Classes
+                  {title}
                 </Text>
                 <View style={styles.subjectListView}>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {data.map((subject,key) => { 
                       return( 
-                        <TouchableWithoutFeedback key={key} onPress={() => navigation.push('chaptervideo',{name:subject.title,description:subject.description,url:subject.url})}>
+                        <TouchableWithoutFeedback key={key} onPress={() => navigation.push('chaptervideo',{name:subject.title,description:subject.description,url:subject.url,nav:navigation,subject:subject.subject,topic:subject.topic,image:subject.image,isfree:subject.isfree,id:subject.id})}>
                           <HorizontalVideoCard 
                             key={key}
                             name={subject.title}
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default LatestVideos
+export default VideoList

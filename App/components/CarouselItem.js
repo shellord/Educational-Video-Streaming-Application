@@ -5,9 +5,8 @@ import {TouchableWithoutFeedback } from 'react-native-gesture-handler'
 const { width, height } = Dimensions.get('window')
 
 const CarouselItem = ({ item,nav }) => {
-
     return (
-        <TouchableWithoutFeedback onPress={()=>nav.push('chaptervideo',{name:item.title,description:item.description,url:item.url})}>
+        <TouchableWithoutFeedback onPress={()=>nav.push('chaptervideo',{name:item.title,description:item.description,url:item.url,nav:nav,subject:item.subject,topic:item.topic,isfree:item.isfree,image:item.image,id:item.id})}>
             <View style={styles.cardView}>
                 <Image style={styles.image} source={{ uri: item.image }} />
                 <View style={styles.textView}>
