@@ -47,6 +47,7 @@ const WatchHistory = ({navigation}) => {
                   topic={item.topic}
                   navigation={navigation}
                   isfree={item.isfree}
+                  class={item.class}
               />
     
               )

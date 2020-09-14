@@ -57,6 +57,8 @@ const Search = ({ navigation }) => {
               subject={item.subject}
               topic={item.topic}
               navigation={navigation}
+              isfree={item.isfree}
+              class={item.class}
           />
 
           )

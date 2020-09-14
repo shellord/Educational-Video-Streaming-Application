@@ -7,13 +7,16 @@ import Constants from 'expo-constants'
 import  Firebase from '../../config/Firebase'
 import { AuthContext } from "../context"
 import { ScrollView } from 'react-native-gesture-handler';
+import VideoList from '../components/VideoList'
 
 const ChapterVideo = ({ route }) => {
   const {API_URL} = React.useContext(AuthContext)
   const [subscriptionStatus, setsubscriptionStatus] = useState(null)
   const [addView, setaddView] = useState(0)
+  const [relatedVideos, setrelatedVideos] = useState([{}])
 
   useEffect(() => {
+ 
     if(addView==1){
       fetch(API_URL+'/api/addview/'+route.params.id)
       .catch((error)=>{
@@ -21,9 +24,7 @@ const ChapterVideo = ({ route }) => {
       })
    }
   }, [addView])
-
   useEffect(() => {
-    
     const watchedVideo ={
       id:route.params.id,
       url:route.params.url,
@@ -32,7 +33,8 @@ const ChapterVideo = ({ route }) => {
       subject:route.params.subject,
       topic:route.params.topic,
       image:route.params.image,
-      isfree:route.params.isfree
+      isfree:route.params.isfree,
+      class:route.params.class
     }
 
     let watchHistory=watchedVideo
@@ -86,6 +88,16 @@ const ChapterVideo = ({ route }) => {
         })
 
   }, [subscriptionStatus])
+
+  useEffect(() => {
+    fetch(API_URL+'/api/relatedvideos/'+route.params.subject+'/'+route.params.topic+'/'+route.params.class+'/'+route.params.id)
+      .then((response) => response.json())
+      .then((json) => {
+            setrelatedVideos(json.response)
+      })
+      .catch(error=>(alert("Network Error!")))
+  }, [])
+
   const isFocused = useIsFocused();
   const videoRef = useRef()
   const [loaded, setLoaded] = useState(false);
@@ -110,7 +122,6 @@ const ChapterVideo = ({ route }) => {
       }
     }
 }
-
   return(
     <ScrollView style={styles.container}>
       {!loaded?(<ActivityIndicator size="large" color="#00ff00" style={{top:140,zIndex:2,padding:0,marginTop:-36}}/>):false}
@@ -131,6 +142,7 @@ const ChapterVideo = ({ route }) => {
       <View style={styles.description}>
       <Card
           title={route.params.name}
+          // titleStyle={{fontSize:}}
           >
         <Text style={{marginBottom: 10}}>
             {route.params.description}
@@ -143,6 +155,9 @@ const ChapterVideo = ({ route }) => {
                     </View>          
       </Card>
       </View>
+      {relatedVideos[0]?(<VideoList title="Related Videos" data={relatedVideos} navigation={route.params.nav} userclass={route.params.class} />
+):(<></>)}
+     <Text></Text>
     </ScrollView>
   )
 }

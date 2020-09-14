@@ -29,7 +29,7 @@ const HorizontalVideoCard = (props) =>{
 const styles=StyleSheet.create({
     subjectList:{
         height:260,
-        width:120,
+        width:150,
         marginLeft:20,
         borderWidth:0,
         borderColor:'#dddddd',
@@ -47,7 +47,7 @@ const styles=StyleSheet.create({
         resizeMode:'cover',
         borderRadius:10,
         height:260,
-        width:120
+        width:150
       },
       tagTextContainer:{
      
@@ -61,8 +61,9 @@ const styles=StyleSheet.create({
           color:'#607d8b',
           fontSize:12,
           backgroundColor:'#eceff1',
-          borderRadius:100,
-          padding:3,
+          borderRadius:30,
+          paddingVertical:2,
+          paddingHorizontal:5,
           marginRight:5   
       }
 })

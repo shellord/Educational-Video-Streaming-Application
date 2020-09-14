@@ -22,7 +22,6 @@ import  Firebase from '../../config/Firebase'
 
         <View style={styles.container}>
           <WebView
-          pointerEvents="none"
           source={{
             uri: `http://192.168.1.12/marvelprofile/index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
           }}

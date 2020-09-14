@@ -54,7 +54,6 @@ const Home = ({ navigation }) =>{
       fetch(API_URL+'/api/popularvideos/'+userclass)
       .then((response) => response.json())
       .then((json) => {
-        co
             setpopularVideos(json.response)
       })
       .catch((error) => {

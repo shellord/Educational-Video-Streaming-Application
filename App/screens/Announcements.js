@@ -8,7 +8,7 @@ import Constants from 'expo-constants'
         <View style={styles.container}>
           <WebView
         source={{
-          uri: 'http://192.168.1.12/marvelprofile/'
+          uri: 'http://192.168.1.12/marvelprofile/anounc/'
         }}
         startInLoadingState={true}
           renderLoading={() => (
@@ -38,7 +38,6 @@ import Constants from 'expo-constants'
     },
     container:{
         flex:1,
-        top:Constants.statusBarHeight
 
     },
     button:{

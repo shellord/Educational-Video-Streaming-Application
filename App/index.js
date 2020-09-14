@@ -29,6 +29,7 @@ const HomeStack = createStackNavigator()
 const SearchStack = createStackNavigator()
 const WatchHistoryStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
+const AnnouncementStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 
@@ -127,6 +128,13 @@ const ProfileStackScreen = () => (
   </ProfileStack.Navigator>
 )
 
+
+const AnnouncementStackScreen = () => (
+  <AnnouncementStack.Navigator>
+    <AnnouncementStack.Screen name="Announcements" component={Announcements} />
+  </AnnouncementStack.Navigator>
+)
+
 const TabsScreen = () => (
   <Tabs.Navigator
   screenOptions={({ route }) => ({
@@ -187,9 +195,8 @@ const DrawerScreen = () => (
     <Drawer.Screen name="Home" component={TabsScreen} options={{
       drawerIcon: () => <Ionicons name="md-home" size={24}/>
     }}/>
-    <Drawer.Screen name="Announcements" component={Announcements} options={{
-      drawerIcon: () => <Ionicons name="md-notifications" size={24}/>
-     
+    <Drawer.Screen name="Announcements" component={AnnouncementStackScreen} options={{
+      drawerIcon: () => <Ionicons name="md-notifications" size={24}/>,     
     }} />
 
     <Drawer.Screen name="Profile" component={ProfileStackScreen} options={{
