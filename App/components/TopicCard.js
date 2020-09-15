@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         margin:5,
-        padding:10
+        padding:10,
     },  
     textContainer:{
         flex:1,
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     },
     ImageBackgroundStyle:{
         width: '100%', 
-        height: '100%'
+        height: '100%',
+
     },
     textStyle:{
         color:'white',

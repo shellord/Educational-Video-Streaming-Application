@@ -28,7 +28,7 @@ const WatchHistory = ({navigation}) => {
         })          
     }
     return(
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={styles.container}>
           <View style={{alignItems:'flex-end',margin:10}}>
           <TouchableOpacity onPress={()=>clearHistory()}>
             <Text style={{color:'#536DFE'}}>Clear History</Text></TouchableOpacity>
@@ -59,7 +59,12 @@ const WatchHistory = ({navigation}) => {
     )
  }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor:'white'
+  }
+})
 
 export default WatchHistory
 

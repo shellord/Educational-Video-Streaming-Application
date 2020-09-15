@@ -4,6 +4,7 @@ import {TouchableOpacity } from 'react-native-gesture-handler'
 
 const VideoCardModel = (props) => {
     return (
+        <View style={{backgroundColor:"white"}}>
         <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
             <View style={styles.container} onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
                 <View>
@@ -25,6 +26,7 @@ const VideoCardModel = (props) => {
                 </View>
             </View>
         </TouchableOpacity>
+        </View>
     )
 }
 
@@ -37,8 +39,9 @@ const styles = StyleSheet.create({
         height:150
     },
     imageStyle:{
-        width:150,
-        height:150
+        width:110,
+        height:140,
+        borderRadius:10
     },
     textContainer:{
         flex:1,
@@ -46,10 +49,12 @@ const styles = StyleSheet.create({
 
     },
     textHeadingContainer:{
-        
+    
     },
     headingTextStyle:{
-        fontSize:18
+        fontSize:18,
+        fontWeight:"600",
+        marginTop:-10
     },
     descriptionTextContainer:{
         marginRight:10,
@@ -60,22 +65,19 @@ const styles = StyleSheet.create({
         fontSize:12
     },
     tagTextContainer:{
-     
+        flex:1
     },
     tagStyle:{
         flex:1,
         flexDirection:'row',
         alignItems:'center',
-        marginBottom:10,
     },
     tagTextStyle:{
         color:'#607d8b',
-        fontSize:12,
+        fontSize:10,
         backgroundColor:'#eceff1',
-        borderRadius:100,
         padding:3,
-        marginRight:5
- 
+        marginRight:5,
     }
 })
 

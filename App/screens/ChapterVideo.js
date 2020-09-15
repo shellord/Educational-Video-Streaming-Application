@@ -1,12 +1,12 @@
 import React,{useRef,useEffect,useState} from 'react'
 import {View,StyleSheet,ActivityIndicator,Alert,AsyncStorage} from 'react-native'
 import { Video } from 'expo-av'
-import { Text,Card } from 'react-native-elements'
-import { useIsFocused } from '@react-navigation/native';
+import { Text } from 'react-native-elements'
+import { useIsFocused } from '@react-navigation/native'
 import Constants from 'expo-constants'
 import  Firebase from '../../config/Firebase'
-import { AuthContext } from "../context"
-import { ScrollView } from 'react-native-gesture-handler';
+import { AuthContext } from '../context'
+import { ScrollView } from 'react-native-gesture-handler'
 import VideoList from '../components/VideoList'
 
 const ChapterVideo = ({ route }) => {
@@ -16,7 +16,6 @@ const ChapterVideo = ({ route }) => {
   const [relatedVideos, setrelatedVideos] = useState([{}])
 
   useEffect(() => {
- 
     if(addView==1){
       fetch(API_URL+'/api/addview/'+route.params.id)
       .catch((error)=>{
@@ -24,6 +23,7 @@ const ChapterVideo = ({ route }) => {
       })
    }
   }, [addView])
+
   useEffect(() => {
     const watchedVideo ={
       id:route.params.id,
@@ -47,7 +47,6 @@ const ChapterVideo = ({ route }) => {
           watchHistory = [...valJson,watchedVideo]
           AsyncStorage.setItem('watchHistory', JSON.stringify(watchHistory) )
           .then( ()=>{
-            console.log('added to history')
           } )
           .catch( (error)=>{
             console.log(error)
@@ -57,7 +56,6 @@ const ChapterVideo = ({ route }) => {
       else {
         AsyncStorage.setItem('watchHistory', JSON.stringify([watchHistory]) )
         .then( ()=>{
-          console.log('first entry to history')
         } )
         .catch( (error)=>{
           console.log(error)
@@ -140,20 +138,24 @@ const ChapterVideo = ({ route }) => {
         ref={videoRef}
       />
       <View style={styles.description}>
-      <Card
-          title={route.params.name}
+      <View style={styles.titleContainer}
           // titleStyle={{fontSize:}}
           >
-        <Text style={{marginBottom: 10}}>
-            {route.params.description}
-        </Text>
+        
+        <Text style={styles.videoTitle}>{route.params.name}</Text>
+
         <View style={styles.tagTextContainer}>
+          
                         <View style={styles.tagStyle}>
                             <Text style={styles.tagTextStyle}> {route.params.subject.toLowerCase()} </Text>
+                            <Text style={styles.tagSupStyle}> • </Text>
                             <Text style={styles.tagTextStyle}> {route.params.topic.toLowerCase()} </Text>
                         </View>
-                    </View>          
-      </Card>
+                    </View>      
+                    <Text style={styles.tagDescstyle}>
+            {route.params.description}
+        </Text>
+      </View>
       </View>
       {relatedVideos[0]?(<VideoList title="Related Videos" data={relatedVideos} navigation={route.params.nav} userclass={route.params.class} />
 ):(<></>)}
@@ -166,28 +168,45 @@ const styles = StyleSheet.create({
   container:{
     top:Constants.statusBarHeight,
     marginTop:0,
-    flex:1
-  },
-  description:{
+    flex:1,
+    backgroundColor:"white",
     
+  },
+  videoTitle:{
+    fontSize:21,
+    fontWeight:"800"
+  },
+  titleContainer:{
+    flex:1,
+    padding:15,
+  },
+  tagSupStyle:{
+    fontSize:23,
+    color:"#607d8b"
+  },
+  tagDescstyle:{
+    marginBottom:0,
+    fontSize:15
   },
   tagTextContainer:{
      marginTop:10,
-     alignItems:'flex-end'
+     alignItems:'flex-start'
   },
   tagStyle:{
     flex:1,
     flexDirection:'row',
     alignItems:'center',
     marginBottom:10,
+    marginLeft:0
   },
   tagTextStyle:{
     color:'#607d8b',
-    fontSize:12,
+    fontSize:14,
     backgroundColor:'#eceff1',
     borderRadius:100,
     padding:3,
-    marginRight:5
+    marginRight:5,
+    textTransform:"capitalize",
   }
 })
 

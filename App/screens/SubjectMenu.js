@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {Text,Button,useContext,View,FlatList,ActivityIndicator} from 'react-native'
+import {FlatList,ActivityIndicator, SafeAreaView,StyleSheet} from 'react-native'
 import VideoCardModel from '../components/VideoCardModel'
 import { AuthContext } from "../context"
 
@@ -31,7 +31,7 @@ const SubjectMenu = ({ route }) => {
   }
   
   return(
-    <View>
+    <SafeAreaView style={styles.cardContainer}>
         <FlatList
           data={videos}
           renderItem={( {item} ) => 
@@ -54,9 +54,14 @@ const SubjectMenu = ({ route }) => {
       numColumns={1}
       keyExtractor={(item, index) => index.toString()}
       />
-    </View>
+    </SafeAreaView>
  
   )
 }
-  
+const styles = StyleSheet.create({
+  cardContainer:{
+    flex:1,
+    backgroundColor:"white"
+  }
+})
 export default SubjectMenu

@@ -42,7 +42,7 @@ const TopicList = ({route}) => {
                     />
                 </View>
             )}
-            numColumns={2}
+            numColumns={1}
             keyExtractor={(item, index) => index.toString()}
             />
              
