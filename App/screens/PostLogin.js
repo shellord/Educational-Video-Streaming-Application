@@ -1,19 +1,31 @@
-import React,{useState,useContext} from 'react'
-import { View, Text,StyleSheet,TextInput,Picker,Image} from 'react-native'
+import React,{useState,useEffect} from 'react'
+import { View, Text,StyleSheet,TextInput,Image} from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { AuthContext } from "../context"
 import  Firebase from '../../config/Firebase'
+import { CustomPicker } from 'react-native-custom-picker'
 
 const PostLogin =()=> {
 
     const { signOut,finishLogin } = React.useContext(AuthContext)
     const {API_URL} = React.useContext(AuthContext)
-
+    const [options, setoptions] = useState([{number:''}])
     const [email,setEmail] = useState('')
     const [name,setName] = useState('')
     const [error,setError] = useState('')
     const [selectedValue, setSelectedValue] = useState("1");
 
+    useEffect(() => {
+      fetch(API_URL+'/api/class')
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        setoptions(json.response)
+      })
+      .catch((error) =>{
+        console.log(error)
+      })
+    }, [])
     const onCompleteHandler = () =>{
         
         fetch(API_URL+`/api/users/register/${name}/${email}/${Firebase.auth().currentUser.phoneNumber}/${selectedValue}/scert/`)
@@ -22,7 +34,7 @@ const PostLogin =()=> {
             finishLogin()
         })
         .catch((error) => {
-        alert("Error!")
+        alert(error)
         })
     }
 
@@ -44,7 +56,7 @@ const PostLogin =()=> {
           
           <Text style={{marginTop:30,fontSize:12,color:'#2196f3'}}>Select Class</Text>
 
-        <Picker
+        {/* <Picker
             selectedValue={selectedValue}
             style={{ height: 50, width: 165 }}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
@@ -60,9 +72,16 @@ const PostLogin =()=> {
           <Picker.Item label="CLASS X" value="10" />
           <Picker.Item label="CLASS XI" value="11" />
           <Picker.Item label="CLASS XII" value="12" />
-      </Picker>
+      </Picker> */}
+       <CustomPicker
+          options={options}
+          getLabel={item => item.value}
+          defaultValue={1}
+          onValueChange={value => {
+            setSelectedValue(value.number)
+          }}
+        />
              
-                          
       <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
           <Text style={styles.buttonText}>Complete</Text>    
       </TouchableOpacity>                         

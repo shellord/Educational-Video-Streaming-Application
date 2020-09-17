@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState, useEffect} from "react"
 import {AsyncStorage} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -253,7 +253,7 @@ export default () => {
   const [initializing, setInitializing] = useState(true)
   const [isFinishedSignup, setisFinishedSignup] = useState(0)
   const [showIntroScreen, setShowIntroScreen] = useState(1)
-
+  const [usertemp, setusertemp] = useState(null)
   AsyncStorage.getItem('showIntro')
   .then(val => {
     if (val !== null) setShowIntroScreen(0)
@@ -267,16 +267,20 @@ export default () => {
         setisFinishedSignup(1)
       }
       setInitializing(false)
+      setUserToken(user)
+
      })
     .catch((error) => {
       alert("error")
     })
+    
   }
+
 
   Firebase.auth().onAuthStateChanged((user) => {
       if(user){
         checkReg(user)
-        setUserToken(user)
+
       } else {
         setUserToken(null)
         setInitializing(false)

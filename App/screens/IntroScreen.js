@@ -7,22 +7,29 @@ import { AuthContext } from "../context"
 
 const data = [
   {
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    image: require('../../assets/logo.jpeg'),
-    bg: '#59b2ab',
+    title: 'Ready to learn',
+    text: 'Welcome to Marvel Creative Learning App, \n Where you can access all your study materials at one place.',
+    image: require('../../assets/illustrations/book.png'),
+    // bg: '#59b2ab',
+    bg:'#fff'
   },
   {
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    image: require('../../assets/logo.jpeg'),
-    bg: '#febe29',
+    title: 'Learn online from home',
+    text: 'Learn a lot of extra things with our interesting lessons by our courses and tutors',
+    image: require('../../assets/illustrations/read.png'),
+    bg:'#fff'
   },
   {
-    title: 'Rocket guy',
-    text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-    image: require('../../assets/logo.jpeg'),
-    bg: '#22bcb5',
+    title: 'Learn on your time schedule',
+    text: "Choose from different types of lessons with new additionals every month",
+    image: require('../../assets/illustrations/learn.png'),
+    bg: '#fff',
+  },
+   {
+    title: 'Ready!',
+    text: "You're all ready,set to rock and roll. Get started with Marvel Creative Learning Application now!",
+    image: require('../../assets/illustrations/ready.png'),
+    bg: '#fff',
   },
 ]
 
@@ -34,7 +41,7 @@ const IntroScreen = () => {
           <View style={styles.buttonCircle}>
             <Icon
               name="md-arrow-round-forward"
-              color="rgba(255, 255, 255, .9)"
+              color='tomato'
               size={24}
             />
           </View>
@@ -46,7 +53,7 @@ const IntroScreen = () => {
           <View style={styles.buttonCircle}>
             <Icon
               name="md-checkmark"
-              color="rgba(255, 255, 255, .9)"
+              color='tomato'
               size={24}
             />
           </View>
@@ -62,8 +69,8 @@ const IntroScreen = () => {
             backgroundColor: item.bg,
           },
         ]}>
-        <Text style={styles.title}>{item.title}</Text>
         <Image source={item.image} style={styles.image} />
+        <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.text}>{item.text}</Text>
       </View>
     )
@@ -90,21 +97,29 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'blue',
+      backgroundColor: 'white', 
+      padding:30,
     },
     image: {
       width: 320,
       height: 320,
       marginVertical: 32,
+      
     },
     text: {
-      color: 'rgba(255, 255, 255, 0.8)',
+      // color: 'rgba(255, 255, 255, 0.8)',
+      color:'#000',
       textAlign: 'center',
+      fontWeight:"500",
+      fontSize:13,
+      padding:10,
     },
     title: {
-      fontSize: 22,
-      color: 'white',
+      marginBottom:10,
+      fontSize: 24,
+      color: 'tomato',
       textAlign: 'center',
+      fontWeight:'600'
     },
   })
 

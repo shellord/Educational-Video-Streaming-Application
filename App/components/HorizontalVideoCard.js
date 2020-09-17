@@ -28,7 +28,8 @@ const HorizontalVideoCard = (props) =>{
 
 const styles=StyleSheet.create({
     subjectList:{
-        height:260,
+        flex:1,
+        height:250,
         width:150,
         marginLeft:20,
         borderWidth:0,
@@ -49,13 +50,18 @@ const styles=StyleSheet.create({
         height:260,
         width:150
       },
+      tagcontainer:{
+        flex:1,
+        flexDirection:"row",
+        alignItems:"flex-end"
+      },
       tagTextContainer:{
-     
+        
       },
       tagStyle:{
-          marginTop:5,
           flexDirection:'row',
           alignItems:'center',
+          marginTop:-35
       },
       tagTextStyle:{
           color:'#607d8b',
