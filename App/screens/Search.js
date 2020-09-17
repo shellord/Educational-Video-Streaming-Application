@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import {View,StyleSheet,FlatList} from 'react-native'
-import { SearchBar } from 'react-native-elements';
+import {View,StyleSheet,FlatList,TextInput} from 'react-native'
 import Constants from 'expo-constants'
 import { AuthContext } from "../context"
 import VideoCardModel from '../components/VideoCardModel'
 import  Firebase from '../../config/Firebase'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Search = ({ navigation }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -38,12 +38,17 @@ const Search = ({ navigation }) => {
 
   return(
     <View style={styles.container}>
-      <SearchBar 
+      <View style={styles.searchSection}>
+      <Ionicons name='ios-search' size={14} color='#fff' />
+      <TextInput 
       value={search}
-      placeholder="search lessons"
+
+      placeholder="Search Lessons"
       onChangeText={(text)=>setsearch(text)}
-      lightTheme
+      placeholderTextColor={'white'}
+      style={styles.searchBar}
       />
+      </View>
        <FlatList
           data={results}
           renderItem={( {item} ) => 
@@ -60,7 +65,6 @@ const Search = ({ navigation }) => {
               isfree={item.isfree}
               class={item.class}
           />
-
           )
         }
       numColumns={1}
@@ -74,7 +78,30 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     paddingTop:Constants.statusBarHeight,
-  }
-})
+    backgroundColor:"#fff"
+  },
+  searchSection: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    width:"90%",
+    alignSelf:'center',
+    borderRadius:10,
+    marginBottom:20,
+    marginTop:20
+},
+searchIcon: {
+    padding: 10,
+},
+searchBar: {
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    backgroundColor: 'grey',
+    color: 'white',
+},
 
-  export default Search
+})
+export default Search

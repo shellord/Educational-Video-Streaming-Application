@@ -82,7 +82,7 @@ const Carousel = ({ data,nav }) => {
         )
     }
 
-    console.log('Please provide Images')
+    // console.log('Please provide Images')
     return null
 }
 
