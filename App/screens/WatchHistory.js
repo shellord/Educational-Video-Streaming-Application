@@ -31,7 +31,7 @@ const WatchHistory = ({navigation}) => {
         <SafeAreaView style={styles.container}>
           <View style={{alignItems:'flex-end',margin:10}}>
           <TouchableOpacity onPress={()=>clearHistory()}>
-            <Text style={{color:'#536DFE'}}>Clear History</Text></TouchableOpacity>
+            <Text style={{color:'tomato'}}>Clear History</Text></TouchableOpacity>
             </View>
             <FlatList
               data={watchHistory}

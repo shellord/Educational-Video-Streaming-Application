@@ -33,8 +33,8 @@ const AnnouncementStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 
-const API_URL='http://192.168.1.12:3000'
-const ASSETS_URL='http://192.168.1.12/marvelprofile/uploads/'
+const API_URL='http://18.223.24.160:3000'
+const ASSETS_URL='http://18.223.24.160//marvelprofile/uploads/'
 
 const AuthStackScreen = () => (
   <AuthStack.Navigator>

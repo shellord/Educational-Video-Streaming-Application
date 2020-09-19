@@ -166,7 +166,6 @@ const ChapterVideo = ({ route }) => {
 
 const styles = StyleSheet.create({
   container:{
-    top:Constants.statusBarHeight,
     marginTop:0,
     flex:1,
     backgroundColor:"white",

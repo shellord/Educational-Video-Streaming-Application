@@ -77,7 +77,6 @@ const Home = ({ navigation }) =>{
 ):(<></>)}
           <VideoList title="Latest Classes" data={latestvids} navigation={navigation} userclass={userclass} />
           <VideoList title="Popular Videos" data={popularVideos} navigation={navigation} userclass={userclass} />
-
         </ScrollView>
       )
     }

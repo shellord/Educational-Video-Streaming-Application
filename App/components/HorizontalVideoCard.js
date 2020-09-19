@@ -36,7 +36,8 @@ const styles=StyleSheet.create({
         borderColor:'#dddddd',
       },
       titleStyle:{
-        fontSize:12
+        fontSize:12,
+        fontWeight:"600",
       },
       subjectText:{
         flex:1,
