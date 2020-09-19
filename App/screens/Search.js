@@ -4,7 +4,7 @@ import { AuthContext } from "../context"
 import VideoCardModel from '../components/VideoCardModel'
 import  Firebase from '../../config/Firebase'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import Constants from 'expo-constants'
 
 const Search = ({ navigation }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -79,7 +79,8 @@ const Search = ({ navigation }) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:"#fff"
+    backgroundColor:"#fff",
+    paddingTop:Constants.statusBarHeight
   },
   searchSection: {
     flexDirection: 'row',

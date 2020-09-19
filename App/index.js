@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React,{useState} from "react"
 import {AsyncStorage} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -253,7 +253,7 @@ export default () => {
   const [initializing, setInitializing] = useState(true)
   const [isFinishedSignup, setisFinishedSignup] = useState(0)
   const [showIntroScreen, setShowIntroScreen] = useState(1)
-  const [usertemp, setusertemp] = useState(null)
+  
   AsyncStorage.getItem('showIntro')
   .then(val => {
     if (val !== null) setShowIntroScreen(0)
@@ -263,9 +263,12 @@ export default () => {
      fetch(API_URL+`/api/users/${user.phoneNumber}`)
     .then((response) => response.json())
     .then((json) => {
-      if(Object.keys(json.response).length!=0){
+      if(json.response[0].class){
         setisFinishedSignup(1)
       }
+      // if(Object.keys(json.response).length!=0){
+      //   setisFinishedSignup(1)
+      // }
       setInitializing(false)
       setUserToken(user)
 

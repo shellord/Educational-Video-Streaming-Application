@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Marvel Creative Learning Application",
-    "slug": "Marvel Creative Learning Application",
+    "slug": "MarvelCreativeLearningApplication",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -26,6 +26,9 @@
     "ios": {
       "supportsTablet": true,
       "requireFullScreen": true
+    },
+    "android": {
+      "package": "com.relicstudio.MarvelCretiveLearningApp"
     }
   }
 }

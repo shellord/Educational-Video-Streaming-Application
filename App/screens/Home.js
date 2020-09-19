@@ -75,8 +75,8 @@ const Home = ({ navigation }) =>{
           <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
           {watchHistory?(<VideoList title="Continue Watching" data={watchHistory} navigation={navigation} userclass={userclass} />
 ):(<></>)}
-          <VideoList title="Latest Classes" data={latestvids} navigation={navigation} userclass={userclass} />
-          <VideoList title="Popular Videos" data={popularVideos} navigation={navigation} userclass={userclass} />
+        {latestvids?(<VideoList title="Latest Classes" data={latestvids} navigation={navigation} userclass={userclass} />):(<></>)}  
+        {popularVideos?(<VideoList title="Popular Videos" data={popularVideos} navigation={navigation} userclass={userclass} />):(<></>)}
         </ScrollView>
       )
     }
