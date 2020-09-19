@@ -263,9 +263,14 @@ export default () => {
      fetch(API_URL+`/api/users/${user.phoneNumber}`)
     .then((response) => response.json())
     .then((json) => {
-      if(json.response[0].class){
-        setisFinishedSignup(1)
-      }
+      try{
+        if(json.response[0].class){
+          setisFinishedSignup(1)
+        }
+     }
+     catch(e){
+       
+     }
       // if(Object.keys(json.response).length!=0){
       //   setisFinishedSignup(1)
       // }
@@ -274,7 +279,7 @@ export default () => {
 
      })
     .catch((error) => {
-      alert("error")
+      alert(error)
     })
     
   }

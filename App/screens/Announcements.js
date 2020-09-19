@@ -8,7 +8,7 @@ import Constants from 'expo-constants'
         <View style={styles.container}>
           <WebView
         source={{
-          uri: 'http://192.168.1.12/marvelprofile/anounc/'
+          uri: 'http://18.223.24.160/marvelprofile/anounc/'
         }}
         startInLoadingState={true}
           renderLoading={() => (

@@ -7,7 +7,7 @@ const DrawerProfile = () => {
     const {API_URL} = React.useContext(AuthContext)
     const {ASSETS_URL} = React.useContext(AuthContext)
 
-    const [userImage, setuserImage] = useState(0)
+    const [userImage, setuserImage] = useState(null)
     const [username, setusername] = useState('Jon Doe')
 
     useEffect(() => {

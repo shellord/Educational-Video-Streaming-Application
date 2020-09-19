@@ -23,7 +23,7 @@ import  Firebase from '../../config/Firebase'
         <View style={styles.container}>
           <WebView
           source={{
-            uri: `http://192.168.1.12/marvelprofile/index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
+            uri: `http://18.223.24.160/marvelprofile//index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
           }}
         startInLoadingState={true}
           renderLoading={() => (
