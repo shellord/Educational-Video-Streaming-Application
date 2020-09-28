@@ -44,14 +44,15 @@ const styles = StyleSheet.create({
     },
     subjectListHeader:{
       flex:1,
-      paddingTop:10,
+      // paddingTop:0,
       flexDirection:'row',
       marginVertical:10
     },
     subjectListText:{
       fontSize:20,
-      fontWeight:'700',
-      paddingHorizontal:20
+      fontWeight:'600',
+      paddingHorizontal:20,
+      color:'#1A237E'
     },
     subjectListView:{
       marginTop:0

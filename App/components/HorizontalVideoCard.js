@@ -38,6 +38,7 @@ const styles=StyleSheet.create({
       titleStyle:{
         fontSize:12,
         fontWeight:"600",
+        // color:'#01579B'
       },
       subjectText:{
         flex:1,
@@ -68,7 +69,7 @@ const styles=StyleSheet.create({
           color:'#607d8b',
           fontSize:12,
           backgroundColor:'#eceff1',
-          borderRadius:30,
+          borderRadius:0,
           paddingVertical:2,
           paddingHorizontal:5,
           marginRight:5   

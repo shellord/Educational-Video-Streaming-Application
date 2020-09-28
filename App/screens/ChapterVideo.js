@@ -3,7 +3,6 @@ import {View,StyleSheet,ActivityIndicator,Alert,AsyncStorage} from 'react-native
 import { Video } from 'expo-av'
 import { Text } from 'react-native-elements'
 import { useIsFocused } from '@react-navigation/native'
-import Constants from 'expo-constants'
 import  Firebase from '../../config/Firebase'
 import { AuthContext } from '../context'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -93,7 +92,7 @@ const ChapterVideo = ({ route }) => {
       .then((json) => {
             setrelatedVideos(json.response)
       })
-      .catch(error=>(alert("Network Error!")))
+      .catch(error=>(alert("Network Error")))
   }, [])
 
   const isFocused = useIsFocused();
@@ -138,9 +137,7 @@ const ChapterVideo = ({ route }) => {
         ref={videoRef}
       />
       <View style={styles.description}>
-      <View style={styles.titleContainer}
-          // titleStyle={{fontSize:}}
-          >
+      <View style={styles.titleContainer}  >
         
         <Text style={styles.videoTitle}>{route.params.name}</Text>
 
@@ -148,11 +145,11 @@ const ChapterVideo = ({ route }) => {
           
                         <View style={styles.tagStyle}>
                             <Text style={styles.tagTextStyle}> {route.params.subject.toLowerCase()} </Text>
-                            <Text style={styles.tagSupStyle}> • </Text>
+                            {/* <Text style={styles.tagSupStyle}> • </Text> */}
                             <Text style={styles.tagTextStyle}> {route.params.topic.toLowerCase()} </Text>
                         </View>
                     </View>      
-                    <Text style={styles.tagDescstyle}>
+                    <Text style={styles.Descstyle}>
             {route.params.description}
         </Text>
       </View>
@@ -173,7 +170,8 @@ const styles = StyleSheet.create({
   },
   videoTitle:{
     fontSize:21,
-    fontWeight:"800"
+    fontWeight:"800",
+    color:'#536DFE'
   },
   titleContainer:{
     flex:1,
@@ -183,9 +181,10 @@ const styles = StyleSheet.create({
     fontSize:23,
     color:"#607d8b"
   },
-  tagDescstyle:{
+  Descstyle:{
     marginBottom:0,
-    fontSize:15
+    fontSize:15,
+    color:'#00838F'
   },
   tagTextContainer:{
      marginTop:10,
@@ -200,9 +199,9 @@ const styles = StyleSheet.create({
   },
   tagTextStyle:{
     color:'#607d8b',
-    fontSize:14,
+    fontSize:12,
     backgroundColor:'#eceff1',
-    borderRadius:100,
+    borderRadius:0,
     padding:3,
     marginRight:5,
     textTransform:"capitalize",

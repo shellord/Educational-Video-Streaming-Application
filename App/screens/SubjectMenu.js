@@ -61,7 +61,9 @@ const SubjectMenu = ({ route }) => {
 const styles = StyleSheet.create({
   cardContainer:{
     flex:1,
-    backgroundColor:"white"
+    backgroundColor:"white",
+    justifyContent:'center',
+    alignContent:'center'
   }
 })
 export default SubjectMenu

@@ -6,13 +6,13 @@ const { width, height } = Dimensions.get('window')
 
 const CarouselItem = ({ item,nav }) => {
     return (
-        <TouchableWithoutFeedback onPress={()=>nav.push('chaptervideo',{name:item.title,description:item.description,url:item.url,nav:nav,subject:item.subject,topic:item.topic,isfree:item.isfree,image:item.image,id:item.id})}>
+        <TouchableWithoutFeedback onPress={()=>nav.push('chaptervideo',{name:item.title,description:item.description,url:item.url,nav:nav,subject:item.subject,topic:item.topic,isfree:item.isfree,image:item.image,id:item.id,class:item.class})}>
             <View style={styles.cardView}>
                 <Image style={styles.image} source={{ uri: item.image }} />
-                <View style={styles.textView}>
+                {/* <View style={styles.textView}>
                     <Text style={styles.itemTitle}> {item.title}</Text>
                     <Text style={styles.itemDescription}>{item.description}</Text>
-                </View>
+                </View> */}
             </View>
         </TouchableWithoutFeedback>
     )
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         width: width - 20,
         height: height / 4,
         backgroundColor: 'white',
-        margin: 10,
+        marginHorizontal: 10,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0.5, height: 0.5 },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     image: {
         width: width - 20,
         height: height / 3,
-        borderRadius: 10
+        borderRadius: 0
     },
     itemTitle: {
         color: 'white',

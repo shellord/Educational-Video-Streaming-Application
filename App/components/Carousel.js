@@ -27,7 +27,7 @@ function infiniteScroll(dataList){
 }
 
 
-const Carousel = ({ data,nav }) => {
+const Carousel = ({ data,nav,title }) => {
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState(data)
@@ -42,8 +42,13 @@ const Carousel = ({ data,nav }) => {
     if (data && data.length) {
         return (
             <View>
+                <View style={styles.subjectListHeader}>
+                    <Text style={styles.subjectListText}>
+                        {title}
+                    </Text>
+                </View>
                 <FlatList data={data}
-                ref = {(flatList) => {this.flatList = flatList}}
+                // ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}
                     horizontal
                     pagingEnabled
@@ -87,7 +92,19 @@ const Carousel = ({ data,nav }) => {
 }
 
 const styles = StyleSheet.create({
-    dotView: { flexDirection: 'row', justifyContent: 'center' }
+    dotView: { flexDirection: 'row', justifyContent: 'center' },
+    subjectListHeader:{
+        flex:1,
+        paddingTop:0,
+        flexDirection:'row',
+        marginVertical:10
+      },
+      subjectListText:{
+        fontSize:20,
+        fontWeight:'600',
+        paddingHorizontal:20,
+        color:'#D81B60'
+      },
 })
 
 export default Carousel

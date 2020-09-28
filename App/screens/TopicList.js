@@ -28,7 +28,7 @@ const TopicList = ({route}) => {
         )
     }
     return(
-        <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
+        <SafeAreaView style={styles.container}>
             <FlatList
             data={topics}
             renderItem={({ item }) => (
@@ -40,6 +40,7 @@ const TopicList = ({route}) => {
                         navigation={route.params.nav}   
                         userclass={route.params.userclass}      
                     />
+    
                 </View>
             )}
             numColumns={1}
@@ -51,7 +52,11 @@ const TopicList = ({route}) => {
 }
 
 const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:'white',
 
+    }
 })
 
 

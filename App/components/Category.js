@@ -14,13 +14,12 @@ const Category = (props) =>{
         </View>
       </View>
     )
-
 }
 
 const styles=StyleSheet.create({
     subjectList:{
-        height:140,
-        width:148,
+        height:110,
+        width:140,
         marginLeft:20,
         borderWidth:0,
         borderColor:'#dddddd'

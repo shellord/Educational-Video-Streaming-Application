@@ -45,11 +45,12 @@ const styles=StyleSheet.create({
     },
     subjectListText:{
       fontSize:20,
-      fontWeight:'700',
-      paddingHorizontal:20
-    },
+      fontWeight:'500',
+      paddingHorizontal:20,
+      color:'tomato'
+   },
     subjectListView:{
-      height:130,
+      height:100,
       marginTop:20
     }
 

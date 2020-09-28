@@ -43,9 +43,10 @@ const PostLogin =()=> {
               <Image source={require('../../assets/logo.jpeg')} style={styles.logo}/>
 
          <TextInput style={styles.inputText}                 
-          onChangeText={text => setName(text)}    
-          value={name}             
-          placeholder="Name"
+            onChangeText={text => setName(text)}    
+            value={name}             
+            placeholder="Name"
+            maxLength = {8}
            />  
 
       <TextInput style={styles.inputText}                 
