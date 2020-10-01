@@ -8,6 +8,8 @@ import  Firebase from '../../config/Firebase'
 import { useIsFocused } from '@react-navigation/native'
 import VideoList from '../components/VideoList'
 import HeaderWelcome from '../components/HeaderWelcome'
+import UpgradeCard from '../components/UpgradeCard'
+
 import * as Contacts from 'expo-contacts';
 
 
@@ -99,6 +101,7 @@ const Home = ({ navigation }) =>{
     return (
         <ScrollView style={styles.container}>
            <HeaderWelcome username={username} userimage={userImage}/>
+          <UpgradeCard/>
           <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
           {watchHistory?
             (<VideoList title="Continue Watching" data={watchHistory} navigation={navigation} userclass={userclass} />
