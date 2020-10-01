@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text,Image,StyleSheet} from 'react-native'
+import { View, Text,Image,StyleSheet,Platform} from 'react-native'
 
 const HeaderWelcome = ({username,userimage}) => {
 
@@ -23,32 +23,33 @@ const styles = StyleSheet.create({
     container:{
           flex:1,                   
           margin:20,
-          padding:20,
+          padding:10,
           flexDirection:'row',
-          backgroundColor:'#E3F2FD',
+        //   backgroundColor:'#E3F2FD',
           // borderRadius:50
 
         },
         userContainer:{
-            flex:2
-    
+            flex:2,
+            height:70,
         },
         userText:{
-          fontSize:25
+            fontSize: Platform.OS === 'ios' ? 44 : 25
         },
         userName:{
-          fontWeight:"bold",
-          fontSize:25
+          fontWeight:Platform.OS === 'ios' ? "600" : "700",
+          fontSize: Platform.OS === 'ios' ? 44 : 25
         },
         avatarContainer:{
             flex:1,
-            alignItems:'flex-end'
+            alignItems:'flex-end',
+            padding:10
         },
         avatar:{
             flex:1,
             justifyContent:'flex-end',
-            height:80,
-            width:80,
+            height:60,
+            width:60,
             borderRadius:75
         },
 })

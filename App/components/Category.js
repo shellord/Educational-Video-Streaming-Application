@@ -9,26 +9,32 @@ const Category = (props) =>{
         <View style={styles.subjectImage}>
             <Image source={props.imageUri} style={styles.subjectImage}/>
         </View>
-        <View style={styles.subjectText}>
-            <Text>{props.name}</Text>
+        <View style={styles.subjectTextContainer}>
+            <Text style={styles.subjectText}>{props.name}</Text>
         </View>
       </View>
     )
+
 }
 
 const styles=StyleSheet.create({
     subjectList:{
-        height:110,
-        width:140,
+        height:140,
+        width:148,
+        // height:200,
+        // width:150,
         marginLeft:20,
         borderWidth:0,
         borderColor:'#dddddd'
       },
-
-      subjectText:{
+      subjectTextContainer:{
         flex:1,
-        paddingLeft:10,
         paddingTop:10
+      },
+      subjectText:{
+        fontWeight:"600",
+        textTransform:'capitalize',
+        color:"black"
       },
       subjectImage:{
         flex:2,

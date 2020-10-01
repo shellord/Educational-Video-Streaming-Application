@@ -10,7 +10,7 @@ const HorizontalScroll = ({subjects,navigation,userclass}) => {
           >
               <View style={styles.subjectListHeader}>
                 <Text style={styles.subjectListText}>
-                  What would you like to learn ?
+                  Subjects 
                 </Text>
                 <View style={styles.subjectListView}>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -44,13 +44,13 @@ const styles=StyleSheet.create({
       paddingTop:10
     },
     subjectListText:{
-      fontSize:20,
-      fontWeight:'500',
-      paddingHorizontal:20,
-      color:'tomato'
-   },
+      fontSize:22,
+      fontWeight:'700',
+      paddingLeft:20,
+      // color:"white"
+    },
     subjectListView:{
-      height:100,
+      height:130,
       marginTop:20
     }
 

@@ -33,17 +33,16 @@ const TopicList = ({route}) => {
             data={topics}
             renderItem={({ item }) => (
                 
-                <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                <View style={{ flex: 1, flexDirection: 'row', margin: 1 }}>
                     <TopicCard
                         subject={route.params.name}
                         item={item}  
                         navigation={route.params.nav}   
                         userclass={route.params.userclass}      
                     />
-    
                 </View>
             )}
-            numColumns={1}
+            numColumns={3}
             keyExtractor={(item, index) => index.toString()}
             />
              
@@ -53,9 +52,9 @@ const TopicList = ({route}) => {
 
 const styles = StyleSheet.create({
     container:{
+        
         flex:1,
-        backgroundColor:'white',
-
+        backgroundColor:'white'
     }
 })
 

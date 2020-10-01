@@ -6,10 +6,10 @@ const TopicCard = (props) => {
     return(
             <TouchableOpacity onPress={()=>{props.navigation.push('subject',{name:props.item.name,subject:props.subject,nav:props.navigation,userclass:props.userclass})}}>
                 <View style={styles.container}>
-                    <ImageBackground source={{uri:props.item.imguri}} style={styles.ImageBackgroundStyle} resizeMode='contain'>
-                        <View style={styles.textContainer}>
-                            {/* <Text style={styles.textStyle}>{props.item.name}</Text> */}
-                        </View>
+                    <ImageBackground source={{uri:props.item.imguri}} imageStyle={{ borderRadius: 15}}  style={styles.ImageBackgroundStyle}>
+                        {/* <View style={styles.textContainer}>
+                            <Text style={styles.textStyle}>{props.item.name}</Text>
+                        </View> */}
                     </ImageBackground>
                 </View>
             </TouchableOpacity>
@@ -19,18 +19,21 @@ const TopicCard = (props) => {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        margin:10,
-        padding:1,
-        // backgroundColor:'tomato',
+        marginTop:15,
+        // margin:5,
+        padding:5,
+    
     },  
     textContainer:{
         flex:1,
         margin:10,
-        height:280
+        justifyContent:'center',
+        alignItems:'center',
+        height:168
     },
     ImageBackgroundStyle:{
-        width: '100%', 
-        height: '100%',
+        width: 110, 
+        height: 168,
     },
     textStyle:{
         color:'white',
