@@ -87,7 +87,7 @@ const HomeStackScreen = ({navigation}) => (
       component={ChapterVideo}
       options={({ route }) => ({
         title: route.params.name,
-        headerShown:false
+        // headerShown:false
       })}    
       />
   </HomeStack.Navigator>
@@ -116,7 +116,7 @@ const WatchHistoryStackScreen = () => (
       component={ChapterVideo}
       options={({ route }) => ({
         title: route.params.name,
-        headerShown:false
+        // headerShown:false
       })}    
       />
   </WatchHistoryStack.Navigator>
@@ -149,9 +149,12 @@ const TabsScreen = () => (
       else if (route.name === 'Search') {
         iconName = focused ? 'ios-search' : 'ios-search';
      }
-     else if (route.name === 'History') {
-      iconName = focused ? 'ios-time' : 'ios-time';
+     else if (route.name === 'Announcements') {
+      iconName = focused ? 'ios-information-circle-outline' : 'ios-information-circle-outline';
      }
+    //  else if (route.name === 'History') {
+    //   iconName = focused ? 'ios-time' : 'ios-time';
+    //  }
       else if (route.name === 'Account') {
         iconName = focused ? 'ios-person' : 'ios-person';
       }
@@ -166,7 +169,8 @@ const TabsScreen = () => (
   >
     <Tabs.Screen name="Home" component={HomeStackScreen} />
     <Tabs.Screen name="Search" component={SearchStackScreen} />
-    <Tabs.Screen name="History" component={WatchHistoryStackScreen} />
+    {/* <Tabs.Screen name="History" component={WatchHistoryStackScreen} /> */}
+    <Tabs.Screen name="Announcements" component={AnnouncementStackScreen} />
     <Tabs.Screen name="Account" component={ProfileStackScreen} />
 
   </Tabs.Navigator>
@@ -195,8 +199,8 @@ const DrawerScreen = () => (
     <Drawer.Screen name="Home" component={TabsScreen} options={{
       drawerIcon: () => <Ionicons name="md-home" size={24}/>
     }}/>
-    <Drawer.Screen name="Announcements" component={AnnouncementStackScreen} options={{
-      drawerIcon: () => <Ionicons name="md-notifications" size={24}/>,     
+    <Drawer.Screen name="History" component={WatchHistoryStackScreen} options={{
+      drawerIcon: () => <Ionicons name="md-time" size={24}/>,     
     }} />
 
     <Drawer.Screen name="Profile" component={ProfileStackScreen} options={{
