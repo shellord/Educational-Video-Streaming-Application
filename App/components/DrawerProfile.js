@@ -25,7 +25,7 @@ const DrawerProfile = () => {
     return (
         <View style={styles.container}>
             {userImage?(<Image source={{uri:userImage}} style={styles.avatar}/>):(<Image source={require('../../assets/userdefault.png')} style={styles.avatar}/>)}
-            <Text>{username}</Text>
+            <Text style={styles.userText}>{username}</Text>
         </View>
     )
 }
@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
         height:100,
         width:100,
         borderRadius:75
+    },
+    userText:{
+        marginTop:10,
+        fontWeight:"600"
     },
     container:{
         alignItems:'center',

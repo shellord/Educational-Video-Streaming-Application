@@ -131,7 +131,7 @@ const ProfileStackScreen = () => (
 
 const AnnouncementStackScreen = () => (
   <AnnouncementStack.Navigator>
-    <AnnouncementStack.Screen name="Announcements" component={Announcements} />
+    <AnnouncementStack.Screen name="Notifications" component={Announcements} />
   </AnnouncementStack.Navigator>
 )
 
@@ -149,7 +149,7 @@ const TabsScreen = () => (
       else if (route.name === 'Search') {
         iconName = focused ? 'ios-search' : 'ios-search';
      }
-     else if (route.name === 'Announcements') {
+     else if (route.name === 'Notifications') {
       iconName = focused ? 'ios-information-circle-outline' : 'ios-information-circle-outline';
      }
     //  else if (route.name === 'History') {
@@ -170,7 +170,7 @@ const TabsScreen = () => (
     <Tabs.Screen name="Home" component={HomeStackScreen} />
     <Tabs.Screen name="Search" component={SearchStackScreen} />
     {/* <Tabs.Screen name="History" component={WatchHistoryStackScreen} /> */}
-    <Tabs.Screen name="Announcements" component={AnnouncementStackScreen} />
+    <Tabs.Screen name="Notifications" component={AnnouncementStackScreen} />
     <Tabs.Screen name="Account" component={ProfileStackScreen} />
 
   </Tabs.Navigator>

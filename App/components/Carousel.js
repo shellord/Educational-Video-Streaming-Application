@@ -27,7 +27,7 @@ function infiniteScroll(dataList){
 }
 
 
-const Carousel = ({ data,nav,title }) => {
+const Carousel = ({ data,nav }) => {
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState(data)
@@ -41,14 +41,12 @@ const Carousel = ({ data,nav,title }) => {
 
     if (data && data.length) {
         return (
-            <View>
-                <View style={styles.subjectListHeader}>
-                    <Text style={styles.subjectListText}>
-                        {title}
-                    </Text>
-                </View>
+            <View style={styles.container}>
+                 <Text style={styles.carouselText}>
+                  For You
+                </Text>
                 <FlatList data={data}
-                // ref = {(flatList) => {this.flatList = flatList}}
+                ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}
                     horizontal
                     pagingEnabled
@@ -77,7 +75,7 @@ const Carousel = ({ data,nav,title }) => {
                         return (
                             <Animated.View
                                 key={i}
-                                style={{ opacity, height: 10, width: 10, backgroundColor: '#595959', margin: 8, borderRadius: 5 }}
+                                style={{ opacity, height: 0, width: 0, backgroundColor: '#595959', margin: 8, borderRadius: 5 }}
                             />
                         )
                     })}
@@ -92,19 +90,15 @@ const Carousel = ({ data,nav,title }) => {
 }
 
 const styles = StyleSheet.create({
-    dotView: { flexDirection: 'row', justifyContent: 'center' },
-    subjectListHeader:{
-        flex:1,
-        paddingTop:0,
-        flexDirection:'row',
-        marginVertical:10
-      },
-      subjectListText:{
-        fontSize:20,
-        fontWeight:'600',
-        paddingHorizontal:20,
-        color:'#D81B60'
-      },
+    dotView: { flexDirection: 'row', justifyContent: 'center',marginTop:-10 },
+    container:{
+        padding: 20,
+    },
+    carouselText:{
+        fontSize:22,
+        fontWeight:"600",
+    }
+    
 })
 
 export default Carousel

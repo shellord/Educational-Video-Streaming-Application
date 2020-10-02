@@ -15,6 +15,7 @@ const HorizontalVideoCard = (props) =>{
                         <View style={styles.tagStyle}>
                             {props.subject?(<Text style={styles.tagTextStyle}> {props.subject.toLowerCase()}</Text>
 ):(<></>)}
+<Text style={styles.tagSupStyle}> • </Text>
                             {props.topic?(<Text style={styles.tagTextStyle}> {props.topic.toLowerCase()}</Text>):(<></>)}
                         </View>
             </View>  
@@ -63,15 +64,14 @@ const styles=StyleSheet.create({
       tagStyle:{
           flexDirection:'row',
           alignItems:'center',
-          marginTop:-35
+          marginTop:-40,
       },
       tagTextStyle:{
-          color:'#607d8b',
-          fontSize:12,
-          backgroundColor:'#eceff1',
-          paddingVertical:2,
-          paddingHorizontal:5,
-          marginRight:5   
+        fontSize:12,
+        color:'tomato',
+        padding:0,
+        fontWeight:"600",
+        textTransform:"capitalize",
       }
 })
 export default HorizontalVideoCard
