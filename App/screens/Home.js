@@ -14,7 +14,7 @@ import * as Contacts from 'expo-contacts';
 
 const Home = ({ navigation }) =>{
     
-    const {API_URL,ASSETS_URL,BACKGROUND_COLOR} = React.useContext(AuthContext)
+    const {API_URL,ASSETS_URL} = React.useContext(AuthContext)
     const [subjects,setSubjects] = useState([{}])
     const [featuredvids,setFeaturedvids] = useState([{}])
     const [latestvids,setLatestvids] = useState([{}])

@@ -1,10 +1,14 @@
-import React,{useState,useRef,useEffect} from 'react'
-import {View,StyleSheet,ActivityIndicator} from 'react-native'
+import React from 'react'
+import {View,StyleSheet,ActivityIndicator,Dimensions,TouchableOpacity,Text} from 'react-native'
 import { WebView } from 'react-native-webview'
-import Constants from 'expo-constants'
 import  Firebase from '../../config/Firebase'
+import colors from '../styles/styles'
+import { AuthContext } from "../context"
+
+const { width, height } = Dimensions.get('window')
 
  const Profile = ({ navigation }) => {
+    const {signOut} = React.useContext(AuthContext)
 
     return (
         // <View style={styles.container}>
@@ -15,27 +19,27 @@ import  Firebase from '../../config/Firebase'
         //     <TouchableOpacity style={styles.button}  onPress={() => alert(Firebase.auth().currentUser.email)} >
         //       <Text>Subscribe </Text> 
         //     </TouchableOpacity>
-        //     <TouchableOpacity style={styles.button}  onPress={() => signOut()} >
-        //       <Text>Sign Out</Text>
-        //     </TouchableOpacity>
+
         // </View>
 
         <View style={styles.container}>
-          <WebView
-          source={{
-            uri: `http://18.223.24.160/marvelprofile//index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
-          }}
-        startInLoadingState={true}
-          renderLoading={() => (
-            <ActivityIndicator
-              color='black'
-              size='large'
-              style={styles.flexContainer}
-            />
-          )}
-          javaScriptEnabled={true}
-          mixedContentMode='always'
-        />
+          <View style={styles.webviewStyle}>
+            <WebView
+              source={{
+               uri: `http://18.223.24.160/marvelprofile//index.php?phone=${Firebase.auth().currentUser.phoneNumber.substring(1)}`
+              }}
+          startInLoadingState={true}
+            renderLoading={() => (
+              <ActivityIndicator
+                color='black'
+                size='large'
+                style={styles.flexContainer}
+              />
+            )}
+            javaScriptEnabled={true}
+            mixedContentMode='always'
+          />
+          </View>
         </View>
     )
   }
@@ -46,17 +50,26 @@ import  Firebase from '../../config/Firebase'
         width:100,
         borderRadius:75
     },
-
+    webviewStyle:{
+      flex:1
+    },
     nameStyle:{
       fontSize:18,
       fontWeight:'bold'
     },
     container:{
         flex:1,
-
+        backgroundColor:'white'
+    },
+    buttonContainer:{
+      alignItems:'flex-end'
     },
     button:{
-      backgroundColor:'green'
+      
+    },
+    textStyle:{
+      fontSize:16,
+      color:'black'
     }
     
 })

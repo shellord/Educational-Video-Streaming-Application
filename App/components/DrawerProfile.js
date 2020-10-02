@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { View, Text,Image ,StyleSheet} from 'react-native'
 import { AuthContext } from "../context"
 import  Firebase from '../../config/Firebase'
+import colors from '../styles/styles'
 
 const DrawerProfile = () => {
     const {API_URL} = React.useContext(AuthContext)
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         marginBottom:10,
-        marginTop:10
+        // backgroundColor:colors.BACKGROUND_COLOR
+        backgroundColor:'white'
     }
     
 })
