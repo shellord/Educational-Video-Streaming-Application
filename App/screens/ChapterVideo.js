@@ -3,10 +3,12 @@ import {View,StyleSheet,ActivityIndicator,Alert,AsyncStorage} from 'react-native
 import { Video } from 'expo-av'
 import { Text } from 'react-native-elements'
 import { useIsFocused } from '@react-navigation/native'
+import Constants from 'expo-constants'
 import  Firebase from '../../config/Firebase'
 import { AuthContext } from '../context'
 import { ScrollView } from 'react-native-gesture-handler'
 import VideoList from '../components/VideoList'
+import UpgradeCard from '../components/UpgradeCard'
 
 const ChapterVideo = ({ route }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -92,7 +94,7 @@ const ChapterVideo = ({ route }) => {
       .then((json) => {
             setrelatedVideos(json.response)
       })
-      .catch(error=>(alert("Network Error")))
+      .catch(error=>(alert("Network Error!")))
   }, [])
 
   const isFocused = useIsFocused();
@@ -137,7 +139,9 @@ const ChapterVideo = ({ route }) => {
         ref={videoRef}
       />
       <View style={styles.description}>
-      <View style={styles.titleContainer}  >
+      <View style={styles.titleContainer}
+          // titleStyle={{fontSize:}}
+          >
         
         <Text style={styles.videoTitle}>{route.params.name}</Text>
 
@@ -145,15 +149,16 @@ const ChapterVideo = ({ route }) => {
           
                         <View style={styles.tagStyle}>
                             <Text style={styles.tagTextStyle}> {route.params.subject.toLowerCase()} </Text>
-                            {/* <Text style={styles.tagSupStyle}> • </Text> */}
+                            <Text style={styles.tagSupStyle}> • </Text>
                             <Text style={styles.tagTextStyle}> {route.params.topic.toLowerCase()} </Text>
                         </View>
                     </View>      
-                    <Text style={styles.Descstyle}>
+                    <Text style={styles.tagDescstyle}>
             {route.params.description}
         </Text>
       </View>
       </View>
+      <UpgradeCard/>
       {relatedVideos[0]?(<VideoList title="Related Videos" data={relatedVideos} navigation={route.params.nav} userclass={route.params.class} />
 ):(<></>)}
      <Text></Text>
@@ -169,9 +174,8 @@ const styles = StyleSheet.create({
     
   },
   videoTitle:{
-    fontSize:21,
-    fontWeight:"800",
-    color:'#536DFE'
+    fontSize:20,
+    fontWeight:"800"
   },
   titleContainer:{
     flex:1,
@@ -179,31 +183,34 @@ const styles = StyleSheet.create({
   },
   tagSupStyle:{
     fontSize:23,
-    color:"#607d8b"
+    // color:"#607d8b"
+    color:"tomato"
+
   },
-  Descstyle:{
+  tagDescstyle:{
     marginBottom:0,
-    fontSize:15,
-    color:'#00838F'
+    fontSize:15
   },
   tagTextContainer:{
-     marginTop:10,
+     marginTop:0,
      alignItems:'flex-start'
   },
   tagStyle:{
     flex:1,
     flexDirection:'row',
     alignItems:'center',
-    marginBottom:10,
-    marginLeft:0
+    marginBottom:5,
+    marginLeft:-2
   },
   tagTextStyle:{
-    color:'#607d8b',
-    fontSize:12,
-    backgroundColor:'#eceff1',
-    borderRadius:0,
-    padding:3,
+    // color:'#607d8b',
+    color:'tomato',
+    fontSize:14,
+    // backgroundColor:'#eceff1',
+    borderRadius:100,
+    padding:0,
     marginRight:5,
+    fontWeight:"600",
     textTransform:"capitalize",
   }
 })
