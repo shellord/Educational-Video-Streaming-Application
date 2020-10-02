@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text,Image,StyleSheet,Platform} from 'react-native'
+import colors from '../styles/styles'
 
 const HeaderWelcome = ({username,userimage}) => {
 
@@ -34,11 +35,14 @@ const styles = StyleSheet.create({
             height:70,
         },
         userText:{
-            fontSize: Platform.OS === 'ios' ? 44 : 25
+            fontSize: Platform.OS === 'ios' ? 44 : 25,
+            color:colors.TEXT_COLOR
+            
         },
         userName:{
           fontWeight:Platform.OS === 'ios' ? "600" : "700",
-          fontSize: Platform.OS === 'ios' ? 44 : 25
+          fontSize: Platform.OS === 'ios' ? 44 : 25,
+          color:colors.TEXT_COLOR
         },
         avatarContainer:{
             flex:1,

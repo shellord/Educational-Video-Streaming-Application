@@ -9,14 +9,12 @@ import { useIsFocused } from '@react-navigation/native'
 import VideoList from '../components/VideoList'
 import HeaderWelcome from '../components/HeaderWelcome'
 import UpgradeCard from '../components/UpgradeCard'
-
+import colors from '../styles/styles'
 import * as Contacts from 'expo-contacts';
-
 
 const Home = ({ navigation }) =>{
     
-    const {API_URL} = React.useContext(AuthContext)
-    const {ASSETS_URL} = React.useContext(AuthContext)
+    const {API_URL,ASSETS_URL,BACKGROUND_COLOR} = React.useContext(AuthContext)
     const [subjects,setSubjects] = useState([{}])
     const [featuredvids,setFeaturedvids] = useState([{}])
     const [latestvids,setLatestvids] = useState([{}])
@@ -97,7 +95,6 @@ const Home = ({ navigation }) =>{
       })    
         
     }, [userclass])
-
     return (
         <ScrollView style={styles.container}>
            <HeaderWelcome username={username} userimage={userImage}/>
@@ -117,7 +114,7 @@ const Home = ({ navigation }) =>{
 
   const styles=StyleSheet.create({
         container:{
-          backgroundColor:'white'
+          backgroundColor:colors.BACKGROUND_COLOR
         }
   })
   

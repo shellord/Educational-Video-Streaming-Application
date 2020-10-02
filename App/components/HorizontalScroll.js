@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text,ScrollView,TouchableOpacity,StyleSheet} from 'react-native'
 import Category from './Category'
+import colors from '../styles/styles'
 
 const HorizontalScroll = ({subjects,navigation,userclass}) => {
     return (
@@ -18,10 +19,10 @@ const HorizontalScroll = ({subjects,navigation,userclass}) => {
                       return( 
                         <TouchableOpacity key={key} onPress={() => navigation.push('topiclist',{name:subject.name,nav:navigation,userclass:userclass})}>
                           <Category 
-                          key={key}
-                          name={subject.name}
-                          imageUri = {{uri:subject.imguri}}
-                          navigation={navigation}
+                            key={key}
+                            name={subject.name}
+                            imageUri = {{uri:subject.imguri}}
+                            navigation={navigation}
                           />
                           </TouchableOpacity>
                       )
@@ -47,7 +48,7 @@ const styles=StyleSheet.create({
       fontSize:22,
       fontWeight:'700',
       paddingLeft:20,
-      // color:"white"
+      color:colors.TEXT_COLOR
     },
     subjectListView:{
       height:130,

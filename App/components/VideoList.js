@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text,StyleSheet,ScrollView} from 'react-native'
 import HorizontalVideoCard from './HorizontalVideoCard'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import colors from '../styles/styles'
 
 const VideoList = ({data,navigation,title}) => {
     return (
@@ -50,9 +51,9 @@ const styles = StyleSheet.create({
     },
     subjectListText:{
       fontSize:22,
-      fontWeight:'600',
+      fontWeight:'700',
       paddingHorizontal:20,
-      color:"black"
+      color:colors.TEXT_COLOR
     },
     subjectListView:{
       marginTop:0

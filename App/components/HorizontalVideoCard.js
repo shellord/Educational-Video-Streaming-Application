@@ -1,5 +1,6 @@
 import React from 'react'
 import {Text,StyleSheet,Image,View} from 'react-native'
+import colors from '../styles/styles'
 
 
 const HorizontalVideoCard = (props) =>{
@@ -39,7 +40,7 @@ const styles=StyleSheet.create({
         fontSize:14,
         fontWeight:"600",
         textTransform:"capitalize",
-        color:"#1A237E"
+        color:colors.TEXT_COLOR
       },
       subjectText:{
         flex:1,

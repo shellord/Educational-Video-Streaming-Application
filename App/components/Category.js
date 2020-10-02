@@ -1,5 +1,6 @@
 import React from 'react'
 import {Text,StyleSheet,Image,View} from 'react-native'
+import colors from '../styles/styles'
 
 
 const Category = (props) =>{
@@ -34,7 +35,7 @@ const styles=StyleSheet.create({
       subjectText:{
         fontWeight:"600",
         textTransform:'capitalize',
-        color:"black"
+        color:colors.TEXT_COLOR
       },
       subjectImage:{
         flex:2,

@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage, StyleSheet} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -17,11 +17,15 @@ import TopicList from "./screens/TopicList"
 import ChapterVideo from "./screens/ChapterVideo"
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import DrawerProfile from './components/DrawerProfile'
-import MobileAuth from './screens/MobileAuth'
 import PostLogin from './screens/PostLogin'
 import IntroScreen from './screens/IntroScreen'
 import Announcements from './screens/Announcements'
 import WatchHistory from './screens/WatchHistory'
+import GettingStarted from './screens/GettingStarted'
+import MobileLogin from './screens/MobileLogin'
+import MobileVerification from './screens/MobileVerification'
+
+import colors from './styles/styles'
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -37,16 +41,23 @@ const API_URL='http://18.223.24.160:3000'
 const ASSETS_URL='http://18.223.24.160/marvelprofile/uploads/'
 
 const AuthStackScreen = () => (
-  <AuthStack.Navigator>
+  <AuthStack.Navigator
+    initialRouteName={MobileLogin}
+  >
+    {/* <AuthStack.Screen
+      name="GettingStarted"
+      component={GettingStarted}
+      options={{ title: "Getting Started" }}
+    /> */}
     <AuthStack.Screen
-      name="Signin"
-      component={MobileAuth}
-      options={{ title: "Log in" }}
+      name="MobileLogin"
+      component={MobileLogin}
+      options={{ title: "MobileLogin" }}
     />
-    <AuthStack.Screen
-      name="Signup"
-      component={Signup}
-      options={{ title: "Create Account" }}
+      <AuthStack.Screen
+      name="MobileVerification"
+      component={MobileVerification}
+      options={{ title: "MobileVerification" }}
     />
   </AuthStack.Navigator>
 )
@@ -57,13 +68,16 @@ const HomeStackScreen = ({navigation}) => (
       options={{
         headerTitleStyle:{
           fontSize:16,
-          color:'#3f51b5'
+          color:colors.HEADER_TEXT_COLOR
+        },
+        headerStyle:{
+          backgroundColor:colors.BACKGROUND_COLOR
         },
         headerLeft: () => (
           <Icon name='menu'
             size={34}
             onPress={() => navigation.openDrawer()}
-
+            color={colors.HEADER_TEXT_COLOR}
           />
         ),
       }}
@@ -159,13 +173,20 @@ const TabsScreen = () => (
         iconName = focused ? 'ios-person' : 'ios-person';
       }
 
-      return <Ionicons name={iconName} size={size} color={color} />;
+      return <Ionicons name={iconName} size={size} color={colors.TAB_BAR_ICON_COLOR} />;
     },
   })}
   tabBarOptions={{
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
+    style:{  
+       backgroundColor:colors.TABBAR_COLOR,
+    },
+    labelStyle:{
+      color:colors.TAB_BAR_TEXT_COLOR
+    }
   }}
+  
   >
     <Tabs.Screen name="Home" component={HomeStackScreen} />
     <Tabs.Screen name="Search" component={SearchStackScreen} />
@@ -244,7 +265,7 @@ const RootStackScreen = ({ userToken,isFinishedSignup,showIntroScreen }) => (
             }}
           />
         ))
-   
+       
 
     }
   </RootStack.Navigator>
@@ -340,7 +361,7 @@ export default () => {
       },
       API_URL:API_URL,
       ASSETS_URL:ASSETS_URL
-    }
+      }
   }, [])
   
 
