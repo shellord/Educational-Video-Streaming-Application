@@ -10,7 +10,7 @@ const HorizontalVideoCard = (props) =>{
         </View>
         <View style={styles.subjectText}>
             <Text numberOfLines={2} style={styles.titleStyle}>{props.name}</Text>
-            <View style={styles.tagcontainer}>
+            {/* <View style={styles.tagcontainer}>
             <View style={styles.tagTextContainer}>
                         <View style={styles.tagStyle}>
                             {props.subject?(<Text style={styles.tagTextStyle}> {props.subject.toLowerCase()}</Text>
@@ -19,7 +19,7 @@ const HorizontalVideoCard = (props) =>{
                             {props.topic?(<Text style={styles.tagTextStyle}> {props.topic.toLowerCase()}</Text>):(<></>)}
                         </View>
             </View>  
-            </View>
+            </View> */}
         </View>
 
       </View>
@@ -30,7 +30,6 @@ const HorizontalVideoCard = (props) =>{
 const styles=StyleSheet.create({
     subjectList:{
         flex:1,
-        height:240,
         width:110,
         marginLeft:20,
         borderWidth:0,
@@ -47,10 +46,9 @@ const styles=StyleSheet.create({
         paddingTop:10
       },
       subjectImage:{
-        flex:2,
         resizeMode:'cover',
         borderRadius:10,
-        height:240,
+        height:140,
         width:110
       },
       tagcontainer:{
