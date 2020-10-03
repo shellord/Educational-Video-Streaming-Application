@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import TextBox from '../components/TextBox'
 
 const MobileLogin = ({navigation}) =>{
     return (
       <View style={styles.container}>
-        <Text style={styles.welcomeToMcl}>Welcome to MCL!</Text>
+        <View style={{flexDirection:'row'}}>
+        <Text style={styles.welcomeToMcl}>Welcome to </Text>
+        <Text style={styles.ToMcl}>MCL!</Text>
+        </View>
           <Text style={styles.insertYourPhone}>
             Insert your phone number to continue
           </Text>
@@ -23,9 +26,15 @@ const styles = StyleSheet.create({
   },
   welcomeToMcl: {
     marginTop:30,
+    fontWeight:"100",
+    color: "#121212",
+    fontSize: Platform.OS === 'ios' ? 44 : 23
+  },
+  ToMcl: {
+    marginTop:30,
     fontWeight:"600",
     color: "#121212",
-    fontSize: 23,
+    fontSize: Platform.OS === 'ios' ? 44 : 23
   },
   insertYourPhone: {
     marginTop:5,
