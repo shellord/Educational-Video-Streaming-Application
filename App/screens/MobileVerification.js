@@ -1,19 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View ,Platform} from 'react-native'
+import { StyleSheet, Text, View ,Platform,ImageBackground} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
 
 const MobileVerification = ({route}) => {
     return (
+        <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
         <View style={styles.container}>
         <View style={{flexDirection:'row'}}>
-        <Text style={styles.welcome}>Welcome to </Text>
-        <Text style={styles.toMcl}>MCL!</Text>
+        <Text style={styles.welcomeToMcl}>Welcome to </Text>
+        <Text style={styles.ToMcl}>MCL!</Text>
         </View>
         <Text style={styles.insertYourPhone}>
         Insert the verification code to continue
         </Text>
-      <TextBoxVerification verificationId={route.params.verificationId}/>
+      {/* <TextBoxVerification verificationId={route.params.verificationId}/> */}
+      <TextBoxVerification verificationId={"asds"}/>
     </View>
+    </ImageBackground>
     )
 }
 
@@ -22,20 +25,25 @@ export default MobileVerification
 const styles = StyleSheet.create({
     container: {
       flex:1,
-      backgroundColor:'white',
       padding:30
     },
-    toMcl: {
-        marginTop:30,
-        fontWeight:"600",
-        color: "#121212",
-        fontSize: Platform.OS=='ios'?44:30 },
-    welcome: {
-      marginTop:30,
+    welcomeToMcl: {
+      marginTop:80,
       fontWeight:"100",
       color: "#121212",
-      fontSize: Platform.OS=='ios'?44:30,
+      fontSize: Platform.OS === 'ios' ? 44 : 23
     },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+    ToMcl: {
+    marginTop:80,
+    fontWeight:"600",
+    color: "#121212",
+    fontSize: Platform.OS === 'ios' ? 44 : 23
+  },
     insertYourPhone: {
       marginTop:5,
       fontSize:18,

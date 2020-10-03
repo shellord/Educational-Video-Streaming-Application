@@ -204,7 +204,7 @@ const Logout = ()=>{
 
 function CustomDrawerContent(props) {
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} style={{backgroundColor:colors.BACKGROUND_COLOR}} >
       <DrawerProfile />
       <DrawerItemList {...props} />
       <DrawerItem
@@ -216,10 +216,13 @@ function CustomDrawerContent(props) {
   );
 }
 const DrawerScreen = () => (
-  <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
+  <Drawer.Navigator initialRouteName="Home" 
+    drawerContent={(props) => <CustomDrawerContent {...props} />}    
+  >
     <Drawer.Screen name="Home" component={TabsScreen} options={{
       drawerIcon: () => <Ionicons name="md-home" size={24}/>
-    }}/>
+    }}
+    />
     <Drawer.Screen name="History" component={WatchHistoryStackScreen} options={{
       drawerIcon: () => <Ionicons name="md-time" size={24}/>,     
     }} />
