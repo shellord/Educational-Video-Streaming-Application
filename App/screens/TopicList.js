@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {StyleSheet,FlatList,View,SafeAreaView,ActivityIndicator} from 'react-native'
 import TopicCard from '../components/TopicCard'
 import { AuthContext } from "../context"
-
+import colors from '../styles/styles'
 
 const TopicList = ({route}) => {
 
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     container:{
         
         flex:1,
-        backgroundColor:'white'
+        backgroundColor:colors.BACKGROUND_COLOR
     }
 })
 

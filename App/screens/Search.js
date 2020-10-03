@@ -5,6 +5,7 @@ import VideoCardModel from '../components/VideoCardModel'
 import  Firebase from '../../config/Firebase'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Constants from 'expo-constants'
+import colors from '../styles/styles'
 
 const Search = ({ navigation }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -79,7 +80,7 @@ const Search = ({ navigation }) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:"#fff",
+    backgroundColor:colors.BACKGROUND_COLOR,
     paddingTop:Constants.statusBarHeight
   },
   searchSection: {

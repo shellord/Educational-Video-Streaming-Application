@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import {FlatList,ActivityIndicator, SafeAreaView,StyleSheet} from 'react-native'
 import VideoCardModel from '../components/VideoCardModel'
 import { AuthContext } from "../context"
+import colors from '../styles/styles'
 
 const SubjectMenu = ({ route }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -61,7 +62,7 @@ const SubjectMenu = ({ route }) => {
 const styles = StyleSheet.create({
   cardContainer:{
     flex:1,
-    backgroundColor:"white",
+    backgroundColor:colors.BACKGROUND_COLOR,
     justifyContent:'center',
     alignContent:'center'
   }

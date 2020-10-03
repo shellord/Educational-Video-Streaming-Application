@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text ,StyleSheet,Image} from 'react-native'
 import {TouchableOpacity } from 'react-native-gesture-handler'
+import colors from '../styles/styles'
 
 const VideoCardModel = (props) => {
     return (
-        <View style={{backgroundColor:"white"}}>
+        <View>
         <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
             <View style={styles.container} onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
                 <View>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         margin:5,
-        backgroundColor:'white',
+        backgroundColor:colors.BACKGROUND_COLOR,
         height:150
     },
     imageStyle:{
@@ -54,7 +55,8 @@ const styles = StyleSheet.create({
     headingTextStyle:{
         fontSize:18,
         fontWeight:"600",
-        marginTop:-10
+        marginTop:-10,
+        color:colors.HEADER_TEXT_COLOR
     },
     descriptionTextContainer:{
         marginRight:10,
@@ -62,7 +64,8 @@ const styles = StyleSheet.create({
         flex:1
     },
     descriptionTextStyle:{
-        fontSize:12
+        fontSize:12,
+        color:colors.TEXT_COLOR
     },
     tagTextContainer:{
         flex:1

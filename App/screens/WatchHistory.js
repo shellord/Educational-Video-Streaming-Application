@@ -4,7 +4,7 @@ import { useIsFocused } from '@react-navigation/native'
 import VideoCardModel from '../components/VideoCardModel'
 import { AuthContext } from "../context"
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-
+import colors from '../styles/styles'
 
 const WatchHistory = ({navigation}) => {
     const {API_URL} = React.useContext(AuthContext)
@@ -62,7 +62,7 @@ const WatchHistory = ({navigation}) => {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor:'white'
+    backgroundColor:colors.BACKGROUND_COLOR
   }
 })
 
