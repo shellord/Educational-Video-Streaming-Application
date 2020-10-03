@@ -13,8 +13,7 @@ const MobileVerification = ({route}) => {
         <Text style={styles.insertYourPhone}>
         Insert the verification code to continue
         </Text>
-      {/* <TextBoxVerification verificationId={route.params.verificationId}/> */}
-      <TextBoxVerification verificationId={"asds"}/>
+      <TextBoxVerification verificationId={route.params.verificationId}/>
     </View>
     </ImageBackground>
     )

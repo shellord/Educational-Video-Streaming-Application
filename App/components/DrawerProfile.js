@@ -39,14 +39,15 @@ const styles = StyleSheet.create({
     },
     userText:{
         marginTop:10,
-        fontWeight:"600"
+        fontWeight:"600",
+        color:colors.TEXT_COLOR
     },
     container:{
         alignItems:'center',
         justifyContent:'center',
         marginBottom:10,
-        // backgroundColor:colors.BACKGROUND_COLOR
-        backgroundColor:'white'
+        backgroundColor:colors.BACKGROUND_COLOR
+        // backgroundColor:'white'
     }
     
 })

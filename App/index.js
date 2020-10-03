@@ -44,15 +44,21 @@ const AuthStackScreen = () => (
   <AuthStack.Navigator
     initialRouteName={MobileLogin}
   >
-    {/* <AuthStack.Screen
+    <AuthStack.Screen
       name="GettingStarted"
       component={GettingStarted}
-      options={{ title: "Getting Started" }}
-    /> */}
+      options={{ 
+        title: "Getting Started",
+        headerShown:false
+       }}
+    />
     <AuthStack.Screen
       name="MobileLogin"
       component={MobileLogin}
-      options={{ title: "MobileLogin" }}
+      options={{ 
+        title: "MobileLogin",
+        headerShown:false
+    }}
     />
       <AuthStack.Screen
       name="MobileVerification"
@@ -209,26 +215,30 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Logout"
+        labelStyle={{color:colors.DRAWER_TEXT_COLOR}}
         onPress={() => Logout()}
-        icon={() => <Ionicons name="md-log-out" size={24}/>}
+        icon={() => <Ionicons name="md-log-out" size={24} color={colors.DRAWER_ICON_COLOR}/>}
       />
     </DrawerContentScrollView>
-  );
+  )
 }
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Home" 
-    drawerContent={(props) => <CustomDrawerContent {...props} />}    
+    drawerContent={(props) => <CustomDrawerContent {...props} />} 
+    drawerContentOptions={{
+      labelStyle:{color:colors.DRAWER_TEXT_COLOR}
+    }}   
   >
     <Drawer.Screen name="Home" component={TabsScreen} options={{
-      drawerIcon: () => <Ionicons name="md-home" size={24}/>
+      drawerIcon: () => <Ionicons name="md-home" size={24} color={colors.DRAWER_ICON_COLOR}/>
     }}
     />
     <Drawer.Screen name="History" component={WatchHistoryStackScreen} options={{
-      drawerIcon: () => <Ionicons name="md-time" size={24}/>,     
+      drawerIcon: () => <Ionicons name="md-time" size={24} color={colors.DRAWER_ICON_COLOR}/>,     
     }} />
 
     <Drawer.Screen name="Profile" component={ProfileStackScreen} options={{
-      drawerIcon: () => <Ionicons name="md-person" size={24}/> 
+      drawerIcon: () => <Ionicons name="md-person" size={24} color={colors.DRAWER_ICON_COLOR}/> 
 
     }} 
     />

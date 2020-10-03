@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, View,ImageBackground,TouchableOpacity } from 'react-native'
 import colors from '../styles/styles'
 
-const GettingStarted = () => {
+const GettingStarted = ({navigation}) => {
     return (
         <View style={styles.container}>
              <ImageBackground source={require('../../assets/get.png')} style={styles.image}>
                 <View style={{flex:1,alignItems:'center',justifyContent: 'flex-end',marginBottom:80}}>
-                  <TouchableOpacity style={styles.button}> 
+                  <TouchableOpacity style={styles.button} onPress={()=>navigation.push('MobileLogin')}> 
                   <Text style={styles.buttonText}>Sign up</Text>
                 </TouchableOpacity>  
                 </View>
