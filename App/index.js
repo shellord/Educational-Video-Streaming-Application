@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem} from "@react-navigation/drawer"
 import Firebase from '../config/Firebase'
 import { AuthContext } from "./context"
-import Signup from './screens/Signup'
 import Profile from './screens/Profile'
 import Search from "./screens/Search";
 import SubjectMenu from './screens/SubjectMenu'
@@ -24,6 +23,8 @@ import WatchHistory from './screens/WatchHistory'
 import GettingStarted from './screens/GettingStarted'
 import MobileLogin from './screens/MobileLogin'
 import MobileVerification from './screens/MobileVerification'
+import { HeaderBackButton } from "@react-navigation/stack";
+
 
 import colors from './styles/styles'
 
@@ -92,14 +93,30 @@ const HomeStackScreen = ({navigation}) => (
       name="subject"
       component={SubjectMenu}
       options={({ route }) => ({
-        title: route.params.name
+        title: route.params.name,
+        headerStyle:{
+          backgroundColor:colors.BACKGROUND_COLOR
+        },
+        headerTitleStyle:{
+          fontSize:16,
+          color:colors.HEADER_TEXT_COLOR
+        },
+        headerTintColor:colors.HEADER_TEXT_COLOR
       })}
     />
      <HomeStack.Screen
       name="topiclist"
       component={TopicList}
       options={({ route }) => ({
-        title: route.params.name
+        title: route.params.name,
+        headerStyle:{
+          backgroundColor:colors.BACKGROUND_COLOR
+        },
+        headerTitleStyle:{
+          fontSize:16,
+          color:colors.HEADER_TEXT_COLOR
+        },
+        headerTintColor:colors.HEADER_TEXT_COLOR
       })}    
       />
     <HomeStack.Screen
@@ -128,15 +145,41 @@ const SearchStackScreen = () => (
   </SearchStack.Navigator>
 )
 
-const WatchHistoryStackScreen = () => (
-  <WatchHistoryStack.Navigator >
-    <WatchHistoryStack.Screen name="Watch History" component={WatchHistory} />
+const WatchHistoryStackScreen = ({navigation}) => (
+  <WatchHistoryStack.Navigator>
+    <WatchHistoryStack.Screen 
+      name="Watch History" 
+      component={WatchHistory} 
+      
+      options={{
+        // headerShown:false
+        headerStyle:{
+          backgroundColor:colors.BACKGROUND_COLOR
+        },
+        headerTitleStyle:{
+          fontSize:16,
+          color:colors.HEADER_TEXT_COLOR
+        },
+        headerTintColor:colors.HEADER_TEXT_COLOR,
+        headerLeft: () => (
+          <HeaderBackButton onPress={() => navigation.goBack(null)} tintColor={colors.HEADER_TEXT_COLOR}/>
+        )
+      }}
+    />
     <WatchHistoryStack.Screen
       name="chaptervideo"
       component={ChapterVideo}
       options={({ route }) => ({
         title: route.params.name,
         // headerShown:false
+        headerStyle:{
+          backgroundColor:colors.BACKGROUND_COLOR
+        },
+        headerTitleStyle:{
+          fontSize:16,
+          color:colors.HEADER_TEXT_COLOR
+        },
+        headerTintColor:colors.HEADER_TEXT_COLOR,
       })}    
       />
   </WatchHistoryStack.Navigator>

@@ -1,13 +1,11 @@
-import React,{useEffect, useState} from 'react'
-import {Text,Button,useContext,View,FlatList,SafeAreaView,AsyncStorage,StyleSheet,Alert} from 'react-native'
+import React,{useState} from 'react'
+import {Text,View,FlatList,SafeAreaView,AsyncStorage,StyleSheet,Alert} from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import VideoCardModel from '../components/VideoCardModel'
-import { AuthContext } from "../context"
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import {TouchableOpacity } from 'react-native-gesture-handler'
 import colors from '../styles/styles'
 
 const WatchHistory = ({navigation}) => {
-    const {API_URL} = React.useContext(AuthContext)
     const isFocused = useIsFocused()
     const [watchHistory, setwatchHistory] = useState()
 
@@ -16,7 +14,8 @@ const WatchHistory = ({navigation}) => {
         "Clear History",
         "Are you sure you want to clear watch history ?",
         [
-          { text: "Yes", onPress: () => AsyncStorage.removeItem('watchHistory') }
+          { text: "Yes", onPress: () => AsyncStorage.removeItem('watchHistory') },
+          { text: "No", onPress: () => (null) }
         ],
         { cancelable: true }
       )
@@ -62,7 +61,7 @@ const WatchHistory = ({navigation}) => {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor:colors.BACKGROUND_COLOR
+    backgroundColor:colors.BACKGROUND_COLOR,
   }
 })
 

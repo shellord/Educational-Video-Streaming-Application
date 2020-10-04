@@ -33,8 +33,8 @@ const TextBoxVerification = ({verificationId}) => {
   const [confirmError, setConfirmError] = React.useState()
   const [confirmInProgress, setConfirmInProgress] = React.useState(false)
   const isConfigValid = !!FIREBASE_CONFIG.apiKey
-  console.log(verificationId)
-    return (
+
+  return (
       <TouchableWithoutFeedback 
       onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>

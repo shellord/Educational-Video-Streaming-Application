@@ -105,7 +105,7 @@ const Home = ({ navigation }) =>{
             ):(<></>)
           }
         {latestvids?(<VideoList title="Latest Classes" data={latestvids} navigation={navigation} userclass={userclass} />):(<></>)}  
-        <Carousel title="Featured Lessons" data={featuredvids} nav={navigation} userclass={userclass}/>
+        <Carousel title="For You" data={featuredvids} nav={navigation} userclass={userclass}/>
 
         {popularVideos?(<VideoList title="Popular Videos" data={popularVideos} navigation={navigation} userclass={userclass} />):(<></>)}
         </ScrollView>

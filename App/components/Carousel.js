@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, FlatList, Animated,Platform} from 'react-native'
 import CarouselItem from './CarouselItem'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import colors from '../styles/styles'
 
 
 const { width, heigth } = Dimensions.get('window')
@@ -101,9 +101,9 @@ const styles = StyleSheet.create({
       },
       subjectListText:{
         fontSize:20,
-        fontWeight:'600',
+        fontWeight:Platform.OS=='ios'?'600':'700',
         paddingHorizontal:20,
-        color:'#D81B60'
+        color:colors.HEADER_TEXT_COLOR
       },
 })
 

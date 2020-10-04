@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'tomato',
+    backgroundColor: colors.SEARCH_BAR_BACKGROUND_COLOR,
     width:"90%",
     alignSelf:'center',
     borderRadius:10,
@@ -102,8 +102,8 @@ searchBar: {
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 10,
-    backgroundColor: 'tomato',
-    color: 'white',
+    backgroundColor: colors.SEARCH_BAR_BACKGROUND_COLOR,
+    color: colors.SEARCH_BAR_TEXT_COLOR
 },
 
 })

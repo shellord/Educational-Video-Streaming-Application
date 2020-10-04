@@ -9,6 +9,7 @@ import { AuthContext } from '../context'
 import { ScrollView } from 'react-native-gesture-handler'
 import VideoList from '../components/VideoList'
 import UpgradeCard from '../components/UpgradeCard'
+import colors from '../styles/styles'
 
 const ChapterVideo = ({ route }) => {
   const {API_URL} = React.useContext(AuthContext)
@@ -85,7 +86,6 @@ const ChapterVideo = ({ route }) => {
         .catch((error) => {
         alert("Network Error!")
         })
-
   }, [subscriptionStatus])
 
   useEffect(() => {
@@ -139,9 +139,7 @@ const ChapterVideo = ({ route }) => {
         ref={videoRef}
       />
       <View style={styles.description}>
-      <View style={styles.titleContainer}
-          // titleStyle={{fontSize:}}
-          >
+      <View style={styles.titleContainer}>
         
         <Text style={styles.videoTitle}>{route.params.name}</Text>
 
@@ -158,7 +156,8 @@ const ChapterVideo = ({ route }) => {
         </Text>
       </View>
       </View>
-      <UpgradeCard/>
+      {!subscriptionStatus?<UpgradeCard/>:null}
+      
       {relatedVideos[0]?(<VideoList title="Related Videos" data={relatedVideos} navigation={route.params.nav} userclass={route.params.class} />
 ):(<></>)}
      <Text></Text>
@@ -170,12 +169,13 @@ const styles = StyleSheet.create({
   container:{
     marginTop:0,
     flex:1,
-    backgroundColor:"white",
+    backgroundColor:colors.BACKGROUND_COLOR
     
   },
   videoTitle:{
     fontSize:20,
-    fontWeight:"800"
+    fontWeight:"800",
+    color:colors.HEADER_TEXT_COLOR
   },
   titleContainer:{
     flex:1,
@@ -189,7 +189,8 @@ const styles = StyleSheet.create({
   },
   tagDescstyle:{
     marginBottom:0,
-    fontSize:15
+    fontSize:15,
+    color:colors.TEXT_COLOR
   },
   tagTextContainer:{
      marginTop:0,
