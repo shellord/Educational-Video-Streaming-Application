@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated,Platform} from 'react-native'
+import { View, Text, StyleSheet, Dimensions, FlatList, Animated} from 'react-native'
 import CarouselItem from './CarouselItem'
 import colors from '../styles/styles'
 
@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
     dotView: { flexDirection: 'row', justifyContent: 'center' },
     subjectListHeader:{
         flex:1,
-        paddingTop:0,
+        paddingTop:10,
         flexDirection:'row',
         marginVertical:10
       },
       subjectListText:{
-        fontSize:20,
-        fontWeight:Platform.OS=='ios'?'600':'700',
+        fontSize:22,
+        fontWeight:'700',
         paddingHorizontal:20,
         color:colors.HEADER_TEXT_COLOR
       },
