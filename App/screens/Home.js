@@ -21,6 +21,7 @@ const Home = ({ navigation }) =>{
     const [userclass,setUserClass] = useState(1)
     const [userImage, setuserImage] = useState(null)
     const [username, setusername] = useState('User')
+    const [subscribtionStatus, setsubscribtionStatus] = useState(0)
     const isFocused = useIsFocused()
     const [watchHistory, setwatchHistory] = useState()
     const [popularVideos, setpopularVideos] = useState([{}])
@@ -56,6 +57,7 @@ const Home = ({ navigation }) =>{
            setUserClass(json.response[0]['class'])
            setusername(json.response[0].name)
            setuserImage(ASSETS_URL+json.response[0].profile_pic)
+           setsubscribtionStatus(json.response[0].subscription_status)
       })
       .catch((error) => {
       alert("Error!")
@@ -98,7 +100,7 @@ const Home = ({ navigation }) =>{
     return (
         <ScrollView style={styles.container}>
            <HeaderWelcome username={username} userimage={userImage}/>
-          <UpgradeCard/>
+          {subscribtionStatus?<UpgradeCard/>:null}
           <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
           {watchHistory?
             (<VideoList title="Continue Watching" data={watchHistory} navigation={navigation} userclass={userclass} />
