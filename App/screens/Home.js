@@ -100,7 +100,7 @@ const Home = ({ navigation }) =>{
     return (
         <ScrollView style={styles.container}>
            <HeaderWelcome username={username} userimage={userImage}/>
-          {subscribtionStatus?<UpgradeCard/>:null}
+          {!subscribtionStatus?<UpgradeCard/>:null}
           <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
           {watchHistory?
             (<VideoList title="Continue Watching" data={watchHistory} navigation={navigation} userclass={userclass} />

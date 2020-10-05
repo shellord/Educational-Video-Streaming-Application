@@ -1,14 +1,14 @@
 const colors = {
-    BACKGROUND_COLOR:"#00106a",
-    HEADER_TEXT_COLOR:'white',
-    TABBAR_COLOR:'#00106a',
-    TEXT_COLOR:'white',
-    TAB_BAR_ICON_COLOR:'white',
-    TAB_BAR_TEXT_COLOR:'white',
-    DRAWER_TEXT_COLOR:'white',
-    DRAWER_ICON_COLOR:'white',
-    SEARCH_BAR_BACKGROUND_COLOR:'white',
-    SEARCH_BAR_TEXT_COLOR:'black'
+    BACKGROUND_COLOR:"white",
+    HEADER_TEXT_COLOR:'#373636',
+    TABBAR_COLOR:'white',
+    TEXT_COLOR:'#373636',
+    TAB_BAR_ICON_COLOR:'#373636',
+    TAB_BAR_TEXT_COLOR:'#373636',
+    DRAWER_TEXT_COLOR:'#373636',
+    DRAWER_ICON_COLOR:'black',
+    SEARCH_BAR_BACKGROUND_COLOR:'lightgrey',
+    SEARCH_BAR_TEXT_COLOR:'#373636'
 }
 
 export default colors

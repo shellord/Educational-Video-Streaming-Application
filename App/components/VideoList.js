@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       marginVertical:10
     },
     subjectListText:{
-      fontSize:22,
+      fontSize:Platform.OS=='ios'?22:16,
       fontWeight:'700',
       paddingHorizontal:20,
       color:colors.TEXT_COLOR

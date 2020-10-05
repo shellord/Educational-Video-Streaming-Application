@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated} from 'react-native'
+import { View, Text, StyleSheet, Dimensions, FlatList, Animated, Platform} from 'react-native'
 import CarouselItem from './CarouselItem'
 import colors from '../styles/styles'
 
@@ -42,6 +42,7 @@ const Carousel = ({ data,nav,title }) => {
     if (data && data.length) {
         return (
             <View>
+
                 <View style={styles.subjectListHeader}>
                     <Text style={styles.subjectListText}>
                         {title}
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
         marginVertical:10
       },
       subjectListText:{
-        fontSize:22,
+        fontSize:Platform.OS=='ios'?22:16,
         fontWeight:'700',
         paddingHorizontal:20,
         color:colors.HEADER_TEXT_COLOR

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text,ScrollView,TouchableOpacity,StyleSheet} from 'react-native'
+import { View, Text,ScrollView,TouchableOpacity,StyleSheet, Platform} from 'react-native'
 import Category from './Category'
 import colors from '../styles/styles'
 
@@ -45,7 +45,7 @@ const styles=StyleSheet.create({
       paddingTop:10
     },
     subjectListText:{
-      fontSize:22,
+      fontSize: Platform.OS=='ios'?22:16,
       fontWeight:'700',
       paddingLeft:20,
       color:colors.TEXT_COLOR

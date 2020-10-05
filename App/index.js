@@ -23,8 +23,8 @@ import WatchHistory from './screens/WatchHistory'
 import GettingStarted from './screens/GettingStarted'
 import MobileLogin from './screens/MobileLogin'
 import MobileVerification from './screens/MobileVerification'
-import { HeaderBackButton } from "@react-navigation/stack";
-
+import { HeaderBackButton } from "@react-navigation/stack"
+import { StatusBar } from 'expo-status-bar';
 
 import colors from './styles/styles'
 
@@ -70,15 +70,19 @@ const AuthStackScreen = () => (
 )
 
 const HomeStackScreen = ({navigation}) => (
-  <HomeStack.Navigator>
+  <HomeStack.Navigator   >
     <HomeStack.Screen name="Marvel Creative Learning App" component={Home} 
       options={{
         headerTitleStyle:{
-          fontSize:16,
-          color:colors.HEADER_TEXT_COLOR
+          fontSize:14,
+          color:colors.HEADER_TEXT_COLOR,
+
         },
         headerStyle:{
-          backgroundColor:colors.BACKGROUND_COLOR
+          backgroundColor:colors.BACKGROUND_COLOR,
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0.2,
         },
         headerLeft: () => (
           <Icon name='menu'
@@ -185,9 +189,17 @@ const WatchHistoryStackScreen = ({navigation}) => (
   </WatchHistoryStack.Navigator>
 )
 
-const ProfileStackScreen = () => (
+const ProfileStackScreen = ({navigation}) => (
   <ProfileStack.Navigator>
-    <ProfileStack.Screen name="Profile" component={Profile} />
+    <ProfileStack.Screen 
+      name="Profile" 
+      component={Profile} 
+      options={{
+        headerLeft: () => (
+          <HeaderBackButton onPress={() => navigation.goBack(null)} tintColor={colors.HEADER_TEXT_COLOR}/>
+        )
+      }}
+    />
   </ProfileStack.Navigator>
 )
 
@@ -210,10 +222,10 @@ const TabsScreen = () => (
           : 'ios-home';
         } 
       else if (route.name === 'Search') {
-        iconName = focused ? 'ios-search' : 'ios-search';
+        iconName = focused ? 'md-search' : 'md-search';
      }
      else if (route.name === 'Notifications') {
-      iconName = focused ? 'ios-information-circle-outline' : 'ios-information-circle-outline';
+      iconName = focused ? 'ios-notifications' : 'ios-notifications';
      }
     //  else if (route.name === 'History') {
     //   iconName = focused ? 'ios-time' : 'ios-time';
@@ -260,7 +272,7 @@ function CustomDrawerContent(props) {
         label="Logout"
         labelStyle={{color:colors.DRAWER_TEXT_COLOR}}
         onPress={() => Logout()}
-        icon={() => <Ionicons name="md-log-out" size={24} color={colors.DRAWER_ICON_COLOR}/>}
+        icon={() => <Ionicons name="ios-log-out" size={24} color={colors.DRAWER_ICON_COLOR}/>}
       />
     </DrawerContentScrollView>
   )
@@ -273,15 +285,15 @@ const DrawerScreen = () => (
     }}   
   >
     <Drawer.Screen name="Home" component={TabsScreen} options={{
-      drawerIcon: () => <Ionicons name="md-home" size={24} color={colors.DRAWER_ICON_COLOR}/>
+      drawerIcon: () => <Ionicons name="ios-home" size={24} color={colors.DRAWER_ICON_COLOR}/>
     }}
     />
     <Drawer.Screen name="History" component={WatchHistoryStackScreen} options={{
-      drawerIcon: () => <Ionicons name="md-time" size={24} color={colors.DRAWER_ICON_COLOR}/>,     
+      drawerIcon: () => <Ionicons name="ios-time" size={24} color={colors.DRAWER_ICON_COLOR}/>,     
     }} />
 
     <Drawer.Screen name="Profile" component={ProfileStackScreen} options={{
-      drawerIcon: () => <Ionicons name="md-person" size={24} color={colors.DRAWER_ICON_COLOR}/> 
+      drawerIcon: () => <Ionicons name="ios-person" size={24} color={colors.DRAWER_ICON_COLOR}/> 
 
     }} 
     />
@@ -428,6 +440,7 @@ export default () => {
 
   return (
     <AuthContext.Provider value={authContext}>
+      <StatusBar style="light" />
       <NavigationContainer>
         <RootStackScreen userToken={userToken} isFinishedSignup={isFinishedSignup} showIntroScreen={showIntroScreen}/>
       </NavigationContainer>

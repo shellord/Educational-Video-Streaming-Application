@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text,StyleSheet,Image,View} from 'react-native'
+import {Text,StyleSheet,Image,View,Platform} from 'react-native'
 import colors from '../styles/styles'
 
 
@@ -37,9 +37,8 @@ const styles=StyleSheet.create({
         borderColor:'#dddddd',
       },
       titleStyle:{
-        fontSize:14,
+        fontSize:Platform.OS=='ios'?14:11,
         fontWeight:"600",
-        textTransform:"capitalize",
         color:colors.TEXT_COLOR
       },
       subjectText:{
