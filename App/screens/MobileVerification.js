@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View ,Platform,ImageBackground,Dimensions} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
-import GoBack from '../components/GoBack'
 import { ScrollView } from 'react-native-gesture-handler'
 
 
@@ -19,8 +18,7 @@ const MobileVerification = ({route,navigation}) => {
             <Text style={styles.insertYourPhone}>
             Insert the verification code to continue
             </Text> 
-            <TextBoxVerification verificationId={route.params.verificationId}/>
-            <GoBack navigation={navigation} />
+            <TextBoxVerification verificationId={route.params.verificationId} navigation={navigation}/>
           </View>
         </ImageBackground>
     </ScrollView>

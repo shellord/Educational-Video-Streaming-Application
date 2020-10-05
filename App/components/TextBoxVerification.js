@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View ,TextInput ,TouchableOpacity,Platform,TouchableWithoutFeedback,Keyboard,ActivityIndicator} from 'react-native'
+import { StyleSheet, Text, View ,TextInput ,TouchableOpacity,Platform,TouchableWithoutFeedback,Keyboard,ActivityIndicator,Alert} from 'react-native'
 import * as FirebaseRecaptcha from "expo-firebase-recaptcha"
 import * as firebase from "firebase"
+import GoBack from '../components/GoBack'
 
 
 // PROVIDE VALID FIREBASE CONFIG HERE
@@ -24,16 +25,33 @@ try {
 } catch (err) {
   // ignore app already initialized error on snack
 }
-const TextBoxVerification = ({verificationId}) => {
+
+
+const TextBoxVerification = ({verificationId,navigation}) => {
+
   const recaptchaVerifier = React.useRef(null)
   const verificationCodeTextInput = React.useRef(null)
   const [verifyError, setVerifyError] = React.useState()
   const [verifyInProgress, setVerifyInProgress] = React.useState(false)
   const [verificationCode, setVerificationCode] = React.useState("")
-  const [confirmError, setConfirmError] = React.useState()
+  const [confirmError, setConfirmError] = React.useState(null)
   const [confirmInProgress, setConfirmInProgress] = React.useState(false)
   const isConfigValid = !!FIREBASE_CONFIG.apiKey
- 
+
+  const AlertBox = ({error}) =>{
+    Alert.alert(
+      "Verification Error",
+      error
+      [
+        {
+          text: "Ok",
+          onPress: () => {console.log(1)}
+  
+        }
+      ],
+      { cancelable: false }
+    );
+  }
   return (
       <TouchableWithoutFeedback 
       onPress={() => Keyboard.dismiss()}>
@@ -49,12 +67,16 @@ const TextBoxVerification = ({verificationId}) => {
               placeholder="Enter Verification Code"
               underlineColorAndroid="transparent"
               ref={verificationCodeTextInput}
+              keyboardType="decimal-pad"
               onChangeText={(verificationCode) =>
                 setVerificationCode(verificationCode)
               }
           />
 
         </View>
+        {confirmError && 
+            <Text style={styles.error}>{`Error: ${confirmError.message}`}</Text>
+          }
           <TouchableOpacity
                style = {styles.submitButton}
                  onPress={
@@ -81,11 +103,11 @@ const TextBoxVerification = ({verificationId}) => {
                   >
                <Text style = {styles.submitButtonText}> CONFIRM </Text>
             </TouchableOpacity>
-     
+ 
+            <GoBack navigation={navigation} />
+
             {verifyInProgress && <ActivityIndicator style={styles.loader} />}
-            {confirmError && (
-            <Text style={styles.error}>{alert(`Error: ${confirmError.message}`)}</Text>
-          )}
+      
        
       </View>
       </TouchableWithoutFeedback>
@@ -107,7 +129,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   error: {
-    marginTop: 10,
     fontWeight: "bold",
     color: "red",
   },
