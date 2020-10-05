@@ -38,7 +38,7 @@ const styles=StyleSheet.create({
       },
       titleStyle:{
         fontSize:Platform.OS=='ios'?14:11,
-        fontWeight:"600",
+        fontWeight:Platform.OS=="ios"?"600":"700",
         color:colors.TEXT_COLOR
       },
       subjectText:{

@@ -33,10 +33,8 @@ const styles=StyleSheet.create({
         paddingTop:10
       },
       subjectText:{
-        fontSize:"AmericanTypewriter-CondensedBold",
         fontSize:Platform.OS=='ios'?14:11,
-        fontWeight:"600",
-        textTransform:'capitalize',
+        fontWeight:"700",
         color:colors.TEXT_COLOR
       },
       subjectImage:{
