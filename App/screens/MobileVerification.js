@@ -1,24 +1,31 @@
 import React from 'react'
-import { StyleSheet, Text, View ,Platform,ImageBackground} from 'react-native'
+import { StyleSheet, Text, View ,Platform,ImageBackground,Dimensions} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
 import GoBack from '../components/GoBack'
+import { ScrollView } from 'react-native-gesture-handler'
 
+
+const windowHeight = Dimensions.get('window').height
 
 const MobileVerification = ({route,navigation}) => {
     return (
-        <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
-        <View style={styles.container}>
-        <View style={{flexDirection:'row'}}>
-        <Text style={styles.welcomeToMcl}>Welcome to </Text>
-        <Text style={styles.ToMcl}>MCL!</Text>
-        </View>
-        <Text style={styles.insertYourPhone}>
-        Insert the verification code to continue
-        </Text> 
-    </View>
-    <TextBoxVerification verificationId={route.params.verificationId}/>
-    <GoBack navigation={navigation} />
-    </ImageBackground>
+          <ScrollView style={styles.container}>
+          <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
+          <View style={{flex:1,padding:10}}>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.welcomeToMcl}>Welcome to </Text>
+              <Text style={styles.ToMcl}>MCL!</Text>
+            </View>
+            <Text style={styles.insertYourPhone}>
+            Insert the verification code to continue
+            </Text> 
+            <TextBoxVerification verificationId={route.params.verificationId}/>
+            <GoBack navigation={navigation} />
+          </View>
+        </ImageBackground>
+    </ScrollView>
+
+
     )
 }
 
@@ -27,7 +34,6 @@ export default MobileVerification
 const styles = StyleSheet.create({
     container: {
       flex:1,
-      padding:30
     },
     welcomeToMcl: {
       marginTop:80,
@@ -37,12 +43,13 @@ const styles = StyleSheet.create({
     },
   image: {
     flex: 1,
+    height:windowHeight,
     resizeMode: "cover",
     justifyContent: "center"
   },
     ToMcl: {
     marginTop:80,
-    fontWeight:"600",
+    fontWeight:Platform.OS=='ios'?"600":"700",
     color: "#121212",
     fontSize: Platform.OS === 'ios' ? 44 : 23
   },
