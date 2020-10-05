@@ -71,7 +71,7 @@ const AuthStackScreen = () => (
 
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator   >
-    <HomeStack.Screen name="Marvel Creative Learning App" component={Home} 
+    <HomeStack.Screen name="Marvel Creative Learning" component={Home} 
       options={{
         headerTitleStyle:{
           fontSize:14,

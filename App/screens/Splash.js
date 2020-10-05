@@ -1,10 +1,10 @@
 import React from 'react'
-import {Text,View,ImageBackground,ActivityIndicator,StyleSheet} from 'react-native'
-import bg from '../../assets/bg.jpeg'
+import {ImageBackground,ActivityIndicator,StyleSheet} from 'react-native'
+import bg from '../../assets/loading.gif'
 
 const Splash = () => (
    <ImageBackground source={bg} style={{width: '100%', height: '100%'}}>
-  <ActivityIndicator style={styles.loading} size="large" color="green" />
+    {/* <ActivityIndicator style={styles.loading} size="large" color="green" /> */}
    </ImageBackground>  
   )
 
