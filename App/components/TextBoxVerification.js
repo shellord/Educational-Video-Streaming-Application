@@ -33,7 +33,7 @@ const TextBoxVerification = ({verificationId}) => {
   const [confirmError, setConfirmError] = React.useState()
   const [confirmInProgress, setConfirmInProgress] = React.useState(false)
   const isConfigValid = !!FIREBASE_CONFIG.apiKey
-
+ 
   return (
       <TouchableWithoutFeedback 
       onPress={() => Keyboard.dismiss()}>
@@ -53,7 +53,7 @@ const TextBoxVerification = ({verificationId}) => {
                 setVerificationCode(verificationCode)
               }
           />
- 
+
         </View>
           <TouchableOpacity
                style = {styles.submitButton}
@@ -81,10 +81,15 @@ const TextBoxVerification = ({verificationId}) => {
                   >
                <Text style = {styles.submitButtonText}> CONFIRM </Text>
             </TouchableOpacity>
+     
             {verifyInProgress && <ActivityIndicator style={styles.loader} />}
- 
+            {confirmError && (
+            <Text style={styles.error}>{alert(`Error: ${confirmError.message}`)}</Text>
+          )}
+       
       </View>
       </TouchableWithoutFeedback>
+      
     )
 }
 
@@ -100,6 +105,11 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 10,
+  },
+  error: {
+    marginTop: 10,
+    fontWeight: "bold",
+    color: "red",
   },
   SectionStyle: {
     // marginTop:-230,

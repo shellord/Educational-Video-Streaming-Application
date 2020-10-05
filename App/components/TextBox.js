@@ -98,8 +98,8 @@ const TextBox = ({navigation}) => {
 
             {verificationId ? (navigation.push('MobileVerification',{verificationId:verificationId})) : undefined}
             {verifyError && (
-            // <Text style={styles.error}>{`Error: ${verifyError.message}`}</Text>
-            <Text style={styles.error}>{`Error`}</Text>
+            <Text style={styles.error}>{`Error: ${verifyError.message}`}</Text>
+            // <Text style={styles.error}>{`Error`}</Text>
 
               )}
 
