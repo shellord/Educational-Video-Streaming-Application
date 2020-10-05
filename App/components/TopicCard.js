@@ -6,12 +6,23 @@ const TopicCard = (props) => {
     return(
             <TouchableOpacity onPress={()=>{props.navigation.push('subject',{name:props.item.name,subject:props.subject,nav:props.navigation,userclass:props.userclass})}}>
                 <View style={styles.container}>
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+                    <ImageBackground source={{uri:props.item.imguri}} imageStyle={{ borderRadius: 15}}  style={styles.ImageBackgroundStyle}>
+=======
+>>>>>>> Stashed changes
                     <ImageBackground 
                         source={{uri:props.item.imguri}}
                          imageStyle={{ borderRadius: 15}}  
                          style={styles.ImageBackgroundStyle}
+<<<<<<< Updated upstream
                          
                          >
+=======
+                         >
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                         {/* <View style={styles.textContainer}>
                             <Text style={styles.textStyle}>{props.item.name}</Text>
                         </View> */}
