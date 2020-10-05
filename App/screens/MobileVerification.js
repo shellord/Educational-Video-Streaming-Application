@@ -1,10 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View ,Platform,ImageBackground} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
-import GoBack from '../components/GoBack'
 
-
-const MobileVerification = ({route,navigation}) => {
+const MobileVerification = ({route}) => {
     return (
         <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
         <View style={styles.container}>
@@ -14,10 +12,9 @@ const MobileVerification = ({route,navigation}) => {
         </View>
         <Text style={styles.insertYourPhone}>
         Insert the verification code to continue
-        </Text> 
+        </Text>
+      <TextBoxVerification verificationId={route.params.verificationId}/>
     </View>
-    <TextBoxVerification verificationId={route.params.verificationId}/>
-    <GoBack navigation={navigation} />
     </ImageBackground>
     )
 }
