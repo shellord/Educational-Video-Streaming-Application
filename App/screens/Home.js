@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {StyleSheet,AsyncStorage} from 'react-native'
 import Carousel from '../components/Carousel'
+import HeaderCarousel from '../components/HeaderCarousel'
 import HorizontalScroll from '../components/HorizontalScroll'
 import { ScrollView } from 'react-native-gesture-handler'
 import { AuthContext } from "../context"
@@ -100,6 +101,7 @@ const Home = ({ navigation }) =>{
     return (
         <ScrollView style={styles.container}>
            <HeaderWelcome username={username} userimage={userImage}/>
+           <HeaderCarousel/>
           {!subscribtionStatus?<UpgradeCard/>:null}
           <HorizontalScroll subjects={subjects} navigation={navigation} userclass={userclass}/>
           {watchHistory?
@@ -107,7 +109,7 @@ const Home = ({ navigation }) =>{
             ):(<></>)
           }
         {latestvids?(<VideoList title="Latest Classes" data={latestvids} navigation={navigation} userclass={userclass} />):(<></>)}  
-        <Carousel title="For You" data={featuredvids} nav={navigation} userclass={userclass}/>
+        <Carousel title="What's New?" data={featuredvids} nav={navigation} userclass={userclass}/>
 
         {popularVideos?(<VideoList title="Popular Videos" data={popularVideos} navigation={navigation} userclass={userclass} />):(<></>)}
         </ScrollView>

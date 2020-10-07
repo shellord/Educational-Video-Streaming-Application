@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,ImageBackground, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import TextBox from '../components/TextBox'
 
 const MobileLogin = ({navigation}) =>{
     return (
-      <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
+      // <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
       <View style={styles.container}>
         <View style={{flexDirection:'row'}}>
         <Text style={styles.welcomeToMcl}>Welcome to </Text>
@@ -16,7 +16,7 @@ const MobileLogin = ({navigation}) =>{
         <TextBox navigation={navigation}/>
        
     </View>
-     </ImageBackground>
+    //  </ImageBackground>
     )
   }
 

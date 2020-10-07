@@ -83,13 +83,13 @@ const HomeStackScreen = ({navigation}) => (
           shadowOpacity: 0,
           borderBottomWidth: 0.2,
         },
-        headerLeft: () => (
-          <Icon name='menu'
-            size={34}
-            onPress={() => navigation.openDrawer()}
-            color={colors.HEADER_TEXT_COLOR}
-          />
-        ),
+        // headerLeft: () => (
+        //   <Icon name='menu'
+        //     size={34}
+        //     onPress={() => navigation.openDrawer()}
+        //     color={colors.HEADER_TEXT_COLOR}
+        //   />
+        // ),
       }}
     />
     <HomeStack.Screen
@@ -229,8 +229,8 @@ const TabsScreen = () => (
     //  else if (route.name === 'History') {
     //   iconName = focused ? 'ios-time' : 'ios-time';
     //  }
-      else if (route.name === 'Account') {
-        iconName = focused ? 'ios-person' : 'ios-person';
+      else if (route.name === 'Settings') {
+        iconName = focused ? 'ios-settings' : 'ios-settings';
       }
 
       return <Ionicons name={iconName} size={size} color={colors.TAB_BAR_ICON_COLOR} />;
@@ -252,7 +252,7 @@ const TabsScreen = () => (
     <Tabs.Screen name="Search" component={SearchStackScreen} />
     {/* <Tabs.Screen name="History" component={WatchHistoryStackScreen} /> */}
     <Tabs.Screen name="Notifications" component={AnnouncementStackScreen} />
-    <Tabs.Screen name="Account" component={ProfileStackScreen} />
+    <Tabs.Screen name="Settings" component={ProfileStackScreen} />
 
   </Tabs.Navigator>
 )

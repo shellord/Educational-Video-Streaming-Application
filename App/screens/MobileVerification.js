@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View ,Platform,ImageBackground,Dimensions} from 'react-native'
+import { StyleSheet, Text, View ,Platform,Dimensions} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -9,7 +9,7 @@ const windowHeight = Dimensions.get('window').height
 const MobileVerification = ({route,navigation}) => {
     return (
           <ScrollView style={styles.container}>
-          <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
+          {/* <ImageBackground source={require('../../assets/bg.png')} style={styles.image}> */}
           <View style={{flex:1,padding:10}}>
             <View style={{flexDirection:'row'}}>
               <Text style={styles.welcomeToMcl}>Welcome to </Text>
@@ -20,7 +20,7 @@ const MobileVerification = ({route,navigation}) => {
             </Text> 
             <TextBoxVerification verificationId={route.params.verificationId} navigation={navigation}/>
           </View>
-        </ImageBackground>
+        {/* </ImageBackground> */}
     </ScrollView>
 
 

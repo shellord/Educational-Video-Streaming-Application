@@ -51,7 +51,7 @@ const TextBox = ({navigation}) => {
             <Text style={styles.countryCode}>+91</Text>
             <TextInput
                 style={styles.inputType}
-                placeholder="9876543210"
+                placeholder="Enter your phone number"
                 autoCompleteType="tel"
                 keyboardType="phone-pad"
                 textContentType="telephoneNumber"
