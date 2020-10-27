@@ -9,7 +9,8 @@ import {
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  ImageBackground
 } from "react-native"
 import * as FirebaseRecaptcha from "expo-firebase-recaptcha"
 import * as firebase from "firebase"
@@ -53,13 +54,14 @@ export default function PhoneAuthScreen() {
   return (
     <TouchableWithoutFeedback 
     onPress={() => Keyboard.dismiss()}>
+    {/* <ImageBackground source={require('../../assets/bg.jpeg')} style={styles.container}> */}
     <View style={styles.container}>
       <View style={styles.content}>
         <FirebaseRecaptcha.FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
           firebaseConfig={FIREBASE_CONFIG}
         />
-        <Image source={require('../../assets/logo.jpeg')} style={styles.logo}/>
+        <Image source={require('../../assets/logo.png')} style={styles.logo}/>
         {/* <Text style={styles.subtitle}>Welcome to,</Text> */}
         
         {/* <Text style={styles.text}>Enter phone number</Text> */}
@@ -73,6 +75,7 @@ export default function PhoneAuthScreen() {
           editable={!verificationId}
           onChangeText={(phoneNumber) => setPhoneNumber("+91"+phoneNumber)}
         />
+          <View style={styles.appButtonView}>
         <TouchableOpacity
           style={styles.appButtonContainer}
           title={`${verificationId ? "Resend" : "Send"} Verification Code`}
@@ -99,6 +102,7 @@ export default function PhoneAuthScreen() {
         >
            <Text style={styles.appButtonText}> {verificationId ? "Resend Verification Code" : "Send Verification Code "} </Text>
           </TouchableOpacity>
+          </View>
         {verifyError && (
           <Text style={styles.error}>{`Error: ${verifyError.message}`}</Text>
         )}
@@ -119,6 +123,7 @@ export default function PhoneAuthScreen() {
             setVerificationCode(verificationCode)
           }
         />
+        <View style={styles.appButtonView2}>
         <TouchableOpacity
         style={styles.appButtonContainer}
           disabled={!verificationCode}
@@ -145,6 +150,7 @@ export default function PhoneAuthScreen() {
         >
           <Text style={styles.appButtonText}> Confirm </Text>
           </TouchableOpacity>
+          </View>
         {confirmError && (
           <Text style={styles.error}>{`Error: ${confirmError.message}`}</Text>
         )}
@@ -167,23 +173,43 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop:Constants.statusBarHeight,
     alignItems:'center',
-    backgroundColor:'white'
+    backgroundColor:'white',
+    justifyContent: 'center',
+  },
+  appButtonView:{
+    marginTop:30,
+    width:300,
+    height:50,
+    backgroundColor:'#4fc3f7',
+    borderRadius:15,
+    alignItems:'center'
+  },
+  appButtonView2:{
+    marginTop:30,
+    width:300,
+    height:50,
+    backgroundColor:'#f06292',
+    borderRadius:15,
+    alignItems:'center'
   },
   appButtonContainer: {
-    marginTop:30,
+    // marginTop:30,
     alignItems:'center',
-    paddingLeft:20,
-    paddingBottom:10,
-    paddingTop:10,
-    paddingRight:20,
-    borderRadius:5,
-    backgroundColor:'#2196f3'
-
+    flexDirection:'row',
+    alignContent:'center',
+    // paddingLeft:20,
+    // paddingBottom:10,
+    // paddingTop:10,
+    // paddingRight:20,
+    flex:1,
+    borderRadius:15,
+    
   },
   appButtonText: {
     fontSize: 16,
     color: "#fff",
-    justifyContent:'center'
+    alignItems:'center',
+    textAlign:'center'
   },
   content: {
     marginTop: 0, 
@@ -191,10 +217,8 @@ const styles = StyleSheet.create({
   },
 
   logo:{
-    width:150,
-    height:150,
-    borderRadius:20,
-
+    width:120,
+    height:120,
   },
   subtitle: {
     marginBottom: 10,
@@ -211,12 +235,13 @@ const styles = StyleSheet.create({
     fontSize:16,
     borderWidth:0.5,
     textAlign:'center',
-    borderColor:'#d3d3d3',
+    borderColor:'transparent',
+    borderBottomColor:'lightgrey',
     paddingTop:15,
     paddingBottom:15,
     paddingLeft:30,
     paddingRight:30,
-    backgroundColor:'#fafafa',
+    // backgroundColor:'#fafafa',
     marginTop:10,
     width:300
   },

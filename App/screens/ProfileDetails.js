@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { StyleSheet, Text, View, Image, Alert, TextInput } from "react-native"
+import { StyleSheet, Text, View, Image, Alert, TextInput,Keyboard,TouchableWithoutFeedback } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
 import Constants from "expo-constants"
@@ -91,6 +91,7 @@ export default function App() {
 		}
 	}
 	return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 		<SafeAreaView style={styles.container}>
 			{image ? (
 				<Image source={{ uri: image.uri }} style={styles.imageStyle} />
@@ -121,6 +122,7 @@ export default function App() {
 				<Text style={styles.submitButton}>Done</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
+		</TouchableWithoutFeedback>
 	)
 }
 
