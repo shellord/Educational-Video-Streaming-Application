@@ -49,7 +49,7 @@ const PostLogin = ({ navigation }) => {
 				onChangeText={(text) => setName(text)}
 				value={name}
 				placeholder="Name"
-				maxLength={8}
+				maxLength={10}
 			/>
 
 			<TextInput

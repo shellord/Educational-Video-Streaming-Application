@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View ,Platform,Dimensions} from 'react-native'
 import TextBoxVerification from '../components/TextBoxVerification'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import colors from '../styles/styles'
 
 const windowHeight = Dimensions.get('window').height
 
@@ -31,7 +31,8 @@ export default MobileVerification
 
 const styles = StyleSheet.create({
     container: {
-      flex:1,
+	  flex:1,
+	  backgroundColor:colors.BACKGROUND_COLOR
     },
     welcomeToMcl: {
       marginTop:80,

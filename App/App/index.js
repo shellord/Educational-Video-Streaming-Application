@@ -358,6 +358,7 @@ export default () => {
       try{
         if(json.response[0].class){
           setisFinishedSignup(1)
+          console.log("finished singup")
         }
      }
      catch(e){
