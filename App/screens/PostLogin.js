@@ -77,7 +77,7 @@ const PostLogin = ({ navigation }) => {
 				style={styles.loginButton}
 				onPress={() => onCompleteHandler()}
 			>
-				<Text style={styles.buttonText}>Complete</Text>
+				<Text style={styles.buttonText}>Next</Text>
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.SignupButton} onPress={() => signOut()}>
 				<Text style={styles.buttonText}>Cancel</Text>
