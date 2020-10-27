@@ -31,7 +31,7 @@ import MobileVerification from "./screens/MobileVerification"
 import ProfileDetails from "./screens/ProfileDetails"
 import { HeaderBackButton } from "@react-navigation/stack"
 import { StatusBar } from "expo-status-bar"
-
+import MobileAuth from "./screens/MobileAuth"
 import colors from "./styles/styles"
 
 const AuthStack = createStackNavigator()
@@ -49,7 +49,7 @@ const API_URL = "http://18.223.24.160:3000"
 const ASSETS_URL = "http://18.223.24.160/marvelprofile/uploads/"
 
 const AuthStackScreen = () => (
-	<AuthStack.Navigator initialRouteName={MobileLogin}>
+	<AuthStack.Navigator initialRouteName={MobileAuth}>
 		<AuthStack.Screen
 			name="GettingStarted"
 			component={GettingStarted}
@@ -59,6 +59,14 @@ const AuthStackScreen = () => (
 			}}
 		/>
 		<AuthStack.Screen
+			name="MobileAuth"
+			component={MobileAuth}
+			options={{
+				title: "MobileAuth",
+				headerShown: false,
+			}}
+		/>
+		{/* <AuthStack.Screen
 			name="MobileLogin"
 			component={MobileLogin}
 			options={{
@@ -70,7 +78,7 @@ const AuthStackScreen = () => (
 			name="MobileVerification"
 			component={MobileVerification}
 			options={{ title: "MobileVerification" }}
-		/>
+		/> */}
 	</AuthStack.Navigator>
 )
 
