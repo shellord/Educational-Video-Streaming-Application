@@ -12,7 +12,7 @@ const HeaderWelcome = ({ username, userimage , navigation }) => {
 				<Text style={styles.userName}>{username}!</Text>
 			</View>
 			<View style={styles.avatarContainer}>
-			<TouchableOpacity  onPress={() => navigation.navigate('ProfileScreen',{username:username,userimage:userimage})}>
+			<TouchableOpacity  onPress={() => navigation.navigate('ProfileScreen')}>
 
 				{userimage ? (
 					<Image source={{ uri: userimage }} style={styles.avatar} />
