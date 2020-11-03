@@ -1,103 +1,103 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, AsyncStorage, View } from "react-native";
-import Carousel from "../components/Carousel";
-import HeaderCarousel from "../components/HeaderCarousel";
-import HorizontalScroll from "../components/HorizontalScroll";
-import { ScrollView } from "react-native-gesture-handler";
-import { AuthContext } from "../context";
-import Firebase from "../../config/Firebase";
-import { useIsFocused } from "@react-navigation/native";
-import VideoList from "../components/VideoList";
-import HeaderWelcome from "../components/HeaderWelcome";
-import UpgradeCard from "../components/UpgradeCard";
-import colors from "../styles/styles";
-import * as Contacts from "expo-contacts";
+import React, { useState, useEffect } from "react"
+import { StyleSheet, AsyncStorage, View } from "react-native"
+import Carousel from "../components/Carousel"
+import HeaderCarousel from "../components/HeaderCarousel"
+import HorizontalScroll from "../components/HorizontalScroll"
+import { ScrollView } from "react-native-gesture-handler"
+import { AuthContext } from "../context"
+import Firebase from "../../config/Firebase"
+import { useIsFocused } from "@react-navigation/native"
+import VideoList from "../components/VideoList"
+import HeaderWelcome from "../components/HeaderWelcome"
+import UpgradeCard from "../components/UpgradeCard"
+import colors from "../styles/styles"
+import * as Contacts from "expo-contacts"
 
 const Home = ({ navigation }) => {
-	const { API_URL, ASSETS_URL } = React.useContext(AuthContext);
-	const [subjects, setSubjects] = useState([{}]);
-	const [featuredvids, setFeaturedvids] = useState([{}]);
-	const [latestvids, setLatestvids] = useState([{}]);
-	const [userclass, setUserClass] = useState(1);
-	const [userImage, setuserImage] = useState(null);
-	const [username, setusername] = useState("User");
-	const [subscribtionStatus, setsubscribtionStatus] = useState(0);
-	const isFocused = useIsFocused();
-	const [watchHistory, setwatchHistory] = useState();
-	const [popularVideos, setpopularVideos] = useState([{}]);
+	const { API_URL, ASSETS_URL } = React.useContext(AuthContext)
+	const [subjects, setSubjects] = useState([{}])
+	const [featuredvids, setFeaturedvids] = useState([{}])
+	const [latestvids, setLatestvids] = useState([{}])
+	const [userclass, setUserClass] = useState(1)
+	const [userImage, setuserImage] = useState(null)
+	const [username, setusername] = useState("User")
+	const [subscribtionStatus, setsubscribtionStatus] = useState(0)
+	const isFocused = useIsFocused()
+	const [watchHistory, setwatchHistory] = useState()
+	const [popularVideos, setpopularVideos] = useState([{}])
 
 	useEffect(() => {
 		(async () => {
-			const { status } = await Contacts.requestPermissionsAsync();
+			const { status } = await Contacts.requestPermissionsAsync()
 			if (status === "granted") {
 				const { data } = await Contacts.getContactsAsync({
 					fields: [Contacts.Fields.FirstName],
-				});
+				})
 
 				if (data.length > 0) {
 					//  console.log(data)
 				}
 			}
-		})();
-	}, []);
+		})()
+	}, [])
 
 	if (isFocused) {
 		AsyncStorage.getItem("watchHistory").then((val) => {
-			setwatchHistory(JSON.parse(val));
-		});
+			setwatchHistory(JSON.parse(val))
+		})
 	}
 
 	useEffect(() => {
-		fetch(API_URL + `/api/users/${Firebase.auth().currentUser.phoneNumber}`)
+		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 			.then((response) => response.json())
 			.then((json) => {
-				setUserClass(json.response[0]["class"]);
-				setusername(json.response[0].name);
-				setuserImage(ASSETS_URL + json.response[0].profile_pic);
-				setsubscribtionStatus(json.response[0].subscription_status);
+				setUserClass(json.response[0]["class"])
+				setusername(json.response[0].name)
+				setuserImage(ASSETS_URL + json.response[0].profile_pic)
+				setsubscribtionStatus(json.response[0].subscription_status)
 			})
 			.catch((error) => {
-				alert("Error!");
-			});
+				alert("Error!")
+			})
 
 		fetch(API_URL + "/api/subjects/" + userclass)
 			.then((response) => response.json())
 			.then((json) => {
-				setSubjects(json.response);
+				setSubjects(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection");
-			});
+				alert("Network Issue!.Check your internet connection")
+			})
 		fetch(API_URL + "/api/videos/featured/" + userclass)
 			.then((response) => response.json())
 			.then((json) => {
-				setFeaturedvids(json.response);
+				setFeaturedvids(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection");
-			});
+				alert("Network Issue!.Check your internet connection")
+			})
 		fetch(API_URL + "/api/popularvideos/" + userclass)
 			.then((response) => response.json())
 			.then((json) => {
-				setpopularVideos(json.response);
+				setpopularVideos(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection");
-			});
+				alert("Network Issue!.Check your internet connection")
+			})
 		fetch(API_URL + "/api/videos/latest/" + userclass)
 			.then((response) => response.json())
 			.then((json) => {
-				setLatestvids(json.response);
+				setLatestvids(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection");
-			});
-	}, [userclass]);
+				alert("Network Issue!.Check your internet connection")
+			})
+	}, [userclass])
 	return (
 		<ScrollView style={styles.container}>
 			<HeaderWelcome username={username} userimage={userImage} />
 			<View style={styles.CarouselContainer}>
-				<HeaderCarousel />
+				{/* <HeaderCarousel /> */}
 			</View>
 			{!subscribtionStatus ? <UpgradeCard /> : null}
 			<HorizontalScroll
@@ -113,11 +113,11 @@ const Home = ({ navigation }) => {
 					userclass={userclass}
 				/>
 			) : (
-				<></>
+				null
 			)}
 			{latestvids ? (
 				<VideoList
-					title="Latest Classes"
+					title="Online Classes"
 					data={latestvids}
 					navigation={navigation}
 					userclass={userclass}
@@ -132,7 +132,7 @@ const Home = ({ navigation }) => {
 				userclass={userclass}
 			/>
 
-			{popularVideos ? (
+			{/* {popularVideos ? (
 				<VideoList
 					title="Popular Videos"
 					data={popularVideos}
@@ -141,10 +141,10 @@ const Home = ({ navigation }) => {
 				/>
 			) : (
 				<></>
-			)}
+			)} */}
 		</ScrollView>
-	);
-};
+	)
+}
 
 const styles = StyleSheet.create({
 	container: {
@@ -153,6 +153,6 @@ const styles = StyleSheet.create({
 	CarouselContainer: {
 		marginHorizontal: 10,
 	},
-});
+})
 
-export default Home;
+export default Home

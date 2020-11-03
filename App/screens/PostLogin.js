@@ -44,21 +44,6 @@ const PostLogin = ({ navigation }) => {
 		<View style={styles.container}>
 			<Image source={require("../../assets/logo.jpeg")} style={styles.logo} />
 
-			<TextInput
-				style={styles.inputText}
-				onChangeText={(text) => setName(text)}
-				value={name}
-				placeholder="Name"
-				maxLength={10}
-			/>
-
-			<TextInput
-				style={styles.inputText}
-				onChangeText={(text) => setEmail(text)}
-				value={email}
-				placeholder="Email"
-				keyboardType="email-address"
-			/>
 
 			<Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
 				Select Class

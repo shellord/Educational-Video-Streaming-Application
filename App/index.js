@@ -26,13 +26,14 @@ import IntroScreen from "./screens/IntroScreen"
 import Announcements from "./screens/Announcements"
 import WatchHistory from "./screens/WatchHistory"
 import GettingStarted from "./screens/GettingStarted"
-import MobileLogin from "./screens/MobileLogin"
-import MobileVerification from "./screens/MobileVerification"
 import ProfileDetails from "./screens/ProfileDetails"
 import { HeaderBackButton } from "@react-navigation/stack"
 import { StatusBar } from "expo-status-bar"
-import MobileAuth from "./screens/MobileAuth"
+import Signin from "./screens/Signin"
+import Signup from "./screens/Signup"
 import colors from "./styles/styles"
+import * as ImagePicker from "expo-image-picker"
+import * as Permissions from "expo-permissions"
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -45,11 +46,20 @@ const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
 
-const API_URL = "http://18.223.24.160:3000"
-const ASSETS_URL = "http://18.223.24.160/marvelprofile/uploads/"
+const API_URL = "http://192.168.1.12:3000"
+const ASSETS_URL = "http://192.168.1.12/marvelprofile/uploads/"
+
+const askForPermission = async () => {
+	const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
+	if (permissionResult.status !== "granted") {
+		Alert.alert("no permissions to access camera!", [{ text: "ok" }])
+		return false
+	}
+	return true
+}
 
 const AuthStackScreen = () => (
-	<AuthStack.Navigator initialRouteName={MobileAuth}>
+	<AuthStack.Navigator initialRouteName={Signin}>
 		<AuthStack.Screen
 			name="GettingStarted"
 			component={GettingStarted}
@@ -59,25 +69,36 @@ const AuthStackScreen = () => (
 			}}
 		/>
 		<AuthStack.Screen
+			name="Signin"
+			component={Signin}
+			options={{
+				title: "Signin",
+				headerShown: false,
+			}}
+		/>
+		<AuthStack.Screen
+			name="Signup"
+			component={Signup}
+			options={{
+				title: "Signup",
+				headerShown: false,
+			}}
+		/>
+		<AuthStack.Screen
+			name="PostLogin"
+			component={PostLogin}
+			options={{
+				title: "PostLogin",
+				headerShown: false,
+			}}
+		/>
+		{/* <AuthStack.Screen
 			name="MobileAuth"
 			component={MobileAuth}
 			options={{
 				title: "MobileAuth",
 				headerShown: false,
 			}}
-		/>
-		{/* <AuthStack.Screen
-			name="MobileLogin"
-			component={MobileLogin}
-			options={{
-				title: "MobileLogin",
-				headerShown: false,
-			}}
-		/>
-		<AuthStack.Screen
-			name="MobileVerification"
-			component={MobileVerification}
-			options={{ title: "MobileVerification" }}
 		/> */}
 	</AuthStack.Navigator>
 )
@@ -379,7 +400,6 @@ const RootStackScreen = ({ userToken, isFinishedSignup, showIntroScreen }) => (
 		{showIntroScreen ? (
 			<RootStack.Screen name="IntroScreen" component={IntroScreen} />
 		) : userToken ? (
-			isFinishedSignup ? (
 				<RootStack.Screen
 					name="App"
 					component={DrawerScreen}
@@ -387,15 +407,6 @@ const RootStackScreen = ({ userToken, isFinishedSignup, showIntroScreen }) => (
 						animationEnabled: false,
 					}}
 				/>
-			) : (
-				<RootStack.Screen
-					name="PostLogin"
-					component={PostLoginStackScreen}
-					options={{
-						animationEnabled: false,
-					}}
-				/>
-			)
 		) : (
 			<RootStack.Screen
 				name="Auth"
@@ -418,65 +429,126 @@ export default () => {
 		if (val !== null) setShowIntroScreen(0)
 	})
 
-	const checkReg = (user) => {
-		fetch(API_URL + `/api/users/${user.phoneNumber}`)
+	// const checkReg = (user) => {
+	// 	fetch(API_URL + `/api/users/email/${user.phoneNumber}`)
+	// 		.then((response) => response.json())
+	// 		.then((json) => {
+	// 			try {
+	// 				if (json.response[0].class) {
+	// 					setisFinishedSignup(1)
+	// 				}
+	// 			} catch (e) {}
+	// 			// if(Object.keys(json.response).length!=0){
+	// 			//   setisFinishedSignup(1)
+	// 			// }
+	// 			setInitializing(false)
+	// 			setUserToken(user)
+	// 		})
+	// 		.catch((error) => {
+	// 			alert(error)
+	// 		})
+	// }
+
+	Firebase.auth().onAuthStateChanged((user) => {
+		if (user) {
+			setUserToken(user)
+		} else {
+			setUserToken(null)
+		}
+		setInitializing(false)
+
+	})
+	const uploadImage = (email,image) => {
+		let uri = image.uri
+		let fileExtension = uri.substr(uri.lastIndexOf(".") + 1)
+
+		fetch(`${API_URL}/api/uploadImage/`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email: email,
+				imgsource: image.base64,
+				imgname:
+					Math.random().toString(36).substring(2, 15) +
+					Math.random().toString(36).substring(2, 15) +
+					"." +
+					fileExtension,
+			}),
+		})
+			.then()
+			.catch((err) => console.log(err))
+	}
+
+	// const uploadAddress = (address,email) => {
+	// 	fetch(`${API_URL}/api/updateAddress/`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			Accept: "application/json",
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			email: email,
+	// 			address: address,
+	// 		}),
+	// 	})
+	// 		.then()
+	// 		.catch((err) => console.log(err))
+	// }
+
+	const adduserData = (name,phone,selectedValue,email,address) => {
+		console.log(API_URL +
+			`/api/users/register/${name}/${email}/${phone}/${selectedValue}/scert/${address}`)
+		fetch(
+			API_URL +
+				`/api/users/register/${name}/${email}/${phone}/${selectedValue}/scert/${address}`
+		)
 			.then((response) => response.json())
 			.then((json) => {
-				try {
-					if (json.response[0].class) {
-						setisFinishedSignup(1)
-					}
-				} catch (e) {}
-				// if(Object.keys(json.response).length!=0){
-				//   setisFinishedSignup(1)
-				// }
-				setInitializing(false)
-				setUserToken(user)
 			})
 			.catch((error) => {
 				alert(error)
 			})
 	}
+	
+	const handleSignUp = (selectedValue,name,email,password,phone,address,image) => {
+	  Firebase.auth()
+	      .createUserWithEmailAndPassword(email,password)
+		  .then(()=>
+		  {
+			adduserData(name,phone,selectedValue,email,address)
+			// uploadAddress(address,email)
+			uploadImage(email,image)
+			setUserToken(Firebase.auth().currentUser)
+		  }
+		  )
+	      .catch(error => {
+	              alert(error.message)
+	      })
+	}
 
-	Firebase.auth().onAuthStateChanged((user) => {
-		if (user) {
-			checkReg(user)
-		} else {
-			setUserToken(null)
-			setInitializing(false)
-		}
-	})
-
-	// const handleSignUp = (email,password) => {
-	//   Firebase.auth()
-	//       .createUserWithEmailAndPassword(email,password)
-	//       .then(()=>setUserToken(Firebase.auth().currentUser))
-	//       .catch(error => {
-	//               alert(error.message)
-	//       })
-	// }
-
-	// const handleSignIn =(email,password) =>{
-	//   Firebase.auth().signInWithPhoneNumber('+918592800500')
-	//           .then(() =>setUserToken(Firebase.auth().currentUser))
-	//           .catch(error =>{
-	//               alert(error.message)
-	//           })
-	// }
+	const handleSignIn =(email,password) =>{
+	  Firebase.auth().signInWithEmailAndPassword(email,password)
+	          .then(() =>setUserToken(Firebase.auth().currentUser))
+	          .catch(error =>{
+	              alert(error.message)
+	          })
+	}
 
 	const authContext = React.useMemo(() => {
 		return {
-			// signIn: (email,password) => {
-			//   handleSignIn(email,password)
-			// },
-			// signUp: (email,password) => {
-			//   handleSignUp(email,password)
-			// },
+			signIn: (email,password) => {
+			  handleSignIn(email,password)
+			},
+			signUp: (selectedValue,name,email,password,phone,address,image) => {
+			  handleSignUp(selectedValue,name,email,password,phone,address,image)
+			},
 			signOut: () => {
 				Firebase.auth().signOut()
 			},
 			finishLogin: () => {
-				console.log(11)
 				setisFinishedSignup(1)
 			},
 			IntroDone: () => {

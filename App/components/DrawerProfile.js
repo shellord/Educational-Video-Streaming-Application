@@ -19,7 +19,7 @@ const DrawerProfile = () => {
             setuserImage(ASSETS_URL+json.response[0].profile_pic)
         })
         .catch((error)=>{
-          alert("Network Error")
+    
         })
     }, [])
 

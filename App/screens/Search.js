@@ -15,7 +15,7 @@ const Search = ({ navigation }) => {
   const searchInput = useRef()
 
   useEffect(() => {
-    fetch(API_URL+`/api/users/${Firebase.auth().currentUser.phoneNumber}`)
+    fetch(API_URL+`/api/users/email/${Firebase.auth().currentUser.email}`)
     .then((response) => response.json())
     .then((json) => {
          setUserClass(json.response[0]['class'])
