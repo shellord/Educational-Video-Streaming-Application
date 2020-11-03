@@ -95,7 +95,7 @@ const Home = ({ navigation }) => {
 	}, [userclass])
 	return (
 		<ScrollView style={styles.container}>
-			<HeaderWelcome username={username} userimage={userImage} />
+			<HeaderWelcome navigation={navigation} username={username} userimage={userImage} />
 			<View style={styles.CarouselContainer}>
 				{/* <HeaderCarousel /> */}
 			</View>

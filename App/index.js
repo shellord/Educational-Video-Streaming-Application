@@ -27,6 +27,8 @@ import Announcements from "./screens/Announcements"
 import WatchHistory from "./screens/WatchHistory"
 import GettingStarted from "./screens/GettingStarted"
 import ProfileDetails from "./screens/ProfileDetails"
+import ProfileScreen from "./screens/ProfileScreen"
+import ProfileScreenEdit from './screens/ProfileScreenEdit'
 import { HeaderBackButton } from "@react-navigation/stack"
 import { StatusBar } from "expo-status-bar"
 import Signin from "./screens/Signin"
@@ -133,6 +135,34 @@ const HomeStackScreen = ({ navigation }) => (
 			component={SubjectMenu}
 			options={({ route }) => ({
 				title: route.params.name,
+				headerStyle: {
+					backgroundColor: colors.BACKGROUND_COLOR,
+				},
+				headerTitleStyle: {
+					fontSize: 16,
+					color: colors.HEADER_TEXT_COLOR,
+				},
+				headerTintColor: colors.HEADER_TEXT_COLOR,
+			})}
+		/>
+		<HomeStack.Screen
+			name="ProfileScreen"
+			component={ProfileScreen}
+			options={() => ({
+				headerStyle: {
+					backgroundColor: colors.BACKGROUND_COLOR,
+				},
+				headerTitleStyle: {
+					fontSize: 16,
+					color: colors.HEADER_TEXT_COLOR,
+				},
+				headerTintColor: colors.HEADER_TEXT_COLOR,
+			})}
+		/>
+		<HomeStack.Screen
+			name="ProfileScreenEdit"
+			component={ProfileScreenEdit}
+			options={() => ({
 				headerStyle: {
 					backgroundColor: colors.BACKGROUND_COLOR,
 				},
