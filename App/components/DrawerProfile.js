@@ -12,7 +12,7 @@ const DrawerProfile = () => {
     const [username, setusername] = useState('Jon Doe')
 
     useEffect(() => {
-        fetch(API_URL+`/api/users/${Firebase.auth().currentUser.phoneNumber}`)
+        fetch(API_URL+`/api/users/email/${Firebase.auth().currentUser.email}`)
         .then((response) => response.json())
         .then((json) => {
             setusername(json.response[0].name)

@@ -165,7 +165,8 @@ const Signup = ({navigation}) => {
         <TextInput style={styles.inputText}              
             onChangeText={text => setPhone(text)}    
             value={phone}             
-            placeholder="Phone"
+			placeholder="Phone"
+			keyboardType="number-pad"
         />         
         <View style={styles.textAreaContainer}>
 				<TextInput

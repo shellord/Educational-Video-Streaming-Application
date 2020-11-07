@@ -3,6 +3,8 @@ import { StyleSheet, Text, View,Image, Keyboard} from 'react-native'
 import { TextInput, TouchableOpacity, TouchableFeedback, ScrollView } from 'react-native-gesture-handler';
 import Constants from 'expo-constants'
 import TextBox from '../components/TextBox';
+import * as ImagePicker from "expo-image-picker"
+import * as Permissions from "expo-permissions"
 import { AuthContext } from "../context"
 import  Firebase from '../../config/Firebase'
 import { useIsFocused } from '@react-navigation/native'
@@ -16,7 +18,15 @@ const ProfileScreen = ({navigation,route}) => {
     const [phone, setphone] = useState("")
     const [userimage, setuserimage] = useState(null)
     const [subscibtionstatus, setsubscibtionstatus] = useState(null)
-    
+
+    const askForPermission = async () => {
+		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
+		if (permissionResult.status !== "granted") {
+			Alert.alert("no permissions to access camera!", [{ text: "ok" }])
+			return false
+		}
+		return true
+    }
 
     useEffect(() => {
         fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
@@ -39,7 +49,7 @@ const ProfileScreen = ({navigation,route}) => {
         .then((json) => {
             setaddress(json.response[0].address)
             setname(json.response[0].name)
-            setuserimage(ASSETS_URL + json.response[0].profile_pic)
+            // setuserimage(ASSETS_URL + json.response[0].profile_pic)
             setsubscibtionstatus(json.response[0].subscription_status)
             setphone(json.response[0].phone)
         })
@@ -47,7 +57,51 @@ const ProfileScreen = ({navigation,route}) => {
             alert(error)
         })
     }
+    const uploadImage = (email,image) => {
+		let uri = image.uri
+		let fileExtension = uri.substr(uri.lastIndexOf(".") + 1)
 
+		fetch(`${API_URL}/api/uploadImage/`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email: email,
+				imgsource: image.base64,
+				imgname:
+					Math.random().toString(36).substring(2, 15) +
+					Math.random().toString(36).substring(2, 15) +
+					"." +
+					fileExtension,
+			}),
+		})
+			.then()
+			.catch((err) => console.log(err))
+    }
+    
+    const takeImage = async () => {
+		// make sure that we have the permission
+		const hasPermission = await askForPermission()
+		if (!hasPermission) {
+			return
+		} else {
+			// launch the camera with the following settings
+			let image = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				aspect: [3, 3],
+				quality: 1,
+				base64: true,
+			})
+			// make sure a image was taken:
+			if (!image.cancelled) {
+                setuserimage(image.uri)
+                uploadImage(Firebase.auth().currentUser.email,image)
+			}
+		}
+	}
     return (
         
         <ScrollView  style={styles.container}>
@@ -61,7 +115,9 @@ const ProfileScreen = ({navigation,route}) => {
 					style={styles.avatar}
 					/>
 					)}
-                    <Text style={styles.avatarText}>Change Profile Photo</Text>
+                    <TouchableOpacity onPress={takeImage}>
+                        <Text style={styles.avatarText}>Change Profile Photo</Text>
+                    </TouchableOpacity>
             </View>
             
             <View style={styles.detailsContainer}>

@@ -66,7 +66,7 @@ const Home = ({ navigation }) => {
 				setSubjects(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection")
+				alert("Network Issue!.Check your internet connection[1]")
 			})
 		fetch(API_URL + "/api/videos/featured/" + userclass)
 			.then((response) => response.json())
@@ -74,7 +74,7 @@ const Home = ({ navigation }) => {
 				setFeaturedvids(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection")
+				alert("Network Issue!.Check your internet connection[2]")
 			})
 		fetch(API_URL + "/api/popularvideos/" + userclass)
 			.then((response) => response.json())
@@ -82,7 +82,7 @@ const Home = ({ navigation }) => {
 				setpopularVideos(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection")
+				alert("Network Issue!.Check your internet connection[3]")
 			})
 		fetch(API_URL + "/api/videos/latest/" + userclass)
 			.then((response) => response.json())
@@ -90,7 +90,7 @@ const Home = ({ navigation }) => {
 				setLatestvids(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection")
+				alert("Network Issue!.Check your internet connection[4]")
 			})
 	}, [userclass])
 	return (
