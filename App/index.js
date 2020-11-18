@@ -29,6 +29,7 @@ import GettingStarted from "./screens/GettingStarted"
 import ProfileDetails from "./screens/ProfileDetails"
 import ProfileScreen from "./screens/ProfileScreen"
 import ProfileScreenEdit from './screens/ProfileScreenEdit'
+import LiveStreamingScreen from './screens/LiveStreamingScreen'
 import { HeaderBackButton } from "@react-navigation/stack"
 import { StatusBar } from "expo-status-bar"
 import Signin from "./screens/Signin"
@@ -48,8 +49,8 @@ const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
 
-const API_URL = "http://192.168.1.10:3000"
-const ASSETS_URL = "http://192.168.1.10/marvelprofile/uploads/"
+const API_URL = "http://192.168.1.11:3000"
+const ASSETS_URL = "http://192.168.1.11/marvelprofile/uploads/"
 
 const askForPermission = async () => {
 	const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
@@ -194,6 +195,13 @@ const HomeStackScreen = ({ navigation }) => (
 			options={({ route }) => ({
 				title: route.params.name,
 				headerShown: false,
+			})}
+		/>
+		<HomeStack.Screen
+			name="LiveStreamingScreen"
+			component={LiveStreamingScreen}
+			options={({ route }) => ({
+				title: "Live Classes",
 			})}
 		/>
 	</HomeStack.Navigator>

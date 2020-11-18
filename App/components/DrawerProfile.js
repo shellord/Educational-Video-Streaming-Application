@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginBottom:10,
         backgroundColor:colors.BACKGROUND_COLOR
-        // backgroundColor:'white'
     }
     
 })

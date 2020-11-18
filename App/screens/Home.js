@@ -10,6 +10,7 @@ import { useIsFocused } from "@react-navigation/native"
 import VideoList from "../components/VideoList"
 import HeaderWelcome from "../components/HeaderWelcome"
 import UpgradeCard from "../components/UpgradeCard"
+import LiveCarousel from "../components/LiveCarousel"
 import colors from "../styles/styles"
 import * as Contacts from "expo-contacts"
 
@@ -127,6 +128,12 @@ const Home = ({ navigation }) => {
 			)}
 			<Carousel
 				title="What's New?"
+				data={featuredvids}
+				nav={navigation}
+				userclass={userclass}
+			/>
+			<LiveCarousel 
+				title="Live Classes"
 				data={featuredvids}
 				nav={navigation}
 				userclass={userclass}
