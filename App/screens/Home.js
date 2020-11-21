@@ -52,6 +52,7 @@ const Home = ({ navigation }) => {
 		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 			.then((response) => response.json())
 			.then((json) => {
+				console.log(json)
 				setUserClass(json.response[0]["class"])
 				setusername(json.response[0].name)
 				setuserImage(ASSETS_URL + json.response[0].profile_pic)

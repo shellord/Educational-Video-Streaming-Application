@@ -26,7 +26,7 @@ const { width, height } = Dimensions.get('window')
           <View style={styles.webviewStyle}>
             <WebView
               source={{
-               uri: `http://192.168.1.11/marvelprofile/index.php?email=${Firebase.auth().currentUser.email}`
+               uri: `http://18.219.43.140/marvelprofile/index.php`
               }}
           startInLoadingState={true}
             renderLoading={() => (

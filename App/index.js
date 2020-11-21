@@ -49,8 +49,8 @@ const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
 
-const API_URL = "http://192.168.1.11:3000"
-const ASSETS_URL = "http://192.168.1.11/marvelprofile/uploads/"
+const API_URL = "http://18.219.43.140:3000"
+const ASSETS_URL = "http://18.219.43.140/marvelprofile/uploads/"
 
 const askForPermission = async () => {
 	const permissionResult = await Permissions.askAsync(Permissions.CAMERA)

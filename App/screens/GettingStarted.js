@@ -5,7 +5,7 @@ import colors from '../styles/styles'
 const GettingStarted = ({navigation}) => {
     return (
         <View style={styles.container}>
-             <ImageBackground source={require('../../assets/get.png')} style={styles.image}>
+             <ImageBackground source={require('../../assets/gettingstarted.png')} style={styles.image}>
                 <View style={{flex:1,alignItems:'center',justifyContent: 'flex-end',marginBottom:80}}>
                   <TouchableOpacity style={styles.button} onPress={()=>navigation.push('Signin')}> 
                   <Text style={styles.buttonText}>Sign up</Text>
