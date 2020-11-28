@@ -7,9 +7,10 @@ import colors from '../styles/styles'
 import { CustomPicker } from "react-native-custom-picker"
 import { AuthContext } from "../context"
 import { ScrollView } from 'react-native-gesture-handler'
+import DatePicker from 'react-native-datepicker'
 
 
-const Signup = ({navigation}) => {
+const Signup1 = ({navigation}) => {
     const { API_URL,signUp } = React.useContext(AuthContext)
     const [email,setEmail] = useState('')
 	const [password,setPassword] = useState('')
@@ -21,8 +22,8 @@ const Signup = ({navigation}) => {
 	const [addressUploaded, setaddressUploaded] = useState(0)
 	const [options, setoptions] = useState([{ number: "" }])
 	const [selectedValue, setSelectedValue] = useState()
-
     const [error,setError] = useState('')
+    const [date, setdate] = useState()
 
 	useEffect(() => {
 		fetch(API_URL + "/api/class")
@@ -142,7 +143,7 @@ const Signup = ({navigation}) => {
 					setSelectedValue(value.number)
 				}}
 			/>
-            
+
         <TextInput style={styles.inputText}              
             onChangeText={text => setName(text)}    
             value={name}             
@@ -168,7 +169,36 @@ const Signup = ({navigation}) => {
 			placeholder="Phone"
 			keyboardType="number-pad"
         />         
-        <View style={styles.textAreaContainer}>
+		<View style={{width:'85%',marginTop:10}}>
+        	<DatePicker
+                style={{width: '100%'}}
+                date={date}
+                mode="date"
+                placeholder="Date of birth"
+                format="YYYY-MM-DD"
+                minDate="2016-05-01"
+                maxDate="2016-06-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                // dateIcon: {
+                //     position: 'absolute',
+                //     left: 0,
+                //     top: 4,
+                //     marginLeft: 0
+                // },
+                dateInput: {
+					marginLeft: 0,
+					backgroundColor:'#fafafa',
+					borderColor:'#d3d3d3',
+
+                }
+                // ... You can check the source to find the other keys.
+                }}
+                onDateChange={(date) => {setdate(date)}}
+            />
+			</View>
+        {/* <View style={styles.textAreaContainer}>
 				<TextInput
 					style={styles.textArea}
 					underlineColorAndroid="transparent"
@@ -181,10 +211,14 @@ const Signup = ({navigation}) => {
 					value={address}
 				/>
 			</View>       
-          
-        <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
-            <Text style={styles.buttonText}>Sign Up</Text>    
-        </TouchableOpacity>  
+			 */}
+
+        {/* <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
+            <Text style={styles.buttonText}>Next</Text>    
+        </TouchableOpacity>   */}
+		<TouchableOpacity style={styles.loginButton} onPress={() => navigation.push("Signup2",{email:email})}>           
+       		 <Text style={styles.buttonText}>Next</Text>    
+        </TouchableOpacity> 
         <Text style={styles.errorMessage}>{error}</Text>
         </ScrollView>
      
@@ -193,6 +227,7 @@ const Signup = ({navigation}) => {
 
   const styles = StyleSheet.create({
 	container:{
+		flex:1,
 		alignItems:'center',
         justifyContent:'center',
         marginTop:Constants.statusBarHeight,
@@ -257,4 +292,4 @@ const Signup = ({navigation}) => {
 	
 })
 
-  export default Signup
+  export default Signup1

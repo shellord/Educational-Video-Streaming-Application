@@ -26,7 +26,7 @@ const Signin = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
           <Text style={styles.buttonText}>Log In</Text>    
       </TouchableOpacity>                         
-      <TouchableOpacity style={styles.SignupButton} onPress={() => navigation.push("Signup")}>           
+      <TouchableOpacity style={styles.SignupButton} onPress={() => navigation.push("Signup1")}>           
           <Text style={styles.buttonText}>Sign Up</Text>    
       </TouchableOpacity>  
       <Text style={styles.errorMessage}>{error}</Text>

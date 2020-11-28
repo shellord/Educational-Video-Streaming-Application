@@ -33,7 +33,8 @@ import LiveStreamingScreen from './screens/LiveStreamingScreen'
 import { HeaderBackButton } from "@react-navigation/stack"
 import { StatusBar } from "expo-status-bar"
 import Signin from "./screens/Signin"
-import Signup from "./screens/Signup"
+import Signup1 from "./screens/Signup1"
+import Signup2 from "./screens/Signup2"
 import colors from "./styles/styles"
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
@@ -80,21 +81,29 @@ const AuthStackScreen = () => (
 			}}
 		/>
 		<AuthStack.Screen
-			name="Signup"
-			component={Signup}
+			name="Signup1"
+			component={Signup1}
 			options={{
 				title: "Signup",
 				headerShown: false,
 			}}
 		/>
 		<AuthStack.Screen
+			name="Signup2"
+			component={Signup2}
+			options={{
+				title: "Signup",
+				headerShown: false,
+			}}
+		/>
+		{/* <AuthStack.Screen
 			name="PostLogin"
 			component={PostLogin}
 			options={{
 				title: "PostLogin",
 				headerShown: false,
 			}}
-		/>
+		/> */}
 		{/* <AuthStack.Screen
 			name="MobileAuth"
 			component={MobileAuth}
