@@ -35,7 +35,7 @@ export default function App() {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				phone: Firebase.auth().currentUser.phoneNumber,
+				email: Firebase.auth().currentUser.email,
 				imgsource: image.base64,
 				imgname:
 					Math.random().toString(36).substring(2, 15) +

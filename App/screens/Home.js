@@ -46,6 +46,17 @@ const Home = ({ navigation }) => {
 		AsyncStorage.getItem("watchHistory").then((val) => {
 			setwatchHistory(JSON.parse(val))
 		})
+		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
+			.then((response) => response.json())
+			.then((json) => {
+				console.log(json)
+				setUserClass(json.response[0]["class"])
+				setusername(json.response[0].firstname)
+				setuserImage(ASSETS_URL + json.response[0].profile_pic)
+			})
+			.catch((error) => {
+				alert("Error!")
+			})
 	}
 
 	useEffect(() => {
@@ -54,7 +65,7 @@ const Home = ({ navigation }) => {
 			.then((json) => {
 				console.log(json)
 				setUserClass(json.response[0]["class"])
-				setusername(json.response[0].name)
+				setusername(json.response[0].firstname)
 				setuserImage(ASSETS_URL + json.response[0].profile_pic)
 				setsubscribtionStatus(json.response[0].subscription_status)
 			})

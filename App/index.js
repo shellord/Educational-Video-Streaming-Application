@@ -525,7 +525,7 @@ export default () => {
 					fileExtension,
 			}),
 		})
-			.then()
+			.then(setUserToken(Firebase.auth().currentUser))
 			.catch((err) => console.log(err))
 	}
 
@@ -545,12 +545,12 @@ export default () => {
 	// 		.catch((err) => console.log(err))
 	// }
 
-	const adduserData = (name,phone,selectedValue,email,address) => {
-		console.log(API_URL +
-			`/api/users/register/${name}/${email}/${phone}/${selectedValue}/scert/${address}`)
+	const adduserData = (fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode) => {
+		console.log("API CALL: "+API_URL +
+			`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`)
 		fetch(
 			API_URL +
-				`/api/users/register/${name}/${email}/${phone}/${selectedValue}/scert/${address}`
+				`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`
 		)
 			.then((response) => response.json())
 			.then((json) => {
@@ -560,15 +560,14 @@ export default () => {
 			})
 	}
 	
-	const handleSignUp = (selectedValue,name,email,password,phone,address,image) => {
+	const handleSignUp = (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode) => {
 	  Firebase.auth()
 	      .createUserWithEmailAndPassword(email,password)
 		  .then(()=>
 		  {
-			adduserData(name,phone,selectedValue,email,address)
-			// uploadAddress(address,email)
+			adduserData(fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode)
 			uploadImage(email,image)
-			setUserToken(Firebase.auth().currentUser)
+			// setUserToken(Firebase.auth().currentUser)
 		  }
 		  )
 	      .catch(error => {
@@ -589,8 +588,9 @@ export default () => {
 			signIn: (email,password) => {
 			  handleSignIn(email,password)
 			},
-			signUp: (selectedValue,name,email,password,phone,address,image) => {
-			  handleSignUp(selectedValue,name,email,password,phone,address,image)
+			signUp: (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode) => {
+				console.log(selectedValue)
+			  handleSignUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode)
 			},
 			signOut: () => {
 				Firebase.auth().signOut()

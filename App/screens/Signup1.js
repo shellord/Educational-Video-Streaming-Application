@@ -9,21 +9,21 @@ import { AuthContext } from "../context"
 import { ScrollView } from 'react-native-gesture-handler'
 import DatePicker from 'react-native-datepicker'
 
-
 const Signup1 = ({navigation}) => {
-    const { API_URL,signUp } = React.useContext(AuthContext)
+
+    const { API_URL } = React.useContext(AuthContext)
     const [email,setEmail] = useState('')
 	const [password,setPassword] = useState('')
-    const [name,setName] = useState('')
+    const [fname,setfname] = useState('')
+    const [lname,setlname] = useState('')
     const [phone,setPhone] = useState('')
 	const [image, setimage] = useState(null)
-    const [address, setaddress] = useState(null)
-	const [imageUploaded, setimageUploaded] = useState(0)
-	const [addressUploaded, setaddressUploaded] = useState(0)
 	const [options, setoptions] = useState([{ number: "" }])
 	const [selectedValue, setSelectedValue] = useState()
     const [error,setError] = useState('')
-    const [date, setdate] = useState()
+    const [date, setdate] = useState('')
+    const [syllabus, setsyllabus  ] = useState('')
+    const syllabusoption = ['scert','cbse']
 
 	useEffect(() => {
 		fetch(API_URL + "/api/class")
@@ -43,51 +43,8 @@ const Signup1 = ({navigation}) => {
 		}
 		return true
     }
-    const uploadImage = (image) => {
-		let uri = image.uri
-		let fileExtension = uri.substr(uri.lastIndexOf(".") + 1)
+    
 
-		fetch(`${API_URL}/api/upload/`, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				phone: Firebase.auth().currentUser.phoneNumber,
-				imgsource: image.base64,
-				imgname:
-					Math.random().toString(36).substring(2, 15) +
-					Math.random().toString(36).substring(2, 15) +
-					"." +
-					fileExtension,
-			}),
-		})
-			.then(setimageUploaded(1))
-			.catch((err) => console.log(err))
-	}
-
-	const uploadAddress = (address) => {
-		fetch(`${API_URL}/api/addAddress/`, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				phone: Firebase.auth().currentUser.phoneNumber,
-				address: address,
-			}),
-		})
-			.then(setaddressUploaded(1))
-			.catch((err) => console.log(err))
-	}
-
-	const submitData = () => {
-		image ? uploadImage(image) : null
-		address ? uploadAddress(address) : alert("Enter Valid Address!")
-		imageUploaded && addressUploaded ? finishLogin() : null
-    }
     
     const takeImage = async () => {
 		// make sure that we have the permission
@@ -110,12 +67,11 @@ const Signup1 = ({navigation}) => {
 		}
 	}
     const onCompleteHandler = () =>{
-        if(!selectedValue || !name || !email || !password || !phone || !address || !image){
+        if(!selectedValue || !fname || !lname || !email || !password || !phone  || !image || !date){
             alert("You need to enter all details to complete signing up")
             return
         }
-        signUp(selectedValue,name,email,password,phone,address,image)
-         
+        navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
             <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
@@ -127,6 +83,7 @@ const Signup1 = ({navigation}) => {
 					style={styles.imageStyle}
 				/>
 			)}
+            
 			<TouchableOpacity onPress={takeImage}>
 				<Text style={styles.imageButton}>Choose Photo</Text>
 			</TouchableOpacity>            
@@ -138,17 +95,30 @@ const Signup1 = ({navigation}) => {
                 options={options}
                 placeholder="Choose Class"
 				getLabel={(item) => item.value}
-				defaultValue={1}
+				defaultValue={6}
 				onValueChange={(value) => {
 					setSelectedValue(value.number)
 				}}
 			/>
-
+	       <CustomPicker
+            options={syllabusoption}
+            placeholder="Choose Syllabus"
+            defaultValue={'scert'}
+            onValueChange={value => {
+                setSelectedValue(value.number)
+            }}
+        />
         <TextInput style={styles.inputText}              
-            onChangeText={text => setName(text)}    
-            value={name}             
-            placeholder="Name"
+            onChangeText={text => setfname(text)}    
+            value={fname}             
+            placeholder="First Name"
          />
+          <TextInput style={styles.inputText}              
+            onChangeText={text => setlname(text)}    
+            value={lname}             
+            placeholder="Last Name"
+         />
+
 
         <TextInput style={styles.inputText}                 
             onChangeText={text => setEmail(text)}    
@@ -198,27 +168,13 @@ const Signup1 = ({navigation}) => {
                 onDateChange={(date) => {setdate(date)}}
             />
 			</View>
-        {/* <View style={styles.textAreaContainer}>
-				<TextInput
-					style={styles.textArea}
-					underlineColorAndroid="transparent"
-					placeholder="Enter your address here"
-					placeholderTextColor="grey"
-					numberOfLines={5}
-					multiline={true}
-					textAlignVertical="top"
-					onChangeText={(value) => setaddress(value)}
-					value={address}
-				/>
-			</View>       
-			 */}
-
-        {/* <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
-            <Text style={styles.buttonText}>Next</Text>    
-        </TouchableOpacity>   */}
-		<TouchableOpacity style={styles.loginButton} onPress={() => navigation.push("Signup2",{email:email})}>           
+    
+		<TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
        		 <Text style={styles.buttonText}>Next</Text>    
         </TouchableOpacity> 
+        {/* <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>           
+       		 <Text style={styles.buttonText}>Back</Text>    
+        </TouchableOpacity> */}
         <Text style={styles.errorMessage}>{error}</Text>
         </ScrollView>
      
@@ -227,7 +183,7 @@ const Signup1 = ({navigation}) => {
 
   const styles = StyleSheet.create({
 	container:{
-		flex:1,
+		// flex:1,
 		alignItems:'center',
         justifyContent:'center',
         marginTop:Constants.statusBarHeight,
@@ -257,6 +213,15 @@ const Signup1 = ({navigation}) => {
                   backgroundColor:'#2196f3',
                   marginBottom:10
           },
+          backButton:{
+            marginTop:10,
+            width:300,
+            alignItems:'center',
+            padding:10,
+            borderRadius:5,
+            backgroundColor:'red',
+            marginBottom:10
+        },
           buttonText:{
                   color:'white',
                   fontWeight:'bold'

@@ -13,7 +13,14 @@ import { useIsFocused } from '@react-navigation/native'
 const ProfileScreen = ({navigation,route}) => {
 
     const { API_URL, ASSETS_URL } = React.useContext(AuthContext)
-    const [name, setname] = useState("")
+    const [firstname, setfirstname] = useState("")
+    const [lastname, setlastname] = useState("")
+    const [syllabus, setsyllabus] = useState("")
+    const [pincode, setpincode] = useState('')
+    const [city, setCity] = useState("")
+    const [street, setStreet] = useState("")
+    const [school, setSchool] = useState("")
+    const [dob, setDob] = useState("")
     const [address, setaddress] = useState("")
     const [phone, setphone] = useState("")
     const [userimage, setuserimage] = useState(null)
@@ -33,7 +40,13 @@ const ProfileScreen = ({navigation,route}) => {
         .then((response) => response.json())
         .then((json) => {
             setaddress(json.response[0].address)
-            setname(json.response[0].name)
+            setfirstname(json.response[0].firstname)
+            setlastname(json.response[0].lastname)
+            setDob(json.response[0].dob)
+            setCity(json.response[0].city)
+            setStreet(json.response[0].street)
+            setSchool(json.response[0].school)
+            setpincode(json.response[0].pincode)
             setuserimage(ASSETS_URL + json.response[0].profile_pic)
             setsubscibtionstatus(json.response[0].subscription_status)
             setphone(json.response[0].phone)
@@ -48,7 +61,14 @@ const ProfileScreen = ({navigation,route}) => {
         .then((response) => response.json())
         .then((json) => {
             setaddress(json.response[0].address)
-            setname(json.response[0].name)
+            setfirstname(json.response[0].firstname)
+            setlastname(json.response[0].lastname)
+            setDob(json.response[0].dob)
+            setCity(json.response[0].city)
+            setStreet(json.response[0].street)
+            setSchool(json.response[0].school)
+            setpincode(json.response[0].pincode)
+
             // setuserimage(ASSETS_URL + json.response[0].profile_pic)
             setsubscibtionstatus(json.response[0].subscription_status)
             setphone(json.response[0].phone)
@@ -123,7 +143,10 @@ const ProfileScreen = ({navigation,route}) => {
             <View style={styles.detailsContainer}>
             <View>
                 <Text style={styles.leftText}>
-                    Name
+                    First Name
+                </Text>
+                <Text style={styles.leftText}>
+                    Last Name
                 </Text>
                 <Text style={styles.leftText}>
                     Email
@@ -137,10 +160,29 @@ const ProfileScreen = ({navigation,route}) => {
                 <Text style={styles.leftText}>
                 Address
                 </Text>
+                <Text style={styles.leftText}>
+                    Street
+                </Text>
+                <Text style={styles.leftText}>
+                    City
+                </Text>
+                <Text style={styles.leftText}>
+                    Pincode
+                </Text>
+                <Text style={styles.leftText}>
+                    School
+                </Text>
+                <Text style={styles.leftText}>
+                    Date of Birth
+                </Text>
+                
             </View>
             <View>
-                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:name,dataToEdit:'name'})}>
-                <Text style={styles.rightText} >{name}</Text>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:firstname,dataToEdit:'firstname'})}>
+                <Text style={styles.rightText} >{firstname}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:lastname,dataToEdit:'lastname'})}>
+                <Text style={styles.rightText} >{lastname}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:Firebase.auth().currentUser.email,dataToEdit:'email'})}>
                 <Text style={styles.rightText} numberOfLines={1}>{Firebase.auth().currentUser.email}</Text>
@@ -153,6 +195,21 @@ const ProfileScreen = ({navigation,route}) => {
                 </TouchableOpacity>
                 <View style={{width:200}}>
                 <Text style={styles.rightText} numberOfLines={5}>{address}</Text>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:street,dataToEdit:'street'})}>
+                <Text style={styles.rightText}> {street} </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:city,dataToEdit:'city'})}>
+                <Text style={styles.rightText}> {city} </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:pincode,dataToEdit:'pincode'})}>
+                <Text style={styles.rightText}> {pincode} </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:school,dataToEdit:'school'})}>
+                <Text style={styles.rightText}> {school} </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:dob,dataToEdit:'dob'})}>
+                <Text style={styles.rightText}> {dob} </Text>
+                </TouchableOpacity>
                 </View>
             </View>
             </View>
@@ -174,7 +231,8 @@ const styles = StyleSheet.create({
 		// flex: 1,
 		alignItems: "center",
 		// padding: 10,
-		justifyContent: 'center',
+        justifyContent: 'center',
+        marginBottom:20
 	},
 	avatar: {
 		// flex: 1,
@@ -197,11 +255,11 @@ const styles = StyleSheet.create({
     },
     leftText:{
         fontSize:16,
-        marginTop:30,
+        marginBottom:30,
     },
     rightText:{
         fontSize:16,
-        marginTop:30,
+        marginBottom:30,
         marginLeft:10
     }
 })
