@@ -105,7 +105,7 @@ const Signup1 = ({navigation}) => {
             placeholder="Choose Syllabus"
             defaultValue={'scert'}
             onValueChange={value => {
-                setSelectedValue(value.number)
+                setsyllabus(value)
             }}
         />
         <TextInput style={styles.inputText}              
@@ -146,8 +146,8 @@ const Signup1 = ({navigation}) => {
                 mode="date"
                 placeholder="Date of birth"
                 format="YYYY-MM-DD"
-                minDate="2016-05-01"
-                maxDate="2016-06-01"
+                // minDate="1990-05-01"
+                // maxDate="2022-06-01"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{

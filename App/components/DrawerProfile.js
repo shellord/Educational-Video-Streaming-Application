@@ -3,6 +3,7 @@ import { View, Text,Image ,StyleSheet} from 'react-native'
 import { AuthContext } from "../context"
 import  Firebase from '../../config/Firebase'
 import colors from '../styles/styles'
+import { useIsFocused } from "@react-navigation/native"
 
 const DrawerProfile = () => {
     const {API_URL} = React.useContext(AuthContext)
@@ -10,6 +11,19 @@ const DrawerProfile = () => {
 
     const [userImage, setuserImage] = useState(null)
     const [username, setusername] = useState('Jon Doe')
+
+    if(useIsFocused()){
+            fetch(API_URL+`/api/users/email/${Firebase.auth().currentUser.email}`)
+            .then((response) => response.json())
+            .then((json) => {
+                setusername(json.response[0].name)
+                setuserImage(ASSETS_URL+json.response[0].profile_pic)
+            })
+            .catch((error)=>{
+        
+            })
+   
+    }
 
     useEffect(() => {
         fetch(API_URL+`/api/users/email/${Firebase.auth().currentUser.email}`)
