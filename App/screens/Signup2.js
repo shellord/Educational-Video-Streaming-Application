@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { StyleSheet, Text,TextInput,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View,TextInput,TouchableOpacity} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Constants from 'expo-constants'
 import colors from '../styles/styles'
@@ -88,33 +88,38 @@ const styles = StyleSheet.create({
 
     },
 	        inputText:{
-                  fontSize:12,
-                  borderWidth:0.5,
-                  width:'85%',
-                  textAlign:'center',
-                  borderColor:'#d3d3d3',
-                  padding:10,
-                  backgroundColor:'#fafafa',
-                  marginTop:10
+                fontSize:14,
+                color:'grey',
+                borderWidth:1,
+                borderRadius:10,
+                width:'85%',
+                textAlign:'center',
+                borderColor:'transparent',
+                padding:15,
+                width:320,
+                backgroundColor:'#f3f3f4',
+                  marginTop:5
   
           },
           loginButton:{
-                  marginTop:30,
-                  width:300,
-                  alignItems:'center',
-                  padding:10,
-                  borderRadius:5,
-                  backgroundColor:'#2196f3',
-                  marginBottom:10
+            marginTop:30,
+            width:320,
+            alignItems:'center',
+            padding:15,
+            borderRadius:5,
+            // backgroundColor:'#A9A9A9',
+            backgroundColor:'black',
+          marginBottom:10
           },
           backButton:{
-            marginTop:10,
-            width:300,
-            alignItems:'center',
-            padding:10,
-            borderRadius:5,
-            backgroundColor:'red',
-            marginBottom:10
+            // marginTop:30,
+                    width:320,
+                    alignItems:'center',
+                    padding:15,
+                    borderRadius:5,
+                    // backgroundColor:'#A9A9A9',
+                    backgroundColor:'red',
+                  marginBottom:10
         },
           buttonText:{
                   color:'white',

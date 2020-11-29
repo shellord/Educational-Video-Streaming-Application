@@ -240,7 +240,7 @@ const Signup1 = ({navigation}) => {
           imageStyle: {
             width: 150,
             height: 150,
-            borderRadius: 100,
+            borderRadius: 30,
             margin: 10,
         },
         imageButton: {

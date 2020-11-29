@@ -48,29 +48,25 @@ const Signin = ({ navigation }) => {
   }
 
 const styles = StyleSheet.create({
-	container:{
-		flex:1,
-		alignItems:'center',
-    justifyContent:'space-between',
-    // backgroundColor:'#425c5a',
-    // flexDirection:"column"
-	},
-  inputText:{
-                  fontSize:16,
-                  color:'grey',
-                  borderWidth:1,
-                  // borderTopColor:'transparent',
-                  borderLeftColor:'transparent',
-                  borderRightColor:'transparent',
-                  borderRadius:0,
-                  width:'85%',
-                  textAlign:'center',
-                  borderColor:'lightgrey',
-                  padding:15,
-                  width:300,
-                  // backgroundColor:'#fafafa',
-                  // backgroundColor:'#425c5a',
-                  marginTop:10,
+          container:{
+            flex:1,
+            alignItems:'center',
+            justifyContent:'space-between',
+            // backgroundColor:'#425c5a',
+            // flexDirection:"column"
+          },
+            inputText:{
+              fontSize:14,
+            color:'grey',
+            borderWidth:1,
+            borderRadius:10,
+            width:'85%',
+            textAlign:'center',
+            borderColor:'transparent',
+            padding:15,
+            width:320,
+            backgroundColor:'lightgrey',
+              marginTop:5
           },
           loginButton:{
                   marginTop:30,
