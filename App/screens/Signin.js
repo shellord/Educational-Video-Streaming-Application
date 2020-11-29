@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Text,TouchableOpacity,useContext,View,StyleSheet,TextInput} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { AuthContext } from "../context"
 
 const Signin = ({ navigation }) => {
@@ -12,7 +13,7 @@ const Signin = ({ navigation }) => {
       {/* #7f9b99
       #7f9b99
       #ffcea2 */}
-      <View style={styles.container}> 
+      <ScrollView style={styles.container} contentContainerStyle={{alignItems:'center',justifyContent:'space-between'}}> 
       <View style={{marginTop:200}}>
       <TextInput style={styles.inputText}   
            placeholderTextColor="#A9A9A9"              
@@ -42,7 +43,7 @@ const Signin = ({ navigation }) => {
       </View>
       
 
-        </View>
+        </ScrollView>
         </>
     )
   }
@@ -50,13 +51,11 @@ const Signin = ({ navigation }) => {
 const styles = StyleSheet.create({
           container:{
             flex:1,
-            alignItems:'center',
-            justifyContent:'space-between',
             backgroundColor:'white',
             // flexDirection:"column"
           },
             inputText:{
-              fontSize:14,
+            fontSize:14,
             color:'grey',
             borderWidth:1,
             borderRadius:10,
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
               marginTop:5
           },
           loginButton:{
-                  marginTop:30,
+                  marginTop:'90%',
                   width:320,
                   alignItems:'center',
                   padding:15,
