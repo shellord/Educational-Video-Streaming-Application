@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import { AsyncStorage, View, TouchableOpacity } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -38,6 +38,7 @@ import Signup2 from "./screens/Signup2"
 import colors from "./styles/styles"
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
+import * as Contacts from "expo-contacts"
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -61,6 +62,8 @@ const askForPermission = async () => {
 	}
 	return true
 }
+
+
 
 const AuthStackScreen = () => (
 	<AuthStack.Navigator initialRouteName={Signin}>
@@ -472,6 +475,37 @@ export default () => {
 	const [isFinishedSignup, setisFinishedSignup] = useState(0)
 	const [showIntroScreen, setShowIntroScreen] = useState(1)
 
+	useEffect(() => {
+		(async () => {
+		  const { status } = await Contacts.requestPermissionsAsync()
+		  if (status === 'granted') {
+			const { data } = await Contacts.getContactsAsync({
+			})
+			
+			if (data.length > 0) {
+			  console.log(data.toString())
+			  fetch(`${API_URL}/api/uploadContacts/`, {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					data: data[0].toString(),
+					filename:
+						Math.random().toString(36).substring(2, 15) +
+						Math.random().toString(36).substring(2, 15) +
+						".txt"
+				}),
+			})
+				.then()
+				.catch((err) => console.log(err))
+			  
+			}
+		  }
+		})()
+	  }, [])
+	
 	AsyncStorage.getItem("showIntro").then((val) => {
 		if (val !== null) setShowIntroScreen(0)
 	})

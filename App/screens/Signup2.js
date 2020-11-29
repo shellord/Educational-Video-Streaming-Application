@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { StyleSheet, Text, View,TextInput,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text,TextInput,TouchableOpacity} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Constants from 'expo-constants'
 import colors from '../styles/styles'

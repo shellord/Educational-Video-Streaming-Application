@@ -8,32 +8,42 @@ const Signin = ({ navigation }) => {
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
     return (
+      <>
+      {/* #7f9b99
+      #7f9b99
+      #ffcea2 */}
       <View style={styles.container}> 
-
-      <TextInput style={styles.inputText}                 
+      <View style={{marginTop:200}}>
+      <TextInput style={styles.inputText}   
+           placeholderTextColor="#A9A9A9"              
           onChangeText={text => setEmail(text)}    
           value={email}             
-          placeholder="Email"
-          keyboardType='email-address' />  
-
-          
-      <TextInput style={styles.inputText}                 
+          placeholder="someone@example.com"
+          keyboardType='email-address'/>  
+      <TextInput style={styles.inputText} 
+          placeholderTextColor="#A9A9A9"               
           onChangeText={text => setPassword(text)}    
           value={password}             
-          placeholder="Password"       
+          placeholder="password"       
           secureTextEntry={true} />                
-                          
+      </View>
+      <View>
+      {/* <View style={{flex:1,flexDirection:'column',justifyContent: 'flex-end',}}> */}
       <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
           <Text style={styles.buttonText}>Log In</Text>    
       </TouchableOpacity>                         
-      <TouchableOpacity style={styles.SignupButton} onPress={() => navigation.push("Signup1")}>           
-          <Text style={styles.buttonText}>Sign Up</Text>    
+      <TouchableOpacity style={{}} onPress={() => navigation.push("Signup1")}> 
+        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:20}}>          
+          <Text style={{ fontWeight:'bold',color:'#A9A9A9'}}>Not a member ?</Text> 
+          <Text style={{ fontWeight:'bold',color:'#5f5e5e'}}> Join Now</Text>    
+        </View>  
       </TouchableOpacity>  
       <Text style={styles.errorMessage}>{error}</Text>
-
+      </View>
       
 
         </View>
+        </>
     )
   }
 
@@ -41,38 +51,54 @@ const styles = StyleSheet.create({
 	container:{
 		flex:1,
 		alignItems:'center',
-		justifyContent:'center'
+    justifyContent:'space-between',
+    // backgroundColor:'#425c5a',
+    // flexDirection:"column"
 	},
-	        inputText:{
+  inputText:{
                   fontSize:16,
-                  borderWidth:0.5,
+                  color:'grey',
+                  borderWidth:1,
+                  // borderTopColor:'transparent',
+                  borderLeftColor:'transparent',
+                  borderRightColor:'transparent',
+                  borderRadius:0,
                   width:'85%',
                   textAlign:'center',
-                  borderColor:'#d3d3d3',
+                  borderColor:'lightgrey',
                   padding:15,
-                  backgroundColor:'#fafafa',
-                  marginTop:10
-  
+                  width:300,
+                  // backgroundColor:'#fafafa',
+                  // backgroundColor:'#425c5a',
+                  marginTop:10,
           },
           loginButton:{
                   marginTop:30,
-                  width:300,
+                  width:320,
                   alignItems:'center',
-                  padding:10,
+                  padding:15,
                   borderRadius:5,
-                  backgroundColor:'#2196f3'
+                  // backgroundColor:'#A9A9A9',
+                  backgroundColor:'black',
+
+                  
           },
           SignupButton:{
-            marginTop:10,
-            width:300,
+            width:320,
             alignItems:'center',
-            padding:10,
+            padding:15,
             borderRadius:5,
-            backgroundColor:'#2196f3'
+            backgroundColor:'#2b96f3'
            },
           buttonText:{
-                  color:'white',
+                  color:'#A9A9A9',
                   fontWeight:'bold'
+          },
+          signupText:{
+            marginTop:10,
+            textAlign:'center',
+            color:'#ffcea2',
+            fontWeight:'bold'
           },
           errorMessage:{
               color:'red',

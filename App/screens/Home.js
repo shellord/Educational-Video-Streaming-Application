@@ -12,9 +12,9 @@ import HeaderWelcome from "../components/HeaderWelcome"
 import UpgradeCard from "../components/UpgradeCard"
 import LiveCarousel from "../components/LiveCarousel"
 import colors from "../styles/styles"
-import * as Contacts from "expo-contacts"
 
 const Home = ({ navigation }) => {
+	
 	const { API_URL, ASSETS_URL } = React.useContext(AuthContext)
 	const [subjects, setSubjects] = useState([{}])
 	const [featuredvids, setFeaturedvids] = useState([{}])
@@ -27,20 +27,6 @@ const Home = ({ navigation }) => {
 	const [watchHistory, setwatchHistory] = useState()
 	const [popularVideos, setpopularVideos] = useState([{}])
 
-	useEffect(() => {
-		(async () => {
-			const { status } = await Contacts.requestPermissionsAsync()
-			if (status === "granted") {
-				const { data } = await Contacts.getContactsAsync({
-					fields: [Contacts.Fields.FirstName],
-				})
-
-				if (data.length > 0) {
-					//  console.log(data)
-				}
-			}
-		})()
-	}, [])
 
 	if (isFocused) {
 		AsyncStorage.getItem("watchHistory").then((val) => {

@@ -90,7 +90,7 @@ const Signup1 = ({navigation}) => {
             {/* <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
 				Select Class
 			</Text> */}
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row',width:320,justifyContent: 'space-between',}}>
 			<CustomPicker
                 options={options}
                 placeholder="Choose Class"
@@ -124,7 +124,7 @@ const Signup1 = ({navigation}) => {
         <TextInput style={styles.inputText}                 
             onChangeText={text => setEmail(text)}    
             value={email}             
-            placeholder="Email"
+            placeholder="someone@example.com"
             keyboardType='email-address' />  
 
             
@@ -137,10 +137,10 @@ const Signup1 = ({navigation}) => {
         <TextInput style={styles.inputText}              
             onChangeText={text => setPhone(text)}    
             value={phone}             
-			placeholder="Phone"
+			placeholder="Phone Number"
 			keyboardType="number-pad"
         />         
-		<View style={{width:'85%',marginTop:10}}>
+		<View style={{width:'85%',marginTop:10,backgroundColor:'#f3f3f4',borderRadius:10}}>
         	<DatePicker
                 style={{width: '100%'}}
                 date={date}
@@ -160,8 +160,9 @@ const Signup1 = ({navigation}) => {
                 // },
                 dateInput: {
 					marginLeft: 0,
-					backgroundColor:'#fafafa',
-					borderColor:'#d3d3d3',
+					backgroundColor:'#f3f3f4',
+                    borderColor:'transparent',
+                    borderRadius:10
 
                 }
                 // ... You can check the source to find the other keys.
@@ -195,23 +196,27 @@ const Signup1 = ({navigation}) => {
 
     },
 	        inputText:{
-                  fontSize:12,
-                  borderWidth:0.5,
-                  width:'85%',
-                  textAlign:'center',
-                  borderColor:'#d3d3d3',
-                  padding:10,
-                  backgroundColor:'#fafafa',
-                  marginTop:10
+                fontSize:14,
+                color:'grey',
+                borderWidth:1,
+                borderRadius:10,
+                width:'85%',
+                textAlign:'center',
+                borderColor:'transparent',
+                padding:15,
+                width:320,
+                backgroundColor:'#f3f3f4',
+                  marginTop:5
   
           },
           loginButton:{
-                  marginTop:30,
-                  width:300,
-                  alignItems:'center',
-                  padding:10,
-                  borderRadius:5,
-                  backgroundColor:'#2196f3',
+                    marginTop:30,
+                    width:320,
+                    alignItems:'center',
+                    padding:15,
+                    borderRadius:5,
+                    // backgroundColor:'#A9A9A9',
+                    backgroundColor:'black',
                   marginBottom:10
           },
           backButton:{
@@ -239,7 +244,7 @@ const Signup1 = ({navigation}) => {
             margin: 10,
         },
         imageButton: {
-            color: "#1E88E5",
+            color: "grey",
             margin: 10,
         },
         textAreaContainer: {
