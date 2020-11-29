@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
             flex:1,
             alignItems:'center',
             justifyContent:'space-between',
-            // backgroundColor:'#425c5a',
+            backgroundColor:'white',
             // flexDirection:"column"
           },
             inputText:{
