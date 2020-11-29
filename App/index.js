@@ -311,7 +311,7 @@ const AnnouncementStackScreen = () => (
 	</AnnouncementStack.Navigator>
 )
 
-const TabsScreen = () => (
+const TabsScreen = ( ) => (
 	<Tabs.Navigator
 		screenOptions={({ route }) => ({
 			tabBarIcon: ({ focused, color, size }) => {
@@ -584,8 +584,8 @@ export default () => {
 	// }
 
 	const adduserData = (fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode) => {
-		console.log("API CALL: "+API_URL +
-			`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`)
+		// console.log("API CALL: "+API_URL +
+		// 	`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`)
 		fetch(
 			API_URL +
 				`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`
@@ -627,7 +627,6 @@ export default () => {
 			  handleSignIn(email,password)
 			},
 			signUp: (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode) => {
-				console.log(selectedValue)
 			  handleSignUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode)
 			},
 			signOut: () => {
