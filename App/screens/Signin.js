@@ -29,6 +29,7 @@ const Signin = ({ navigation }) => {
           secureTextEntry={true} />                
       </View>
       <View>
+      <View style={{marginTop:"90%"}}></View>
       {/* <View style={{flex:1,flexDirection:'column',justifyContent: 'flex-end',}}> */}
       <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
           <Text style={styles.buttonText}>Log In</Text>    
@@ -68,15 +69,13 @@ const styles = StyleSheet.create({
               marginTop:5
           },
           loginButton:{
-                  marginTop:'90%',
+                  
                   width:320,
                   alignItems:'center',
                   padding:15,
                   borderRadius:5,
                   // backgroundColor:'#A9A9A9',
-                  backgroundColor:'black',
-
-                  
+                  backgroundColor:'black',      
           },
           SignupButton:{
             width:320,
@@ -87,7 +86,8 @@ const styles = StyleSheet.create({
            },
           buttonText:{
                   color:'#A9A9A9',
-                  fontWeight:'bold'
+                  fontWeight:'bold',
+                  
           },
           signupText:{
             marginTop:10,
