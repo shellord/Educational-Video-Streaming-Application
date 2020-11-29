@@ -189,9 +189,7 @@ const ProfileScreen = ({navigation,route}) => {
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:lastname,dataToEdit:'lastname'})}>
                 <Text style={styles.rightText} >{lastname}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:userclass,dataToEdit:'class'})}>
                 <Text style={styles.rightText} >{userclass}</Text>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:Firebase.auth().currentUser.email,dataToEdit:'email'})}>
                 <Text style={styles.rightText} numberOfLines={1}>{Firebase.auth().currentUser.email}</Text>
                 </TouchableOpacity>
