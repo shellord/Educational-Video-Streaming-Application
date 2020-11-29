@@ -90,24 +90,25 @@ const Signup1 = ({navigation}) => {
             {/* <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
 				Select Class
 			</Text> */}
-
+            <View style={{flexDirection:'row'}}>
 			<CustomPicker
                 options={options}
                 placeholder="Choose Class"
 				getLabel={(item) => item.value}
-				defaultValue={6}
+				// defaultValue={6}
 				onValueChange={(value) => {
-					setSelectedValue(value.number)
+					value?setSelectedValue(value.number):null
 				}}
 			/>
 	       <CustomPicker
             options={syllabusoption}
             placeholder="Choose Syllabus"
-            defaultValue={'scert'}
+            // defaultValue={'scert'}
             onValueChange={value => {
                 setsyllabus(value)
             }}
         />
+        </View>
         <TextInput style={styles.inputText}              
             onChangeText={text => setfname(text)}    
             value={fname}             

@@ -16,6 +16,7 @@ const ProfileScreen = ({navigation,route}) => {
     const [firstname, setfirstname] = useState("")
     const [lastname, setlastname] = useState("")
     const [syllabus, setsyllabus] = useState("")
+    const [userclass, setuserclass] = useState('')
     const [pincode, setpincode] = useState('')
     const [city, setCity] = useState("")
     const [street, setStreet] = useState("")
@@ -43,6 +44,7 @@ const ProfileScreen = ({navigation,route}) => {
             setfirstname(json.response[0].firstname)
             setlastname(json.response[0].lastname)
             setDob(json.response[0].dob)
+            setuserclass(json.response[0].class)
             setCity(json.response[0].city)
             setStreet(json.response[0].street)
             setSchool(json.response[0].school)
@@ -65,10 +67,10 @@ const ProfileScreen = ({navigation,route}) => {
             setlastname(json.response[0].lastname)
             setDob(json.response[0].dob)
             setCity(json.response[0].city)
+            setuserclass(json.response[0].class)
             setStreet(json.response[0].street)
             setSchool(json.response[0].school)
             setpincode(json.response[0].pincode)
-
             // setuserimage(ASSETS_URL + json.response[0].profile_pic)
             setsubscibtionstatus(json.response[0].subscription_status)
             setphone(json.response[0].phone)
@@ -149,6 +151,9 @@ const ProfileScreen = ({navigation,route}) => {
                     Last Name
                 </Text>
                 <Text style={styles.leftText}>
+                    Class
+                </Text>
+                <Text style={styles.leftText}>
                     Email
                 </Text>
                 <Text style={styles.leftText}>
@@ -158,7 +163,7 @@ const ProfileScreen = ({navigation,route}) => {
                     Phone
                 </Text>
                 <Text style={styles.leftText}>
-                Address
+                     Address
                 </Text>
                 <Text style={styles.leftText}>
                     Street
@@ -183,6 +188,9 @@ const ProfileScreen = ({navigation,route}) => {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:lastname,dataToEdit:'lastname'})}>
                 <Text style={styles.rightText} >{lastname}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:userclass,dataToEdit:'class'})}>
+                <Text style={styles.rightText} >{userclass}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:Firebase.auth().currentUser.email,dataToEdit:'email'})}>
                 <Text style={styles.rightText} numberOfLines={1}>{Firebase.auth().currentUser.email}</Text>
