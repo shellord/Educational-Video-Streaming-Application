@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { StyleSheet, Text, View,TextInput,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View,TextInput,TouchableOpacity,KeyboardAvoidingView} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Constants from 'expo-constants'
 import colors from '../styles/styles'
@@ -34,7 +34,11 @@ const Signup2 = ({navigation,route}) => {
     }
 
     return (
-        <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
+        // <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
+        <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
 
             <TextInput style={styles.inputText}              
                 onChangeText={text => setschool(text)}    
@@ -68,7 +72,8 @@ const Signup2 = ({navigation,route}) => {
         <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>           
        		 <Text style={styles.buttonText}>Back</Text>    
         </TouchableOpacity>
-        </ScrollView>
+        {/* </ScrollView> */}
+        </KeyboardAvoidingView>
     )
 
 }

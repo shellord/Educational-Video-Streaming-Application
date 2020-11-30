@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Text,View,StyleSheet,TextInput,TouchableOpacity,Image,Alert,Keyboard,TouchableWithoutFeedback,SafeAreaView} from 'react-native'
+import {Text,View,StyleSheet,TextInput,TouchableOpacity,Image,Alert,Keyboard,TouchableWithoutFeedback,SafeAreaView,KeyboardAvoidingView} from 'react-native'
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
 import Constants from 'expo-constants'
@@ -74,7 +74,11 @@ const Signup1 = ({navigation}) => {
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
-            <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
+            // <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
+            <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            style={styles.container}
+          >
         {image ? (
 				<Image source={{ uri: image.uri }} style={styles.imageStyle} />
 			) : (
@@ -178,8 +182,10 @@ const Signup1 = ({navigation}) => {
        		 <Text style={styles.buttonText}>Back</Text>    
         </TouchableOpacity> */}
         <Text style={styles.errorMessage}>{error}</Text>
-        </ScrollView>
-     
+        {/* </ScrollView> */}
+        </KeyboardAvoidingView>
+
+
     )
   }
 
