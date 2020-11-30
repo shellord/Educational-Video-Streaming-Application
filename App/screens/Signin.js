@@ -29,7 +29,7 @@ const Signin = ({ navigation }) => {
           secureTextEntry={true} />                
       </View>
       <View>
-      <View style={{marginTop:"90%"}}></View>
+      <View style={{marginBottom:"90%"}}></View>
       {/* <View style={{flex:1,flexDirection:'column',justifyContent: 'flex-end',}}> */}
       <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
           <Text style={styles.buttonText}>Log In</Text>    
@@ -42,8 +42,6 @@ const Signin = ({ navigation }) => {
       </TouchableOpacity>  
       <Text style={styles.errorMessage}>{error}</Text>
       </View>
-      
-
         </ScrollView>
         </>
     )

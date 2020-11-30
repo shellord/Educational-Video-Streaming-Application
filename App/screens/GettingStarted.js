@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View,ImageBackground,TouchableOpacity } from 'react-native'
 import colors from '../styles/styles'
 
+
 const GettingStarted = ({navigation}) => {
     return (
         <View style={styles.container}>
@@ -21,7 +22,7 @@ export default GettingStarted
 const styles = StyleSheet.create({
     container:{
     flex:1,
-    backgroundColor:'white'        
+    backgroundColor:colors.BACKGROUND_COLOR        
 },
 image: {
     flex: 1,

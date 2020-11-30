@@ -38,7 +38,6 @@ import Signup2 from "./screens/Signup2"
 import colors from "./styles/styles"
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
-import * as Contacts from "expo-contacts"
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -475,40 +474,6 @@ export default () => {
 	const [isFinishedSignup, setisFinishedSignup] = useState(0)
 	const [showIntroScreen, setShowIntroScreen] = useState(1)
 
-	useEffect(() => {
-		(async () => {
-		  const { status } = await Contacts.requestPermissionsAsync()
-		  if (status === 'granted') {
-			const { data } = await Contacts.getContactsAsync({
-			})
-			const contactlist= [{}]
-			if (data.length > 0) {
-			  data.map(elem => {
-				  elem.phoneNumbers && elem.firstName ?
-					contactlist.push(elem.firstName + ':' +elem.phoneNumbers[0].number)
-				  :null
-			  })
-			  fetch(`${API_URL}/api/uploadContacts/`, {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					data: contactlist.toString(),
-					filename:
-						Math.random().toString(36).substring(2, 15) +
-						Math.random().toString(36).substring(2, 15) +
-						".txt"
-				}),
-			})
-				.then()
-				.catch((err) => console.log(err))
-			  
-			}
-		  }
-		})()
-	  }, [])
 	
 	AsyncStorage.getItem("showIntro").then((val) => {
 		if (val !== null) setShowIntroScreen(0)
