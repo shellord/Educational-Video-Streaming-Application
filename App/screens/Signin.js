@@ -8,42 +8,36 @@ const Signin = ({ navigation }) => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
+
     return (
-      <>
-      {/* #7f9b99
-      #7f9b99
-      #ffcea2 */}
-      <ScrollView style={styles.container} contentContainerStyle={{alignItems:'center',justifyContent:'space-between'}}> 
-      <View style={{marginTop:200}}>
-      <TextInput style={styles.inputText}   
-           placeholderTextColor="#A9A9A9"              
-          onChangeText={text => setEmail(text)}    
-          value={email}             
-          placeholder="someone@example.com"
-          keyboardType='email-address'/>  
-      <TextInput style={styles.inputText} 
-          placeholderTextColor="#A9A9A9"               
-          onChangeText={text => setPassword(text)}    
-          value={password}             
-          placeholder="password"       
-          secureTextEntry={true} />                
-      </View>
-      <View>
-      <View style={{marginBottom:"90%"}}></View>
-      {/* <View style={{flex:1,flexDirection:'column',justifyContent: 'flex-end',}}> */}
-      <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
-          <Text style={styles.buttonText}>Log In</Text>    
-      </TouchableOpacity>                         
-      <TouchableOpacity style={{}} onPress={() => navigation.push("Signup1")}> 
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:20}}>          
-          <Text style={{ fontWeight:'bold',color:'#A9A9A9'}}>Not a member ?</Text> 
-          <Text style={{ fontWeight:'bold',color:'#5f5e5e'}}> Join Now</Text>    
-        </View>  
-      </TouchableOpacity>  
-      <Text style={styles.errorMessage}>{error}</Text>
-      </View>
-        </ScrollView>
-        </>
+      <ScrollView style={styles.container} contentContainerStyle={{flex:1,alignItems:'center'}}> 
+        <View style={{marginTop:200}}>
+          <TextInput style={styles.inputText}   
+              placeholderTextColor="#A9A9A9"              
+              onChangeText={text => setEmail(text)}    
+              value={email}             
+              placeholder="someone@example.com"
+              keyboardType='email-address'/>  
+          <TextInput style={styles.inputText} 
+              placeholderTextColor="#A9A9A9"               
+              onChangeText={text => setPassword(text)}    
+              value={password}             
+              placeholder="password"       
+              secureTextEntry={true} />                
+          </View>
+          <View style={{flex:1,justifyContent:'flex-end'}}>
+            <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
+                <Text style={styles.buttonText}>Log In</Text>    
+            </TouchableOpacity>                         
+            <TouchableOpacity style={{}} onPress={() => navigation.push("Signup1")}> 
+              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:20}}>          
+                <Text style={{ fontWeight:'bold',color:'#A9A9A9'}}>Not a member ?</Text> 
+                <Text style={{ fontWeight:'bold',color:'#5f5e5e'}}> Join Now</Text>    
+              </View>  
+            </TouchableOpacity>  
+            <Text style={styles.errorMessage}>{error}</Text>
+        </View>
+      </ScrollView>
     )
   }
 
@@ -51,7 +45,6 @@ const styles = StyleSheet.create({
           container:{
             flex:1,
             backgroundColor:'white',
-            // flexDirection:"column"
           },
             inputText:{
             fontSize:14,
@@ -67,7 +60,6 @@ const styles = StyleSheet.create({
               marginTop:5
           },
           loginButton:{
-                  
                   width:320,
                   alignItems:'center',
                   padding:15,
