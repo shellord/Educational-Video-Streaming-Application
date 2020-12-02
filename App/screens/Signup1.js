@@ -44,8 +44,6 @@ const Signup1 = ({navigation}) => {
 		return true
     }
     
-
-    
     const takeImage = async () => {
 		// make sure that we have the permission
 		const hasPermission = await askForPermission()
@@ -74,7 +72,8 @@ const Signup1 = ({navigation}) => {
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
-          <ScrollView style={styles.ScrollViewContainer} contentContainerStyle={styles.container}>
+        <KeyboardAvoidingView style={styles.container} >
+   <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}> 
 {/* 
               <KeyboardAvoidingView
                  behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -93,9 +92,9 @@ const Signup1 = ({navigation}) => {
                 <TouchableOpacity onPress={takeImage}>
                     <Text style={styles.imageButton}>Choose Photo</Text>
                 </TouchableOpacity>            
-                {/* <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
+                <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
                     Select Class
-                </Text> */}
+                </Text>
                 <View style={{flexDirection:'row',width:320,justifyContent: 'space-between',}}>
                 <CustomPicker
                     options={options}
@@ -116,6 +115,7 @@ const Signup1 = ({navigation}) => {
             />
             </View>
             <View style={{flex:1}}>
+                
             <TextInput style={styles.inputText}              
                 onChangeText={text => setfname(text)}    
                 value={fname}             
@@ -188,21 +188,17 @@ const Signup1 = ({navigation}) => {
 
             <Text style={styles.errorMessage}>{error}</Text>
             </ScrollView>
-        
-
-
-
+            </KeyboardAvoidingView>
     )
   }
 
   const styles = StyleSheet.create({
 	container:{
-		alignItems:'center',
-        justifyContent:'center',
+    		alignItems:'center',
+             justifyContent:'center',
     },
     ScrollViewContainer:{
-        flex:1,
-
+     
         backgroundColor:colors.BACKGROUND_COLOR,
         paddingTop:Constants.statusBarHeight
     },
