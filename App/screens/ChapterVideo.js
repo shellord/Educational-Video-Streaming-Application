@@ -16,6 +16,7 @@ const ChapterVideo = ({ route }) => {
   const [subscriptionStatus, setsubscriptionStatus] = useState(null)
   const [addView, setaddView] = useState(0)
   const [relatedVideos, setrelatedVideos] = useState([{}])
+  const [syllabus, setsyllabus] = useState('scert')
 
   useEffect(() => {
     if(addView==1){
@@ -89,7 +90,7 @@ const ChapterVideo = ({ route }) => {
   }, [subscriptionStatus])
 
   useEffect(() => {
-    fetch(API_URL+'/api/relatedvideos/'+route.params.subject+'/'+route.params.topic+'/'+route.params.class+'/'+route.params.id)
+    fetch(API_URL+'/api/relatedvideos/'+route.params.subject+'/'+route.params.topic+'/'+route.params.class+'/'+route.params.id+'/'+syllabus)
       .then((response) => response.json())
       .then((json) => {
             setrelatedVideos(json.response)

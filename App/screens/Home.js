@@ -27,6 +27,7 @@ const Home = ({ navigation }) => {
 	const isFocused = useIsFocused()
 	const [watchHistory, setwatchHistory] = useState()
 	const [popularVideos, setpopularVideos] = useState([{}])
+	const [syllabus, setsyllabus] = useState('scert')
 
 
 	if (isFocused) {
@@ -40,10 +41,11 @@ const Home = ({ navigation }) => {
 				fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 					.then((response) => response.json())
 					.then((json) => {
-						console.log(json)
 						setUserClass(json.response[0]["class"])
 						setusername(json.response[0].firstname)
 						setuserImage(ASSETS_URL + json.response[0].profile_pic)
+						setsyllabus(json.response[0].syllabus)
+
 					})
 					.catch((error) => {
 						alert("Error!")
@@ -51,28 +53,28 @@ const Home = ({ navigation }) => {
 			}
 		}
 	}
-
 	useEffect(() => {
 		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 			.then((response) => response.json())
 			.then((json) => {
-				console.log(json)
 				setUserClass(json.response[0]["class"])
 				setusername(json.response[0].firstname)
 				setuserImage(ASSETS_URL + json.response[0].profile_pic)
 				setsubscribtionStatus(json.response[0].subscription_status)
+				setsyllabus(json.response[0].syllabus)
 			})
 			.catch((error) => {
 				alert("Error!")
 			})
-
-		fetch(API_URL + "/api/subjects/" + userclass)
+			console.log(API_URL + "/api/subjects/" + userclass+"/"+ syllabus)
+		fetch(API_URL + "/api/subjects/" + userclass+"/"+ syllabus)
 			.then((response) => response.json())
 			.then((json) => {
+				console.log(json)
 				setSubjects(json.response)
 			})
 			.catch((error) => {
-				alert("Network Issue!.Check your internet connection[1]")
+				alert(error)
 			})
 		fetch(API_URL + "/api/videos/featured/" + userclass)
 			.then((response) => response.json())
@@ -119,6 +121,7 @@ const Home = ({ navigation }) => {
 				subjects={subjects}
 				navigation={navigation}
 				userclass={userclass}
+				syllabus={syllabus}
 			/>
 			{watchHistory ? (
 				<VideoList

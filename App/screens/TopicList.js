@@ -9,7 +9,7 @@ const TopicList = ({route}) => {
     const {API_URL} = React.useContext(AuthContext)
     const [topics,setTopics] = useState([{}]);
     useEffect(() => {
-        fetch(API_URL+`/api/topics/${route.params.name}/${route.params.userclass}`)
+        fetch(API_URL+`/api/topics/${route.params.name}/${route.params.userclass}/${route.params.syllabus}`)
         .then((response) => response.json())
         .then((json) => {
               setTopics(json.response)
@@ -38,7 +38,8 @@ const TopicList = ({route}) => {
                         subject={route.params.name}
                         item={item}  
                         navigation={route.params.nav}   
-                        userclass={route.params.userclass}      
+                        userclass={route.params.userclass}     
+                        syllabus={route.params.syllabus} 
                     />
                 </View>
             )}

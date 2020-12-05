@@ -6,12 +6,14 @@ import  Firebase from '../../config/Firebase'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Constants from 'expo-constants'
 import colors from '../styles/styles'
+import { setStatusBarBackgroundColor } from 'expo-status-bar'
 
 const Search = ({ navigation }) => {
   const {API_URL} = React.useContext(AuthContext)
   const [search, setsearch] = useState('')
   const [results, setResults] = useState('')
   const [userclass,setUserClass] = useState(1)
+  const [syllabus, setsyllabus] = useState('scert')
   const searchInput = useRef()
 
   useEffect(() => {
@@ -19,6 +21,7 @@ const Search = ({ navigation }) => {
     .then((response) => response.json())
     .then((json) => {
          setUserClass(json.response[0]['class'])
+         setsyllabus(json.response[0]['syllabus'])
     })
     .catch((error) => {
     alert("Error!")
@@ -27,7 +30,7 @@ const Search = ({ navigation }) => {
   }, [])
   useEffect(() => {
     if(search){
-      fetch(API_URL+'/api/search/'+search+'/'+userclass)
+      fetch(API_URL+'/api/search/'+search+'/'+userclass+'/'+syllabus)
         .then((response) => response.json())
         .then((json) => {
               setResults(json.response)

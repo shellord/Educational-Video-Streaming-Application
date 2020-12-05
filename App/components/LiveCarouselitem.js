@@ -10,7 +10,7 @@ const LiveCarouselitem = ({ item,nav }) => {
     let image=''
     item.image ? image = ADMIN_UPLOADS_URL+ JSON.parse(item.image)[0].name:null
     return (
-        <TouchableWithoutFeedback onPress={()=>nav.push('LiveStreamingScreen',{url:item.url})}>
+        <TouchableWithoutFeedback onPress={()=>nav.push('LiveStreamingScreen',{nav:nav,url:item.url})}>
             <View style={styles.cardView}>
                 <Image style={styles.image} source={{uri:image}} />
                 <View style={styles.textView}>

@@ -3,7 +3,7 @@ import { View, Text,ScrollView,TouchableOpacity,StyleSheet, Platform} from 'reac
 import Category from './Category'
 import colors from '../styles/styles'
 
-const HorizontalScroll = ({subjects,navigation,userclass}) => {
+const HorizontalScroll = ({subjects,navigation,userclass,syllabus}) => {
     return (
       <View>
         <ScrollView
@@ -17,12 +17,13 @@ const HorizontalScroll = ({subjects,navigation,userclass}) => {
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {subjects.map((subject,key) => {   
                       return( 
-                        <TouchableOpacity key={key} onPress={() => navigation.push('topiclist',{name:subject.name,nav:navigation,userclass:userclass})}>
+                        <TouchableOpacity key={key} onPress={() => navigation.push('topiclist',{name:subject.name,nav:navigation,userclass:userclass,syllabus:syllabus})}>
                           <Category 
                             key={key}
                             name={subject.name}
                             imageUri = {{uri:subject.imguri}}
                             navigation={navigation}
+                            syllabus={syllabus}
                           />
                           </TouchableOpacity>
                       )

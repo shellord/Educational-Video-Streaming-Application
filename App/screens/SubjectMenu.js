@@ -10,14 +10,14 @@ import { AuthContext } from "../context";
 import colors from "../styles/styles";
 
 const SubjectMenu = ({ route }) => {
-	const { API_URL } = React.useContext(AuthContext);
-	const [videos, setVideos] = useState([{}]);
-	const [isLoaded, setIsLoaded] = useState(0);
+	const { API_URL,ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
+	const [videos, setVideos] = useState([{}])
+	const [isLoaded, setIsLoaded] = useState(0)
 
 	useEffect(() => {
 		fetch(
 			API_URL +
-				`/api/videos/${route.params.subject}/${route.params.name}/${route.params.userclass}`
+				`/api/videos/${route.params.subject}/${route.params.name}/${route.params.userclass}/${route.params.syllabus}`
 		)
 			.then((response) => response.json())
 			.then((json) => {
