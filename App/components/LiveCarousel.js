@@ -48,6 +48,7 @@ const LiveCarousel = ({ data,nav,title }) => {
                         {title}
                     </Text>
                 </View>
+                
                 <FlatList data={data}
                 // ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}

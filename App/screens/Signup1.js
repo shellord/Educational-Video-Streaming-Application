@@ -72,13 +72,9 @@ const Signup1 = ({navigation}) => {
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
-        <KeyboardAvoidingView style={styles.container} >
-   <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}> 
-{/* 
-              <KeyboardAvoidingView
-                 behavior={Platform.OS == "ios" ? "padding" : "height"}
-                style={styles.container}
-                 > */}
+    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}> 
+
+
 
         {image ? (
 				<Image source={{ uri: image.uri }} style={styles.imageStyle} />
@@ -187,8 +183,8 @@ const Signup1 = ({navigation}) => {
             </TouchableOpacity>
 
             <Text style={styles.errorMessage}>{error}</Text>
-            </ScrollView>
-            </KeyboardAvoidingView>
+    
+             </ScrollView>
     )
   }
 

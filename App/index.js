@@ -52,6 +52,7 @@ const PostLoginStack = createStackNavigator()
 
 const API_URL = "http://18.219.43.140:3000"
 const ASSETS_URL = "http://18.219.43.140/marvelprofile/uploads/"
+const ADMIN_UPLOADS_URL = "http://18.219.43.140/admin/"
 
 const askForPermission = async () => {
 	const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
@@ -606,6 +607,7 @@ export default () => {
 			},
 			API_URL: API_URL,
 			ASSETS_URL: ASSETS_URL,
+			ADMIN_UPLOADS_URL:ADMIN_UPLOADS_URL
 		}
 	}, [])
 

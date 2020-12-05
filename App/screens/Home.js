@@ -19,6 +19,7 @@ const Home = ({ navigation }) => {
 	const [subjects, setSubjects] = useState([{}])
 	const [featuredvids, setFeaturedvids] = useState([{}])
 	const [latestvids, setLatestvids] = useState([{}])
+	const [livevideos, setlivevideos] = useState([{}])
 	const [userclass, setUserClass] = useState(1)
 	const [userImage, setuserImage] = useState(null)
 	const [username, setusername] = useState("User")
@@ -89,6 +90,14 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[3]")
 			})
+		fetch(API_URL + "/api/livevideos/" + userclass)
+			.then((response) => response.json())
+			.then((json) => {
+				setlivevideos(json.response)
+			})
+			.catch((error) => {
+				alert("Network Issue!.Check your internet connection[3]")
+			})
 		fetch(API_URL + "/api/videos/latest/" + userclass)
 			.then((response) => response.json())
 			.then((json) => {
@@ -98,6 +107,7 @@ const Home = ({ navigation }) => {
 				alert("Network Issue!.Check your internet connection[4]")
 			})
 	}, [userclass])
+
 	return (
 		<ScrollView style={styles.container}>
 			<HeaderWelcome navigation={navigation} username={username} userimage={userImage} />
@@ -122,7 +132,7 @@ const Home = ({ navigation }) => {
 			)}
 			{latestvids ? (
 				<VideoList
-					title="Online Classes"
+					title="Latest "
 					data={latestvids}
 					navigation={navigation}
 					userclass={userclass}
@@ -136,12 +146,14 @@ const Home = ({ navigation }) => {
 				nav={navigation}
 				userclass={userclass}
 			/>
+			{livevideos ?	
 			<LiveCarousel 
 				title="Live Classes"
-				data={featuredvids}
+				data={livevideos}
 				nav={navigation}
 				userclass={userclass}
-			/>
+			/>:null}
+		
 
 			{/* {popularVideos ? (
 				<VideoList

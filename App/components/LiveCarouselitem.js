@@ -1,28 +1,33 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import {TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { AuthContext } from "../context"
 
 const { width, height } = Dimensions.get('window')
 
 const LiveCarouselitem = ({ item,nav }) => {
+    const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
+    let image=''
+    item.image ? image = ADMIN_UPLOADS_URL+ JSON.parse(item.image)[0].name:null
     return (
-        <TouchableWithoutFeedback onPress={()=>nav.push('LiveStreamingScreen',{nav:nav})}>
+        <TouchableWithoutFeedback onPress={()=>nav.push('LiveStreamingScreen',{url:item.url})}>
             <View style={styles.cardView}>
-                <Image style={styles.image} source={{uri:'https://image.freepik.com/free-vector/online-courses-cartoon-advertising-web-page-with-students-sitting-books-pile-with-laptops-notebooks_1284-27827.jpg'}} />
+                <Image style={styles.image} source={{uri:image}} />
                 <View style={styles.textView}>
-                    <Text style={styles.itemTitle}> {item.title}</Text>
+                    <Text style={styles.itemTitle}> {item.name}</Text>
                     <Text style={styles.itemDescription}>{item.description}</Text>
                 </View>
             </View>
         </TouchableWithoutFeedback>
     )
+
 }
 
 const styles = StyleSheet.create({
     cardView: {
         width: width - 20,
         height: height / 4,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         marginHorizontal: 10,
         borderRadius: 10,
         shadowColor: '#000',

@@ -1,14 +1,20 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import {TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { AuthContext } from "../context"
 
 const { width, height } = Dimensions.get('window')
 
 const CarouselItem = ({ item,nav }) => {
+    
+    const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
+    let imageurl=''
+   
+    item.image ? imageurl = ADMIN_UPLOADS_URL+ JSON.parse(item.image)[0].name:null
     return (
         <TouchableWithoutFeedback onPress={()=>nav.push('chaptervideo',{name:item.title,description:item.description,url:item.url,nav:nav,subject:item.subject,topic:item.topic,isfree:item.isfree,image:item.image,id:item.id,class:item.class})}>
             <View style={styles.cardView}>
-                <Image style={styles.image} source={{ uri: item.image }} />
+                <Image style={styles.image} source={{ uri: imageurl }} />
                 <View style={styles.textView}>
                     <Text style={styles.itemTitle}> {item.title}</Text>
                     <Text style={styles.itemDescription}>{item.description}</Text>

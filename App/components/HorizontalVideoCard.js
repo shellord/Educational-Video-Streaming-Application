@@ -1,13 +1,20 @@
 import React from 'react'
 import {Text,StyleSheet,Image,View,Platform} from 'react-native'
 import colors from '../styles/styles'
+import { AuthContext } from "../context"
 
 
 const HorizontalVideoCard = (props) =>{
+
+  
+    const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
+    let imageurl=''
+   
+    props.imageUri.uri ? imageurl = ADMIN_UPLOADS_URL+ JSON.parse(props.imageUri.uri)[0].name:null
     return(
         <View style={styles.subjectList}>
         <View style={styles.subjectImage}>
-            <Image source={props.imageUri} style={styles.subjectImage}/>
+            <Image source={{uri:imageurl}} style={styles.subjectImage}/>
         </View>
         <View style={styles.subjectText}>
             <Text numberOfLines={2} style={styles.titleStyle}>{props.name}</Text>
