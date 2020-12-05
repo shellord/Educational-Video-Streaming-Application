@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Text,TouchableOpacity,useContext,View,StyleSheet,TextInput} from 'react-native'
+import {Text,TouchableOpacity,useContext,View,StyleSheet,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,TextInput} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { AuthContext } from "../context"
 
@@ -10,7 +10,11 @@ const Signin = ({ navigation }) => {
     const [error,setError] = useState('')
 
     return (
-      <ScrollView style={styles.container} contentContainerStyle={{flex:1,alignItems:'center'}}> 
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
         <View style={{marginTop:200}}>
           <TextInput style={styles.inputText}   
               placeholderTextColor="#A9A9A9"              
@@ -37,7 +41,8 @@ const Signin = ({ navigation }) => {
             </TouchableOpacity>  
             <Text style={styles.errorMessage}>{error}</Text>
         </View>
-      </ScrollView>
+    </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     )
   }
 
@@ -45,25 +50,27 @@ const styles = StyleSheet.create({
           container:{
             flex:1,
             backgroundColor:'white',
+            alignItems:'center'
           },
             inputText:{
-            fontSize:14,
-            color:'grey',
-            borderWidth:1,
-            borderRadius:10,
-            width:'85%',
-            textAlign:'center',
-            borderColor:'transparent',
-            padding:15,
-            width:320,
-            backgroundColor:'#f3f3f4',
-              marginTop:5
+              fontSize:14,
+              color:'grey',
+              borderWidth:1,
+              width:'85%',
+              textAlign:'left',
+              borderColor:'black',
+              borderTopColor:'transparent',
+              borderLeftWidth:0,
+              borderRightWidth:0,
+              padding:15,
+              width:320,
+              backgroundColor:'transparent',
+                marginTop:5
           },
           loginButton:{
                   width:320,
                   alignItems:'center',
                   padding:15,
-                  borderRadius:5,
                   // backgroundColor:'#A9A9A9',
                   backgroundColor:'black',      
           },
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
             backgroundColor:'#2b96f3'
            },
           buttonText:{
-                  color:'#A9A9A9',
+                  color:'white',
                   fontWeight:'bold',
                   
           },

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Text,View,StyleSheet,TextInput,TouchableOpacity,Image,Alert,Keyboard,TouchableWithoutFeedback,SafeAreaView,KeyboardAvoidingView} from 'react-native'
+import {Text,View,StyleSheet,KeyboardAvoidingView,TextInput,TouchableOpacity,Image,Alert,Keyboard,TouchableWithoutFeedback,SafeAreaView} from 'react-native'
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
 import Constants from 'expo-constants'
@@ -8,6 +8,7 @@ import { CustomPicker } from "react-native-custom-picker"
 import { AuthContext } from "../context"
 import { ScrollView } from 'react-native-gesture-handler'
 import DatePicker from 'react-native-datepicker'
+import { ThemeContext } from 'react-native-elements'
 
 const Signup1 = ({navigation}) => {
 
@@ -44,6 +45,8 @@ const Signup1 = ({navigation}) => {
 		return true
     }
     
+
+    
     const takeImage = async () => {
 		// make sure that we have the permission
 		const hasPermission = await askForPermission()
@@ -72,10 +75,13 @@ const Signup1 = ({navigation}) => {
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
-    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}> 
-
-
-
+        <KeyboardAvoidingView keyboardVerticalOffset="100"
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+          <View style={{marginTop:"25%"}}/>
+          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
+          <>
         {image ? (
 				<Image source={{ uri: image.uri }} style={styles.imageStyle} />
 			) : (
@@ -85,131 +91,134 @@ const Signup1 = ({navigation}) => {
 				/>
 			)}
             
-                <TouchableOpacity onPress={takeImage}>
-                    <Text style={styles.imageButton}>Choose Photo</Text>
-                </TouchableOpacity>            
-                <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
-                    Select Class
-                </Text>
-                <View style={{flexDirection:'row',width:320,justifyContent: 'space-between',}}>
-                <CustomPicker
-                    options={options}
-                    placeholder="Choose Class"
-                    getLabel={(item) => item.value}
-                    // defaultValue={6}
-                    onValueChange={(value) => {
-                        value?setSelectedValue(value.number):null
-                    }}
-                />
-            <CustomPicker
-                options={syllabusoption}
-                placeholder="Choose Syllabus"
-                // defaultValue={'scert'}
-                onValueChange={value => {
-                    setsyllabus(value)
+			<TouchableOpacity onPress={takeImage}>
+				<Text style={styles.imageButton}>Choose Photo</Text>
+			</TouchableOpacity>            
+            {/* <Text style={{ marginTop: 30, fontSize: 12, color: "#2196f3" }}>
+				Select Class
+			</Text> */}
+            <View style={{flexDirection:'row',width:320,justifyContent: 'space-between',}}>
+			<CustomPicker
+                options={options}
+                placeholder="Choose Class"
+				getLabel={(item) => item.value}
+				// defaultValue={6}
+				onValueChange={(value) => {
+					value?setSelectedValue(value.number):null
+				}}
+			/>
+	       <CustomPicker
+            options={syllabusoption}
+            placeholder="Choose Syllabus"
+            // defaultValue={'scert'}
+            onValueChange={value => {
+                setsyllabus(value)
+            }}
+        />
+        </View>
+        <TextInput style={styles.inputText}              
+            onChangeText={text => setfname(text)}    
+            value={fname}             
+            placeholder="First Name"
+         />
+          <TextInput style={styles.inputText}              
+            onChangeText={text => setlname(text)}    
+            value={lname}             
+            placeholder="Last Name"
+         />
+
+
+        <TextInput style={styles.inputText}                 
+            onChangeText={text => setEmail(text)}    
+            value={email}             
+            placeholder="someone@example.com"
+            keyboardType='email-address' />  
+
+            
+        <TextInput style={styles.inputText}                 
+            onChangeText={text => setPassword(text)}    
+            value={password}             
+            placeholder="Password"       
+            secureTextEntry={true} />     
+              
+        <TextInput style={styles.inputText}              
+            onChangeText={text => setPhone(text)}    
+            value={phone}             
+			placeholder="Phone Number"
+			keyboardType="number-pad"
+        />         
+		<View style={{width:"80%",marginTop:10,backgroundColor:'white',borderColor:'black',borderWidth:1}}>
+        	<DatePicker
+                style={{width: 320}}
+                placeholder="Date of birth"
+                date={date}
+                mode="date"
+                format="YYYY-MM-DD"
+                // minDate="1990-05-01"
+                // maxDate="2022-06-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                // dateIcon: {
+                //     position: 'absolute',
+                //     left: 0,
+                //     top: 4,
+                //     marginLeft: 0
+                // },
+                dateInput: {
+					marginLeft: 0,
+					backgroundColor:'white',
+                    borderColor:'transparent',
+                    borderRadius:10
+
+                }
+                // ... You can check the source to find the other keys.
                 }}
+                onDateChange={(date) => {setdate(date)}}
             />
             </View>
-            <View style={{flex:1}}>
-                
-            <TextInput style={styles.inputText}              
-                onChangeText={text => setfname(text)}    
-                value={fname}             
-                placeholder="First Name"
-            />
-            <TextInput style={styles.inputText}              
-                onChangeText={text => setlname(text)}    
-                value={lname}             
-                placeholder="Last Name"
-            />
-
-
-            <TextInput style={styles.inputText}                 
-                onChangeText={text => setEmail(text)}    
-                value={email}             
-                placeholder="someone@example.com"
-                keyboardType='email-address' />  
-
-                
-            <TextInput style={styles.inputText}                 
-                onChangeText={text => setPassword(text)}    
-                value={password}             
-                placeholder="Password"       
-                secureTextEntry={true} />     
-              
-            <TextInput style={styles.inputText}              
-                onChangeText={text => setPhone(text)}    
-                value={phone}             
-                placeholder="Phone Number"
-                keyboardType="number-pad"
-            />        
-            </View> 
-            <View style={{width:'80%',marginTop:10,backgroundColor:'#f3f3f4',borderRadius:10}}>
-                <DatePicker
-                    style={{width: '100%'}}
-                    date={date}
-                    mode="date"
-                    placeholder="Date of birth"
-                    format="YYYY-MM-DD"
-                    // minDate="1990-05-01"
-                    // maxDate="2022-06-01"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                    // dateIcon: {
-                    //     position: 'absolute',
-                    //     left: 0,
-                    //     top: 4,
-                    //     marginLeft: 0
-                    // },
-                    dateInput: {
-                        marginLeft: 0,
-                        backgroundColor:'#f3f3f4',
-                        borderColor:'transparent',
-                        borderRadius:10
-
-                    }
-                    // ... You can check the source to find the other keys.
-                    }}
-                    onDateChange={(date) => {setdate(date)}}
-                />
-                </View>
     
-            <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
-                <Text style={styles.buttonText}>Next</Text>    
-            </TouchableOpacity> 
-            <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>           
-                <Text style={styles.buttonText}>Back</Text>    
-            </TouchableOpacity>
-
-            <Text style={styles.errorMessage}>{error}</Text>
-    
-             </ScrollView>
+		<TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>           
+       		 <Text style={styles.buttonText}>Next</Text>    
+        </TouchableOpacity> 
+        {/* <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>           
+       		 <Text style={styles.buttonText}>Back</Text>    
+        </TouchableOpacity> */}
+        <Text style={styles.errorMessage}>{error}</Text>
+        <View style={{marginBottom:"50%"}}/>
+        </>
+        </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+     
     )
   }
 
   const styles = StyleSheet.create({
 	container:{
-    		alignItems:'center',
-             justifyContent:'center',
+		// flex:1,
+		alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'white'
     },
     ScrollViewContainer:{
-     
-        backgroundColor:colors.BACKGROUND_COLOR,
-        paddingTop:Constants.statusBarHeight
+        flex:1,
+        backgroundColor:colors.BACKGROUND_COLOR
+
     },
 	        inputText:{
                 fontSize:14,
                 color:'grey',
                 borderWidth:1,
-                borderRadius:10,
                 width:'85%',
-                textAlign:'center',
-                borderColor:'transparent',
+                textAlign:'left',
+                borderColor:'black',
+                borderTopColor:'transparent',
+                borderLeftWidth:0,
+                borderRightWidth:0,
                 padding:15,
                 width:320,
-                backgroundColor:'#f3f3f4',
-                marginTop:5
+                backgroundColor:'transparent',
+                  marginTop:5
   
           },
           loginButton:{
@@ -220,14 +229,16 @@ const Signup1 = ({navigation}) => {
                     borderRadius:5,
                     // backgroundColor:'#A9A9A9',
                     backgroundColor:'black',
+                  marginBottom:10
           },
           backButton:{
             marginTop:10,
-            width:320,
+            width:300,
             alignItems:'center',
-            padding:15,
+            padding:10,
             borderRadius:5,
             backgroundColor:'red',
+            marginBottom:10
         },
           buttonText:{
                   color:'white',
@@ -241,13 +252,29 @@ const Signup1 = ({navigation}) => {
           imageStyle: {
             width: 150,
             height: 150,
-            borderRadius: 30,
             margin: 10,
         },
         imageButton: {
-            color: "grey",
+            color: "white",
             margin: 10,
-        }
+            textAlign:'center',
+            backgroundColor:'black',
+            padding:7
+        },
+        textAreaContainer: {
+            borderColor: "grey",
+            borderWidth: 1,
+            borderColor:'#d3d3d3',
+            margin: 10,
+            width: '85%',
+            
+        },
+        textArea: {
+            height: 100,
+            padding: 10,
+            backgroundColor:'#fafafa'
+        },
+	
 })
 
   export default Signup1
