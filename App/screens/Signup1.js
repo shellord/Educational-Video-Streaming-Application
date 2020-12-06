@@ -75,11 +75,11 @@ const Signup1 = ({navigation}) => {
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
     }
     return (
-        <KeyboardAvoidingView keyboardVerticalOffset="100"
+        <ScrollView contentContainerStyle={styles.container}>
+        {/* <KeyboardAvoidingView keyboardVerticalOffset="100"
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
-      >
-          <View style={{marginTop:"25%"}}/>
+      > */}
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
           <>
         {image ? (
@@ -185,20 +185,23 @@ const Signup1 = ({navigation}) => {
        		 <Text style={styles.buttonText}>Back</Text>    
         </TouchableOpacity> */}
         <Text style={styles.errorMessage}>{error}</Text>
-        <View style={{marginBottom:"50%"}}/>
+        {/* <View style={{marginBottom:"50%"}}/> */}
         </>
         </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    {/* </KeyboardAvoidingView> */}
+    </ScrollView>
      
     )
   }
 
   const styles = StyleSheet.create({
 	container:{
-		// flex:1,
+        // flex:1,
+        marginTop:Constants.statusBarHeight,
 		alignItems:'center',
         justifyContent:'center',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        backgroundColor:colors.BACKGROUND_COLOR
     },
     ScrollViewContainer:{
         flex:1,
