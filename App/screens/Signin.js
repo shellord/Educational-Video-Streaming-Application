@@ -11,10 +11,7 @@ const Signin = ({ navigation }) => {
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+        <ScrollView contentContainerStyle={styles.container}>
         <View style={{marginTop:200}}>
           <TextInput style={styles.inputText}   
               placeholderTextColor="#A9A9A9"              
@@ -39,9 +36,14 @@ const Signin = ({ navigation }) => {
                 <Text style={{ fontWeight:'bold',color:'#5f5e5e'}}> Join Now</Text>    
               </View>  
             </TouchableOpacity>  
+            <TouchableOpacity onPress={() => navigation.push('ForgotPwd')}>
+              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>          
+                  <Text style={{ fontWeight:'bold',color:'#EF5350'}}> Forgot Password</Text>  
+               </View>  
+            </TouchableOpacity>
             <Text style={styles.errorMessage}>{error}</Text>
         </View>
-    </KeyboardAvoidingView>
+        </ScrollView>
         </TouchableWithoutFeedback>
     )
   }

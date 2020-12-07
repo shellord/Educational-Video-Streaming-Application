@@ -76,7 +76,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert(error)
 			})
-		fetch(API_URL + "/api/videos/featured/" + userclass)
+		fetch(API_URL + "/api/videos/featured/" + userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setFeaturedvids(json.response)
@@ -84,7 +84,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[2]")
 			})
-		fetch(API_URL + "/api/popularvideos/" + userclass)
+		fetch(API_URL + "/api/popularvideos/" + userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setpopularVideos(json.response)
@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[3]")
 			})
-		fetch(API_URL + "/api/livevideos/" + userclass)
+		fetch(API_URL + "/api/livevideos/" +userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setlivevideos(json.response)
@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[3]")
 			})
-		fetch(API_URL + "/api/videos/latest/" + userclass)
+		fetch(API_URL + "/api/videos/latest/" + userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setLatestvids(json.response)
@@ -109,7 +109,7 @@ const Home = ({ navigation }) => {
 				alert("Network Issue!.Check your internet connection[4]")
 			})
 	}, [userclass])
-
+	
 	return (
 		<ScrollView style={styles.container}>
 			<HeaderWelcome navigation={navigation} username={username} userimage={userImage} />
@@ -135,7 +135,7 @@ const Home = ({ navigation }) => {
 			)}
 			{latestvids ? (
 				<VideoList
-					title="Latest "
+					title="Latest Videos"
 					data={latestvids}
 					navigation={navigation}
 					userclass={userclass}
@@ -143,12 +143,23 @@ const Home = ({ navigation }) => {
 			) : (
 				<></>
 			)}
-			<Carousel
-				title="What's New?"
+			{featuredvids?(	<Carousel
+				title="Featured Videos"
 				data={featuredvids}
 				nav={navigation}
 				userclass={userclass}
-			/>
+			/>):null}
+		
+			{popularVideos ? (
+				<VideoList
+					title="Popular Videos"
+					data={popularVideos}
+					navigation={navigation}
+					userclass={userclass}
+				/>
+			) : (
+				<></>
+			)} 
 			{livevideos ?	
 			<LiveCarousel 
 				title="Live Classes"
@@ -158,16 +169,7 @@ const Home = ({ navigation }) => {
 			/>:null}
 		
 
-			{/* {popularVideos ? (
-				<VideoList
-					title="Popular Videos"
-					data={popularVideos}
-					navigation={navigation}
-					userclass={userclass}
-				/>
-			) : (
-				<></>
-			)} */}
+
 		</ScrollView>
 	)
 }

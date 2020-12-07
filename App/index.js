@@ -49,6 +49,7 @@ const AnnouncementStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
+import ForgotPwd from './screens/ForgotPwd'
 
 const API_URL = "http://18.219.43.140:3000"
 const ASSETS_URL = "http://18.219.43.140/marvelprofile/uploads/"
@@ -80,6 +81,14 @@ const AuthStackScreen = () => (
 			component={Signin}
 			options={{
 				title: "Signin",
+				headerShown: false,
+			}}
+		/>
+			<AuthStack.Screen
+			name="ForgotPwd"
+			component={ForgotPwd}
+			options={{
+				title: "forgot password",
 				headerShown: false,
 			}}
 		/>
@@ -597,6 +606,14 @@ export default () => {
 			},
 			signOut: () => {
 				Firebase.auth().signOut()
+			},
+			passwordReset: email => {
+				Firebase.auth().sendPasswordResetEmail(email)
+				.then(function (user) {
+					alert('Please check your email...')
+				}).catch(function (e) {
+					alert(e)
+				})
 			},
 			finishLogin: () => {
 				setisFinishedSignup(1)
