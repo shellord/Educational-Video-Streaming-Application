@@ -66,11 +66,17 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Error!")
 			})
-			console.log(API_URL + "/api/subjects/" + userclass+"/"+ syllabus)
+		fetch(API_URL + `/api/checksup/${Firebase.auth().currentUser.email}`)
+			.then((response) => response.json())
+			.then((json) => {
+				// console.log(json)
+			})
+			.catch((error) => {
+				alert(error)
+			})
 		fetch(API_URL + "/api/subjects/" + userclass+"/"+ syllabus)
 			.then((response) => response.json())
 			.then((json) => {
-				console.log(json)
 				setSubjects(json.response)
 			})
 			.catch((error) => {
@@ -116,7 +122,7 @@ const Home = ({ navigation }) => {
 			<View style={styles.CarouselContainer}>
 				{/* <HeaderCarousel /> */}
 			</View>
-			{!subscribtionStatus ? <UpgradeCard /> : null}
+			{!subscribtionStatus ? <UpgradeCard navigation={navigation}/> : null}
 			<HorizontalScroll
 				subjects={subjects}
 				navigation={navigation}

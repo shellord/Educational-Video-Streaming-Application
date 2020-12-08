@@ -1,19 +1,21 @@
 import React from "react"
 import { View, Text, StyleSheet, ImageBackground } from "react-native"
+import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
-const UpgradeCard = () => {
+const UpgradeCard = ({navigation}) => {
 	return (
+		<TouchableWithoutFeedback onPress={() => navigation.navigate('Profile')}>
 		<View style={styles.container}>
 			<ImageBackground
 				style={styles.imgBackground}
 				resizeMode="cover"
 				source={require("../../assets/gopro.png")}
 			>
-				<View style={{ height: "100%" }}>
-					<Text>&nbsp;</Text>
-				</View>
+				<View style={{ height: "100%" }}/>
+
 			</ImageBackground>
 		</View>
+		</TouchableWithoutFeedback>
 	)
 }
 

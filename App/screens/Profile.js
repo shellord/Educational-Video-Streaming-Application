@@ -26,7 +26,7 @@ const { width, height } = Dimensions.get('window')
           <View style={styles.webviewStyle}>
             <WebView
               source={{
-               uri: `http://18.219.43.140/marvelprofile/index.php`
+              uri: `http://marvelapi.ddns.net/marvelprofile/index.php`
               }}
           startInLoadingState={true}
             renderLoading={() => (

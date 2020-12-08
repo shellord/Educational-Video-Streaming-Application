@@ -51,9 +51,9 @@ const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
 import ForgotPwd from './screens/ForgotPwd'
 
-const API_URL = "http://18.219.43.140:3000"
-const ASSETS_URL = "http://18.219.43.140/marvelprofile/uploads/"
-const ADMIN_UPLOADS_URL = "http://18.219.43.140/admin/"
+const API_URL = "http://marvelapi.ddns.net/:3000"
+const ASSETS_URL = "http://marvelapi.ddns.net/marvelprofile/uploads/"
+const ADMIN_UPLOADS_URL = "http://marvelapi.ddns.net/admin/"
 
 const askForPermission = async () => {
 	const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
@@ -157,6 +157,20 @@ const HomeStackScreen = ({ navigation }) => (
 			component={SubjectMenu}
 			options={({ route }) => ({
 				title: route.params.name,
+				headerStyle: {
+					backgroundColor: colors.BACKGROUND_COLOR,
+				},
+				headerTitleStyle: {
+					fontSize: 16,
+					color: colors.HEADER_TEXT_COLOR,
+				},
+				headerTintColor: colors.HEADER_TEXT_COLOR,
+			})}
+		/>
+		<HomeStack.Screen
+			name="Profile"
+			component={Profile}
+			options={() => ({
 				headerStyle: {
 					backgroundColor: colors.BACKGROUND_COLOR,
 				},

@@ -7,7 +7,7 @@ import { WebView } from 'react-native-webview'
         <View style={styles.container}>
           <WebView
         source={{
-          uri: 'http://18.219.43.140/marvelprofile/anounc/'
+            uri: 'http://marvelapi.ddns.net/marvelprofile/anounc/'
         }}
         startInLoadingState={true}
           renderLoading={() => (
