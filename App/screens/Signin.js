@@ -12,7 +12,6 @@ const Signin = ({ navigation }) => {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.container}>
-        <View style={{marginTop:200}}>
           <TextInput style={styles.inputText}   
               placeholderTextColor="#A9A9A9"              
               onChangeText={text => setEmail(text)}    
@@ -25,8 +24,6 @@ const Signin = ({ navigation }) => {
               value={password}             
               placeholder="password"       
               secureTextEntry={true} />                
-          </View>
-          <View style={{flex:1,justifyContent:'flex-end'}}>
             <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
                 <Text style={styles.buttonText}>Log In</Text>    
             </TouchableOpacity>                         
@@ -42,7 +39,6 @@ const Signin = ({ navigation }) => {
                </View>  
             </TouchableOpacity>
             <Text style={styles.errorMessage}>{error}</Text>
-        </View>
         </ScrollView>
         </TouchableWithoutFeedback>
     )
@@ -52,7 +48,8 @@ const styles = StyleSheet.create({
           container:{
             flex:1,
             backgroundColor:'white',
-            alignItems:'center'
+            alignItems:'center',
+            justifyContent:'center'
           },
             inputText:{
               fontSize:14,
@@ -67,13 +64,13 @@ const styles = StyleSheet.create({
               padding:15,
               width:320,
               backgroundColor:'transparent',
-                marginTop:5
+              marginTop:5
           },
           loginButton:{
                   width:320,
                   alignItems:'center',
+                  marginTop:50,
                   padding:15,
-                  // backgroundColor:'#A9A9A9',
                   backgroundColor:'black',      
           },
           SignupButton:{

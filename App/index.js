@@ -51,7 +51,7 @@ const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
 import ForgotPwd from './screens/ForgotPwd'
 
-const API_URL = "http://marvelapi.ddns.net/:3000"
+const API_URL = "http://marvelapi.ddns.net:3000"
 const ASSETS_URL = "http://marvelapi.ddns.net/marvelprofile/uploads/"
 const ADMIN_UPLOADS_URL = "http://marvelapi.ddns.net/admin/"
 
