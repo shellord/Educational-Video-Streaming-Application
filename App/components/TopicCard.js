@@ -8,6 +8,7 @@ const TopicCard = (props) => {
     const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
     let image=''
     props.item.imguri ? image = ADMIN_UPLOADS_URL+ JSON.parse(props.item.imguri)[0].name:null
+    console.log(22)
     return(
             <TouchableOpacity onPress={()=>{props.navigation.push('subject',{name:props.item.name,subject:props.subject,nav:props.navigation,userclass:props.userclass,syllabus:props.syllabus})}}>
                 <View style={styles.container}>

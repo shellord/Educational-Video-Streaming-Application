@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {StyleSheet,FlatList,View,SafeAreaView,ActivityIndicator} from 'react-native'
+import {StyleSheet,FlatList,View,SafeAreaView,ActivityIndicator,Text} from 'react-native'
 import TopicCard from '../components/TopicCard'
 import { AuthContext } from "../context"
 import colors from '../styles/styles'
@@ -7,7 +7,7 @@ import colors from '../styles/styles'
 const TopicList = ({route}) => {
 
     const {API_URL} = React.useContext(AuthContext)
-    const [topics,setTopics] = useState([{}]);
+    const [topics,setTopics] = useState([{}])
     useEffect(() => {
         fetch(API_URL+`/api/topics/${route.params.name}/${route.params.userclass}/${route.params.syllabus}`)
         .then((response) => response.json())
@@ -19,7 +19,8 @@ const TopicList = ({route}) => {
         })
 
       }, [])
-    if(Object.keys(topics).length==1){
+
+    if(Object.keys(topics[0]).length==1){
         return(
             <ActivityIndicator 
             size="large"
@@ -32,7 +33,6 @@ const TopicList = ({route}) => {
             <FlatList
             data={topics}
             renderItem={({ item }) => (
-                
                 <View style={{ flex: 1, flexDirection: 'row', margin: 1 }}>
                     <TopicCard
                         subject={route.params.name}
@@ -53,7 +53,7 @@ const TopicList = ({route}) => {
 
 const styles = StyleSheet.create({
     container:{
-        
+
         flex:1,
         backgroundColor:colors.BACKGROUND_COLOR
     }
