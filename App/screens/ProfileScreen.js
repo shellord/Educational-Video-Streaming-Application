@@ -200,7 +200,9 @@ const ProfileScreen = ({navigation,route}) => {
                 <Text style={styles.rightText} >{phone}</Text>
                 </TouchableOpacity>
                 <View style={{width:200}}>
+                 <TouchableOpacity onPress={() => navigation.navigate('ProfileScreenEdit', { editvalue: address, dataToEdit: 'address' })}>
                 <Text style={styles.rightText} numberOfLines={5}>{address}</Text>
+                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('ProfileScreenEdit',{editvalue:street,dataToEdit:'street'})}>
                 <Text style={styles.rightText}> {street} </Text>
                 </TouchableOpacity>
