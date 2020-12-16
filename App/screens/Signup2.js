@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
 		flex:1,
 		alignItems:'center',
         justifyContent:'center',
-        marginTop:Constants.statusBarHeight+50,
+        marginTop:Constants.statusBarHeight,
+        backgroundColor:colors.BACKGROUND_COLOR
     },
     ScrollViewContainer:{
         flex:1,
@@ -93,17 +94,19 @@ const styles = StyleSheet.create({
 
     },
 	        inputText:{
-                fontSize:14,
-                color:'grey',
-                borderWidth:1,
-                borderRadius:10,
-                width:'85%',
-                textAlign:'center',
-                borderColor:'transparent',
-                padding:15,
-                width:320,
-                backgroundColor:'#f3f3f4',
-                  marginTop:5
+                fontSize: 14,
+                color: 'grey',
+                borderWidth: 1,
+                width: '85%',
+                textAlign: 'left',
+                borderColor: 'black',
+                borderTopColor: 'transparent',
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                padding: 15,
+                width: 320,
+                backgroundColor: 'transparent',
+                marginTop: 5
   
           },
           loginButton:{

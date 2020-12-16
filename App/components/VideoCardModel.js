@@ -10,7 +10,6 @@ const VideoCardModel = (props) => {
     let videourl=''
     props.image ? imageurl = ADMIN_UPLOADS_URL+ JSON.parse(props.image)[0].name:null
     props.url ? videourl = ADMIN_UPLOADS_URL+ JSON.parse(props.url)[0].name:null
-    console.log(videourl)
     return (
         <View>
         <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:videourl,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
