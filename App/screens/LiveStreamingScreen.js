@@ -3,13 +3,12 @@ import {View,StyleSheet,ActivityIndicator} from 'react-native'
 import { WebView } from 'react-native-webview'
 
  
- const LiveStreamingScreen = ({ nav,url }) => {
-    
+ const LiveStreamingScreen = ({ route }) => {
   return (
     <View style={styles.container}>
     <WebView
       source={{
-        uri: 'http://18.219.43.140/LiveStream.php?url='+url
+          uri: 'http://marvelapi.ddns.net/LiveStream.php?url='+route.params.url
       }}
       startInLoadingState={true}
         renderLoading={() => (

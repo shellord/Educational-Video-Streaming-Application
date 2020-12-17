@@ -24,13 +24,13 @@ const Signup2 = ({navigation,route}) => {
         let password = route.params.password
         let phone = route.params.phone
         let image = route.params.image
-
+        let syllabus = route.params.syllabus
         if(!school || !street || !pincode || !city || !address || !address ){
             alert("You need to enter all details to complete signing up")
             return
         }
 
-        signUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode)    
+        signUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus)    
     }
 
     return (

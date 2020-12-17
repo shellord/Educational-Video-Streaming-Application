@@ -19,14 +19,15 @@ const TopicList = ({route}) => {
         })
 
       }, [])
-
-    if(Object.keys(topics[0]).length==1){
-        return(
-            <ActivityIndicator 
-            size="large"
-            style={{flex:1,justifyContent:'center',alignItems:'center'}}
-            />
-        )
+      if(topics){
+         if(Object.keys(topics[0]).length==1){
+            return(
+                <ActivityIndicator 
+                size="large"
+                style={{flex:1,justifyContent:'center',alignItems:'center'}}
+                />
+            )
+        }
     }
     return(
         <SafeAreaView style={styles.container}>

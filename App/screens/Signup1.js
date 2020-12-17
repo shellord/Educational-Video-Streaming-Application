@@ -68,11 +68,11 @@ const Signup1 = ({navigation}) => {
 		}
 	}
     const onCompleteHandler = () =>{
-        if(!selectedValue || !fname || !lname || !email || !password || !phone  || !image || !date){
+        if(!selectedValue || !fname || !lname || !email || !password || !phone  || !image || !date || !syllabus){
             alert("You need to enter all details to complete signing up")
             return
         }
-        navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image})
+        navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image,syllabus:syllabus})
     }
     return (
         <ScrollView contentContainerStyle={styles.container}>

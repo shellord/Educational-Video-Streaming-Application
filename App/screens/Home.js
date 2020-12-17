@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { StyleSheet, AsyncStorage, View } from "react-native"
+import { StyleSheet, View } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import Carousel from "../components/Carousel"
 import HeaderCarousel from "../components/HeaderCarousel"
 import HorizontalScroll from "../components/HorizontalScroll"
@@ -29,15 +31,18 @@ const Home = ({ navigation }) => {
 	const [popularVideos, setpopularVideos] = useState([{}])
 	const [syllabus, setsyllabus] = useState('scert')
 
-
-	if (isFocused) {
-		AsyncStorage.getItem("watchHistory").then((val) => {
-			setwatchHistory(JSON.parse(val))
-		})
+	const getData = async () => {
+		try {
+			const jsonValue = await AsyncStorage.getItem('watchHistory')
+			return jsonValue != null ? setwatchHistory(JSON.parse(jsonValue)) : null
+		} catch (e) {
+			// console.log(e)
+		}
+	}  
+	if (useIsFocused()) {
+		getData()
 		if(userImage){
 			if(userImage.includes('default-user.png')){
-				console.log(11)
-
 				fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 					.then((response) => response.json())
 					.then((json) => {

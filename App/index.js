@@ -304,12 +304,13 @@ const ProfileStackScreen = ({ navigation }) => (
 			name="Profile"
 			component={Profile}
 			options={{
-				headerLeft: () => (
-					<HeaderBackButton
-						onPress={() => navigation.goBack(null)}
-						tintColor={colors.HEADER_TEXT_COLOR}
-					/>
-				),
+				// headerLeft: () => (
+				// 	<HeaderBackButton
+				// 		onPress={() => navigation.goBack(null)}
+				// 		tintColor={colors.HEADER_TEXT_COLOR}
+				// 	/>
+				// ),
+				// headerShown:false,
 				headerRight: () => (
 					<View
 						style={{
@@ -573,12 +574,12 @@ export default () => {
 	// 		.catch((err) => console.log(err))
 	// }
 
-	const adduserData = (fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode) => {
+	const adduserData = (fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode,syllabus) => {
 		// console.log("API CALL: "+API_URL +
 		// 	`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`)
 		fetch(
 			API_URL +
-				`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`
+				`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/${syllabus} /${address}/${date}/${school}/${street}/${city}/${pincode}`
 		)
 			.then((response) => response.json())
 			.then((json) => {
@@ -588,12 +589,12 @@ export default () => {
 			})
 	}
 	
-	const handleSignUp = (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode) => {
+	const handleSignUp = (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus) => {
 	  Firebase.auth()
 	      .createUserWithEmailAndPassword(email,password)
 		  .then(()=>
 		  {
-			adduserData(fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode)
+			adduserData(fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode,syllabus)
 			uploadImage(email,image)
 			// setUserToken(Firebase.auth().currentUser)
 		  }
@@ -616,8 +617,8 @@ export default () => {
 			signIn: (email,password) => {
 			  handleSignIn(email,password)
 			},
-			signUp: (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode) => {
-			  handleSignUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode)
+			signUp: (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus) => {
+			  handleSignUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus)
 			},
 			signOut: () => {
 				Firebase.auth().signOut()

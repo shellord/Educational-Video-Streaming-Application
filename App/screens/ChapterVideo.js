@@ -104,7 +104,6 @@ const ChapterVideo = ({ route }) => {
   if(!isFocused){
     videoRef.current.pauseAsync()
   }
-
   const _onPlaybackStatusUpdate = playbackStatus => {
 
   if(playbackStatus.positionMillis>=10000 && !addView){
