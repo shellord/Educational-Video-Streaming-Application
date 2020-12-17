@@ -17,8 +17,8 @@ const VideoCardModel = (props) => {
     }
     return (
         <View>
-        <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:videourl,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
-            <View style={styles.container} onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:videourl,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
+        <TouchableOpacity onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
+            <View style={styles.container} onPress={()=>props.navigation.navigate('chaptervideo',{name:props.title,description:props.description,url:props.url,nav:props.navigation,isfree:props.isfree,subject:props.subject,topic:props.topic,image:props.image,id:props.id,class:props.class})}>
                 <View>
                 <Image source={{uri:imageurl}} style={styles.imageStyle}/>
                 </View>

@@ -12,6 +12,17 @@ import UpgradeCard from '../components/UpgradeCard'
 import colors from '../styles/styles'
 
 const ChapterVideo = ({ navigation,route }) => {
+
+  const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
+
+  try{
+    route.params.url ? videourl = ADMIN_UPLOADS_URL + JSON.parse(route.params.url)[0].name : null
+  }
+  catch{
+    videourl=route.params.url
+  }
+
+  console.log(videourl)
   const {API_URL} = React.useContext(AuthContext)
   const [subscriptionStatus, setsubscriptionStatus] = useState(null)
   const [addView, setaddView] = useState(0)
@@ -30,7 +41,7 @@ const ChapterVideo = ({ navigation,route }) => {
   useEffect(() => {
     const watchedVideo ={
       id:route.params.id,
-      url:route.params.url,
+      url:videourl,
       title:route.params.name,
       description:route.params.description,
       subject:route.params.subject,
@@ -125,7 +136,7 @@ const ChapterVideo = ({ navigation,route }) => {
     <ScrollView style={styles.container}>
       {!loaded?(<ActivityIndicator size="large" color="#00ff00" style={{top:140,zIndex:2,padding:0,marginTop:-36}}/>):false}
       <Video
-        source={{ uri: route.params.url }}
+        source={{ uri: videourl }}
         rate={1.0}
         volume={1.0}
         isMuted={false}

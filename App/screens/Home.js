@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { StyleSheet, View } from "react-native"
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import Carousel from "../components/Carousel"
 import HeaderCarousel from "../components/HeaderCarousel"
 import HorizontalScroll from "../components/HorizontalScroll"
