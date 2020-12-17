@@ -31,7 +31,7 @@ const ProfileScreenEdit = ({navigation,route}) => {
             user.updateEmail(value).then(function() {
             })
             .catch(function(error) {
-                    console.log(error)
+                    alert(error)
             })
         }
         if(dataToEdit=='password'){
@@ -59,15 +59,22 @@ const ProfileScreenEdit = ({navigation,route}) => {
            
             return
         }
-        fetch(API_URL + `/api/users/update/${dataToEdit}/${value}/${Firebase.auth().currentUser.email}`)
-        .then((response) => response.json())
-        .then(
-            // json =>console.log(json.response.message)
-            navigation.goBack(null)
-        )
-        .catch((error) => {
-            alert(error)
-        })
+        console.log(/^[a-zA-Z]+$/.test(value))
+        if (/^[a-zA-Z]+$/.test(value) ) {
+
+            fetch(API_URL + `/api/users/update/${dataToEdit}/${value}/${Firebase.auth().currentUser.email}`)
+            .then((response) => response.json())
+            .then(
+                // json =>console.log(json.response.message)
+                navigation.goBack(null)
+            )
+            .catch((error) => {
+                alert(error)
+            })
+          }
+          else{
+              alert("Check your input, Only Letters allowed")
+          }
 
     }
     return (
