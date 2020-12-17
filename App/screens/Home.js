@@ -39,6 +39,7 @@ const Home = ({ navigation }) => {
 			// console.log(e)
 		}
 	}  
+
 	if (useIsFocused()) {
 		getData()
 		if(userImage){
@@ -59,6 +60,7 @@ const Home = ({ navigation }) => {
 		}
 	}
 	useEffect(() => {
+		console.log(1111)
 		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 			.then((response) => response.json())
 			.then((json) => {
@@ -83,6 +85,8 @@ const Home = ({ navigation }) => {
 			.then((response) => response.json())
 			.then((json) => {
 				setSubjects(json.response)
+				console.log(json.response)
+				console.log('22222'+subjects)
 			})
 			.catch((error) => {
 				alert(error)
@@ -114,12 +118,13 @@ const Home = ({ navigation }) => {
 		fetch(API_URL + "/api/videos/latest/" + userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
+				console.log(latestvids)
 				setLatestvids(json.response)
 			})
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[4]")
 			})
-	}, [userclass])
+	}, [userclass,syllabus])
 	
 	return (
 		<ScrollView style={styles.container}>

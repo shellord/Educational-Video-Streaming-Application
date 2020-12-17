@@ -30,6 +30,7 @@ const Search = ({ navigation }) => {
   }, [])
   useEffect(() => {
     if(search){
+      if (/^[a-zA-Z]+$/.test(search)){
       fetch(API_URL+'/api/search/'+search+'/'+userclass+'/'+syllabus)
         .then((response) => response.json())
         .then((json) => {
@@ -38,7 +39,7 @@ const Search = ({ navigation }) => {
         .catch((error) => {
         })
     }
-    
+  }
   }, [search])
 
   return(

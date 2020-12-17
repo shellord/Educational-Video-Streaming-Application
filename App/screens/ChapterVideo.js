@@ -11,7 +11,7 @@ import VideoList from '../components/VideoList'
 import UpgradeCard from '../components/UpgradeCard'
 import colors from '../styles/styles'
 
-const ChapterVideo = ({ route }) => {
+const ChapterVideo = ({ navigation,route }) => {
   const {API_URL} = React.useContext(AuthContext)
   const [subscriptionStatus, setsubscriptionStatus] = useState(null)
   const [addView, setaddView] = useState(0)
@@ -156,7 +156,7 @@ const ChapterVideo = ({ route }) => {
         </Text>
       </View>
       </View>
-      {!subscriptionStatus?<UpgradeCard/>:null}
+      {!subscriptionStatus?<UpgradeCard navigation={navigation}/>:null}
       
       {relatedVideos[0]?(<VideoList title="Related Videos" data={relatedVideos} navigation={route.params.nav} userclass={route.params.class} />
 ):(<></>)}

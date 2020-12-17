@@ -78,7 +78,7 @@ const IntroScreen = () => {
         return (
           <View style={styles.buttonCircle}>
             <Icon
-              name="md-arrow-round-forward"
+              name="ios-arrow-forward"
               color='tomato'
               size={24}
             />
@@ -125,6 +125,7 @@ return (
           renderDoneButton={_renderDoneButton}
           renderNextButton={_renderNextButton}
           onDone={IntroDone}
+      activeDotStyle={{ backgroundColor: 'tomato' }}
         />
       </View>
     ) 
@@ -151,13 +152,16 @@ const styles = StyleSheet.create({
       fontWeight:"500",
       fontSize:13,
       padding:10,
+      letterSpacing:2
     },
     title: {
       marginBottom:10,
-      fontSize: 24,
+      fontSize: 20,
       color: 'tomato',
       textAlign: 'center',
-      fontWeight:'600'
+      fontWeight:'600',
+      textTransform:'uppercase',
+      letterSpacing:2
     },
   })
 
