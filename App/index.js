@@ -419,6 +419,11 @@ const DrawerScreen = () => (
 		drawerContentOptions={{
 			labelStyle: { color: colors.DRAWER_TEXT_COLOR },
 		}}
+		screenOptions={
+			{
+				gestureEnabled:false
+			}
+		}
 	>
 		<Drawer.Screen
 			name="Home"
