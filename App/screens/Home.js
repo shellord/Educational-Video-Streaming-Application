@@ -148,6 +148,14 @@ const Home = ({ navigation }) => {
 			) : (
 				null
 			)}
+			{livevideos ?
+				<LiveCarousel
+					title="Live Classes"
+					data={livevideos}
+					nav={navigation}
+					userclass={userclass}
+				/> : null}
+{/* 
 			{latestvids ? (
 				<VideoList
 					title="Latest Videos"
@@ -157,7 +165,7 @@ const Home = ({ navigation }) => {
 				/>
 			) : (
 				<></>
-			)}
+			)} */}
 			{featuredvids?(	<Carousel
 				title="Featured Videos"
 				data={featuredvids}
@@ -175,14 +183,7 @@ const Home = ({ navigation }) => {
 			) : (
 				<></>
 			)} 
-			{livevideos ?	
-			<LiveCarousel 
-				title="Live Classes"
-				data={livevideos}
-				nav={navigation}
-				userclass={userclass}
-			/>:null}
-		
+	
 
 
 		</ScrollView>

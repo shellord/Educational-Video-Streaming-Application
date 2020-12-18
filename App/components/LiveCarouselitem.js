@@ -11,13 +11,13 @@ const LiveCarouselitem = ({ item,nav }) => {
     item.image ? image = ADMIN_UPLOADS_URL+ JSON.parse(item.image)[0].name:null
     return (
         <TouchableWithoutFeedback onPress={()=>nav.push('LiveStreamingScreen',{nav:nav,url:item.url})}>
-            <View style={styles.cardView}>
-                <Image style={styles.image} source={{uri:image}} />
-                <View style={styles.textView}>
-                    <Text style={styles.itemTitle}> {item.name}</Text>
-                    <Text style={styles.itemDescription}>{item.description}</Text>
-                </View>
-            </View>
+                <View style={styles.cardView}>
+                    <Image style={styles.image} source={{ uri: image }} />
+                    <View style={styles.textView}>
+                        <Text style={styles.itemTitle}> {item.name}</Text>
+                        <Text style={styles.itemDescription}>{item.description}</Text>
+                    </View>
+                </View>      
         </TouchableWithoutFeedback>
     )
 
@@ -25,8 +25,8 @@ const LiveCarouselitem = ({ item,nav }) => {
 
 const styles = StyleSheet.create({
     cardView: {
-        width: width/2,
-        height: height / 4,
+        width: width/1.5 ,
+        height: height /4,
         backgroundColor: 'black',
         marginHorizontal: 10,
         borderRadius: 10,

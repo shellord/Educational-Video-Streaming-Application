@@ -36,6 +36,8 @@ import Signin from "./screens/Signin"
 import Signup1 from "./screens/Signup1"
 import Signup2 from "./screens/Signup2"
 import colors from "./styles/styles"
+import ForgotPwd from './screens/ForgotPwd'
+import UpcomingLive from './screens/UpcomingLive'
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
 
@@ -49,8 +51,6 @@ const AnnouncementStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const RootStack = createStackNavigator()
 const PostLoginStack = createStackNavigator()
-import ForgotPwd from './screens/ForgotPwd'
-
 
 const API_URL = "http://marvelapi.ddns.net:3000"
 const ASSETS_URL = "http://marvelapi.ddns.net/marvelprofile/uploads/"
@@ -238,6 +238,13 @@ const HomeStackScreen = ({ navigation }) => (
 			component={LiveStreamingScreen}
 			options={({ route }) => ({
 				title: "Live Classes",
+			})}
+		/>
+		<HomeStack.Screen
+			name="UpcomingLive"
+			component={UpcomingLive}
+			options={({ route }) => ({
+				title: "Upcoming Live Classes",
 			})}
 		/>
 	</HomeStack.Navigator>
