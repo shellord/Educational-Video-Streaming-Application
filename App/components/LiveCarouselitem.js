@@ -25,7 +25,7 @@ const LiveCarouselitem = ({ item,nav }) => {
 
 const styles = StyleSheet.create({
     cardView: {
-        width: width - 20,
+        width: width/2,
         height: height / 4,
         backgroundColor: 'black',
         marginHorizontal: 10,

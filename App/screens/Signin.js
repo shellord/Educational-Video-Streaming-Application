@@ -27,14 +27,14 @@ const Signin = ({ navigation }) => {
             <TouchableOpacity style={styles.loginButton} onPress={() => signIn(email,password)}>           
                 <Text style={styles.buttonText}>Log In</Text>    
             </TouchableOpacity>                         
-            <TouchableOpacity style={{}} onPress={() => navigation.push("Signup1")}> 
+            {/* <TouchableOpacity style={{}} onPress={() => navigation.push("Signup1")}> 
               <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:20}}>          
                 <Text style={{ fontWeight:'bold',color:'#A9A9A9'}}>Not a member ?</Text> 
                 <Text style={{ fontWeight:'bold',color:'#5f5e5e'}}> Join Now</Text>    
               </View>  
-            </TouchableOpacity>  
+            </TouchableOpacity>   */}
             <TouchableOpacity onPress={() => navigation.push('ForgotPwd')}>
-              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>          
+              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:20}}>          
                   <Text style={{ fontWeight:'bold',color:'#EF5350'}}> Forgot Password</Text>  
                </View>  
             </TouchableOpacity>
