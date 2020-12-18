@@ -68,7 +68,20 @@ const Signup1 = ({navigation}) => {
 		}
 	}
     const onCompleteHandler = () =>{
-        if(!selectedValue || !fname || !lname || !email || !password || !phone  || !image || !date || !syllabus){
+        if (fname.length < 3)
+        {
+           alert("You need atleast 3 letters for First name")
+           return
+        }
+        if (lname.length < 3) {
+            alert("You need atleast 3 letters for Last name")
+            return
+        }
+        if (phone.length !=10) {
+            alert("Your phone number is not valid")
+            return
+        }
+        if(!selectedValue || !lname || !email || !password || !phone  || !image || !date || !syllabus){
             alert("You need to enter all details to complete signing up")
             return
         }

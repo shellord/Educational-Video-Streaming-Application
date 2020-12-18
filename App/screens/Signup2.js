@@ -25,6 +25,27 @@ const Signup2 = ({navigation,route}) => {
         let phone = route.params.phone
         let image = route.params.image
         let syllabus = route.params.syllabus
+
+        if(school.length < 4){
+            alert("Your school name is not complete!")
+            return
+        }
+        if (school.length < 10) {
+            alert("Your school name is not complete!")
+            return
+        }
+        if (street.length < 5) {
+            alert("Your street name is not complete!")
+            return
+        }
+        if (city.length < 5) {
+            alert("Your city name is not complete!")
+            return
+        }
+        if (pincode.length != 6) {
+            alert("Your Pincode is not complete!")
+            return
+        }
         if(!school || !street || !pincode || !city || !address || !address ){
             alert("You need to enter all details to complete signing up")
             return
