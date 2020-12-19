@@ -14,8 +14,9 @@ import UpgradeCard from "../components/UpgradeCard"
 import LiveCarousel from "../components/LiveCarousel"
 import colors from "../styles/styles"
 
+
 const Home = ({ navigation }) => {
-	
+
 	const { API_URL, ASSETS_URL } = React.useContext(AuthContext)
 	const [subjects, setSubjects] = useState([{}])
 	const [featuredvids, setFeaturedvids] = useState([{}])
@@ -84,8 +85,7 @@ const Home = ({ navigation }) => {
 			.then((response) => response.json())
 			.then((json) => {
 				setSubjects(json.response)
-				console.log(json.response)
-				console.log('22222'+subjects)
+
 			})
 			.catch((error) => {
 				alert(error)
@@ -117,7 +117,6 @@ const Home = ({ navigation }) => {
 		fetch(API_URL + "/api/videos/latest/" + userclass+"/"+syllabus)
 			.then((response) => response.json())
 			.then((json) => {
-				console.log(latestvids)
 				setLatestvids(json.response)
 			})
 			.catch((error) => {
