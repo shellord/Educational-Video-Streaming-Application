@@ -169,7 +169,7 @@ const HomeStackScreen = ({ navigation }) => (
 			})}
 		/>
 		<HomeStack.Screen
-			name="Profile"
+			name="Settings"
 			component={Profile}
 			options={() => ({
 				headerStyle: {
@@ -308,7 +308,7 @@ const WatchHistoryStackScreen = ({ navigation }) => (
 const ProfileStackScreen = ({ navigation }) => (
 	<ProfileStack.Navigator>
 		<ProfileStack.Screen
-			name="Profile"
+			name="Settings"
 			component={Profile}
 			options={{
 				// headerLeft: () => (
@@ -339,7 +339,7 @@ const ProfileStackScreen = ({ navigation }) => (
 
 const AnnouncementStackScreen = () => (
 	<AnnouncementStack.Navigator>
-		<AnnouncementStack.Screen name="Notifications" component={Announcements} />
+		<AnnouncementStack.Screen name="Notice Board" component={Announcements} />
 	</AnnouncementStack.Navigator>
 )
 
@@ -353,7 +353,7 @@ const TabsScreen = ( ) => (
 					iconName = focused ? "ios-home" : "ios-home"
 				} else if (route.name === "Search") {
 					iconName = focused ? "md-search" : "md-search"
-				} else if (route.name === "Notifications") {
+				} else if (route.name === "Notice Board") {
 					iconName = focused ? "ios-notifications" : "ios-notifications"
 				}
 				//  else if (route.name === 'History') {
@@ -386,7 +386,7 @@ const TabsScreen = ( ) => (
 		<Tabs.Screen name="Home" component={HomeStackScreen} />
 		<Tabs.Screen name="Search" component={SearchStackScreen} />
 		{/* <Tabs.Screen name="History" component={WatchHistoryStackScreen} /> */}
-		<Tabs.Screen name="Notifications" component={AnnouncementStackScreen} />
+		<Tabs.Screen name="Notice Board" component={AnnouncementStackScreen} />
 		<Tabs.Screen name="Settings" component={ProfileStackScreen} />
 	</Tabs.Navigator>
 )
@@ -460,7 +460,7 @@ const DrawerScreen = () => (
 		/>
 
 		<Drawer.Screen
-			name="Profile"
+			name="Settings"
 			component={ProfileStackScreen}
 			options={{
 				drawerIcon: () => (
@@ -670,6 +670,7 @@ export default () => {
 					showIntroScreen={showIntroScreen}
 				/>
 			</NavigationContainer>
+
 		</AuthContext.Provider>
 	)
 }

@@ -26,6 +26,7 @@ const ProfileScreen = ({navigation,route}) => {
     const [phone, setphone] = useState("")
     const [userimage, setuserimage] = useState(null)
     const [subscibtionstatus, setsubscibtionstatus] = useState(null)
+    const [isimageuploading, setisimageuploading] = useState(0)
 
     const askForPermission = async () => {
 		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
@@ -79,10 +80,10 @@ const ProfileScreen = ({navigation,route}) => {
             alert(error)
         })
     }
+
     const uploadImage = (email,image) => {
 		let uri = image.uri
 		let fileExtension = uri.substr(uri.lastIndexOf(".") + 1)
-
 		fetch(`${API_URL}/api/uploadImage/`, {
 			method: "POST",
 			headers: {
@@ -99,7 +100,8 @@ const ProfileScreen = ({navigation,route}) => {
 					fileExtension,
 			}),
 		})
-			.then()
+            .then(response => response.json())
+            .then(json => console.log(json))
 			.catch((err) => console.log(err))
     }
     
@@ -127,6 +129,7 @@ const ProfileScreen = ({navigation,route}) => {
     return (
         
         <ScrollView  style={styles.container}>
+          
             {/* <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}> */}
            <View style={styles.avatarContainer}>
 				{userimage ? (

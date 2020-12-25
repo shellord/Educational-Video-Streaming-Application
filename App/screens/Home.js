@@ -60,7 +60,6 @@ const Home = ({ navigation }) => {
 		}
 	}
 	useEffect(() => {
-		console.log(1111)
 		fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 			.then((response) => response.json())
 			.then((json) => {

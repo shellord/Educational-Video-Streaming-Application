@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
 const UpgradeCard = ({navigation}) => {
 	return (
-		<TouchableWithoutFeedback onPress={() => navigation.navigate('Profile')}>
+		<TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
 		<View style={styles.container}>
 			<ImageBackground
 				style={styles.imgBackground}
