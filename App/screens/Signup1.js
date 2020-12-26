@@ -68,6 +68,11 @@ const Signup1 = ({navigation}) => {
 		}
 	}
     const onCompleteHandler = () =>{
+        
+        if (!/^[a-zA-Z]+$/.test(lname) || !/^[a-zA-Z]+$/.test(fname)) {
+            alert("use only valid characters!")
+            return
+        }
         if (fname.length < 3)
         {
            alert("You need atleast 3 letters for First name")
@@ -85,6 +90,7 @@ const Signup1 = ({navigation}) => {
             alert("You need to enter all details to complete signing up")
             return
         }
+
         navigation.push("Signup2",{email:email,fname:fname,lname:lname,password:password,phone:phone,date:date,selectedValue:selectedValue,image:image,syllabus:syllabus})
     }
     return (
@@ -130,32 +136,32 @@ const Signup1 = ({navigation}) => {
         />
         </View>
         <TextInput style={styles.inputText}              
-            onChangeText={text => setfname(text)}    
+                        onChangeText={text => setfname(text.replace(/['"]+/g, ''))}    
             value={fname}             
             placeholder="First Name"
          />
           <TextInput style={styles.inputText}              
-            onChangeText={text => setlname(text)}    
+                        onChangeText={text => setlname(text.replace(/['"]+/g, ''))}    
             value={lname}             
             placeholder="Last Name"
          />
 
 
         <TextInput style={styles.inputText}                 
-            onChangeText={text => setEmail(text)}    
+                        onChangeText={text => setEmail(text.replace(/['"]+/g, ''))}    
             value={email}             
             placeholder="someone@example.com"
             keyboardType='email-address' />  
 
             
         <TextInput style={styles.inputText}                 
-            onChangeText={text => setPassword(text)}    
+                        onChangeText={text => setPassword(text.replace(/['"]+/g, ''))}    
             value={password}             
             placeholder="Password"       
             secureTextEntry={true} />     
               
         <TextInput style={styles.inputText}              
-            onChangeText={text => setPhone(text)}    
+                        onChangeText={text => setPhone(text.replace(/['"]+/g, ''))}    
             value={phone}             
 			placeholder="Phone Number"
 			keyboardType="number-pad"

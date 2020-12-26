@@ -26,14 +26,16 @@ const Signup2 = ({navigation,route}) => {
         let image = route.params.image
         let syllabus = route.params.syllabus
 
+        if (!/^[a-zA-Z]+$/.test(school) || !/^[a-zA-Z]+$/.test(street) || !/^[a-zA-Z]+$/.test(city)) {
+            alert("use only valid characters!")
+            return
+        }
+
         if(school.length < 4){
             alert("Your school name is not complete!")
             return
         }
-        if (school.length < 10) {
-            alert("Your school name is not complete!")
-            return
-        }
+
         if (street.length < 5) {
             alert("Your street name is not complete!")
             return
@@ -62,27 +64,27 @@ const Signup2 = ({navigation,route}) => {
       >
 
             <TextInput style={styles.inputText}              
-                onChangeText={text => setschool(text)}    
+                onChangeText={text => setschool(text.replace(/['"]+/g, ''))}    
                 value={school}             
                 placeholder="School Name"
             />
             <TextInput style={styles.inputText}              
-                onChangeText={text => setaddress(text)}    
+                onChangeText={text => setaddress(text.replace(/['"]+/g, ''))}    
                 value={address}             
                 placeholder="Address"
             />
              <TextInput style={styles.inputText}              
-                onChangeText={text => setstreet(text)}    
+                onChangeText={text => setstreet(text.replace(/['"]+/g, ''))}    
                 value={street}             
                 placeholder="Street Name"
             />
             <TextInput style={styles.inputText}              
-                onChangeText={text => setcity(text)}    
+                onChangeText={text => setcity(text.replace(/['"]+/g, ''))}    
                 value={city}             
                 placeholder="City"
             />
               <TextInput style={styles.inputText}              
-                onChangeText={text => setpincode(text)}    
+                onChangeText={text => setpincode(text.replace(/['"]+/g, ''))}    
                 value={pincode}             
                 placeholder="Pincode"
                 keyboardType={"number-pad"}
