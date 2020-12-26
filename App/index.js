@@ -230,7 +230,7 @@ const HomeStackScreen = ({ navigation }) => (
 			component={ChapterVideo}
 			options={({ route }) => ({
 				title: route.params.name,
-				headerShown: false,
+				headerShown: true,
 			})}
 		/>
 		<HomeStack.Screen
