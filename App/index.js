@@ -391,8 +391,16 @@ const TabsScreen = ( ) => (
 	</Tabs.Navigator>
 )
 
+const removeValue = async () => {
+	try {
+		await AsyncStorage.removeItem('watchHistory')
+	} catch (e) {
+		console.log(e)
+	}
+}
 const Logout = () => {
 	Firebase.auth().signOut()
+	removeValue()
 	return null
 }
 

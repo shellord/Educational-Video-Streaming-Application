@@ -31,16 +31,16 @@ const UpcomingLive = ({route,navigation}) => {
             })
     }, [userclass,syllabus,upcominglivevids])
     
-    if (upcominglivevids) {
-        if (Object.keys(upcominglivevids[0]).length == 1) {
-            return (
-                <ActivityIndicator
-                    size="large"
-                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-                />
-            )
-        }
-    }
+    // if (upcominglivevids) {
+    //     if (upcominglivevids[0].length == 1) {
+    //         return (
+    //             <ActivityIndicator
+    //                 size="large"
+    //                 style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    //             />
+    //         )
+    //     }
+    // }
     return (
         <ScrollView style={styles.container}>
             {upcominglivevids?
