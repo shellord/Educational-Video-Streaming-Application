@@ -1,25 +1,23 @@
 import React from 'react'
 import {View,StyleSheet,ActivityIndicator} from 'react-native'
-import { WebView } from 'react-native-webview'
+import { Video } from 'expo-av'
 
  
  const LiveStreamingScreen = ({ route }) => {
+    
   return (
     <View style={styles.container}>
-    <WebView
-      source={{
-          uri: 'http://marvelapi.ddns.net/LiveStream.php?url='+route.params.url
-      }}
-      startInLoadingState={true}
-        renderLoading={() => (
-          <ActivityIndicator
-            color='black'
-            size='large'
-            style={styles.flexContainer}
-          />
-        )}
-        javaScriptEnabled={true}
-        mixedContentMode='always'
+      <Video
+        source={{ uri: route.params.url }}
+        rate={1.0}
+        volume={1.0}
+        isMuted={false}
+        resizeMode={Video.RESIZE_MODE_CONTAIN}
+        shouldPlay
+        usePoster={true}
+        isLooping={false}
+        useNativeControls
+        style={{ width: '100%', height: 280, marginTop: 0, zIndex: 1, backgroundColor: 'black' }}
       />
     </View>
 )
