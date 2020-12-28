@@ -32,7 +32,6 @@ const LiveStreamingScreen = ({ route }) => {
       })
   }, [subscriptionStatus])
 
-  console.log(route.params)
   return (
     <ScrollView style={styles.container}>
       <Video

@@ -42,22 +42,34 @@ const UpcomingLiveCard = (item) => {
     item.time ? time = item.time.split('T')[1].split('.')[0] : null
     item.time ? readabletime = tConvert(time).split(':')[0] + ':' + tConvert(time).split(':')[1] + ' ' + tConvert(time).split(':')[2][2] + tConvert(time).split(':')[2][3] : null
     item.time ? timestamp = Date.parse(item.time.split('Z'))[0] : null
-    item.time ? timestamp = Date.parse(item.time.split('Z')[0]) : null
-    console.log(image)
+    // function secondsDiff(d1, d2) {
+    //     // console.log("d1:"+d1+"d2:"+d2)
+    //     let secDiff = Math.floor((new Date(d2).getTime() - new Date(d1).getTime()) / 1000)
+
+    //     return Math.abs(secDiff)
+    // }
     function secondsDiff(d1, d2) {
         // console.log("d1:"+d1+"d2:"+d2)
-        let secDiff = Math.floor((new Date(d2) - new Date(d1)) / 1000 % 60)
-        console.log(secDiff)
-        return Math.abs(secDiff)
+        let secDiff = Math.floor((new Date(d1).getTime() - new Date(d2).getTime()) / 1000)
+        // console.log("time d1" + d1)
+        // console.log("time d2" + d2)
+        // let td1 = new Date(d1).getTime()
+        // let td2 = new Date(d2).getTime()
+        // let diff = Math.floor((td1 - td2) / 1000)
+        // console.log("d1: " + td1)
+        // console.log("d2: " + td2)
+        // console.log("diff: " + diff)
+        // console.log(secDiff)
+        return Math.abs(Math.ceil(secDiff))
     }
+    secondsDiff(new Date(), new Date('2020-12-29T00:46:02.000Z'))
+    // console.log(item.time)
     const subbedLive = {
         id: item.id,
         title: item.title,
         description: item.description,
     }
     let subHistory = subbedLive
-
-
     const doNotify = () => {
         // console.log(item)
         // Prepare the notification channel
@@ -77,7 +89,8 @@ const UpcomingLiveCard = (item) => {
                 sound: 'email-sound.wav', // <- for Android below 8.0
             },
             trigger: {
-                seconds: secondsDiff(new Date(), item.time),
+
+                seconds: item.time * 3600,
                 // channelId: 'new-emails', // <- for Android 8.0+, see definition above
             },
         });
