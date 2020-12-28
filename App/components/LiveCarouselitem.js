@@ -1,23 +1,23 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
-import {TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { AuthContext } from "../context"
 
 const { width, height } = Dimensions.get('window')
 
-const LiveCarouselitem = ({ item,nav }) => {
+const LiveCarouselitem = ({ item, nav }) => {
     const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
-    let image=''
-    item.image ? image = ADMIN_UPLOADS_URL+ JSON.parse(item.image)[0].name:null
+    let image = ''
+    item.image ? image = ADMIN_UPLOADS_URL + JSON.parse(item.image)[0].name : null
     return (
-        <TouchableWithoutFeedback onPress={()=>nav.navigate('LiveStreamingScreen',{nav:nav,url:item.url})}>
-                <View style={styles.cardView}>
-                    <Image style={styles.image} source={{ uri: image }} />
-                    <View style={styles.textView}>
-                        <Text style={styles.itemTitle}> {item.name}</Text>
-                        <Text style={styles.itemDescription}>{item.description}</Text>
-                    </View>
-                </View>      
+        <TouchableWithoutFeedback onPress={() => nav.navigate('LiveStreamingScreen', { nav: nav, url: item.url, name: item.name, description: item.description, isfree: item.isfree })}>
+            <View style={styles.cardView}>
+                <Image style={styles.image} source={{ uri: image }} />
+                <View style={styles.textView}>
+                    <Text style={styles.itemTitle}> {item.name}</Text>
+                    <Text style={styles.itemDescription}>{item.description}</Text>
+                </View>
+            </View>
         </TouchableWithoutFeedback>
     )
 
@@ -25,8 +25,8 @@ const LiveCarouselitem = ({ item,nav }) => {
 
 const styles = StyleSheet.create({
     cardView: {
-        width: width/1.5 ,
-        height: height /4,
+        width: width / 1.5,
+        height: height / 4,
         backgroundColor: 'black',
         marginHorizontal: 10,
         borderRadius: 10,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 3,
         elevation: 5,
-        
+
     },
 
     textView: {
