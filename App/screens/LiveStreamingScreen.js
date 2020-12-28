@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   videoTitle: {
     fontSize: 20,
     fontWeight: "800",
+    marginBottom: 10,
     color: colors.HEADER_TEXT_COLOR
   },
   titleContainer: {
