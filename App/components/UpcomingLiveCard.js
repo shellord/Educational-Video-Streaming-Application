@@ -1,6 +1,6 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Pressable } from 'react-native'
-import { StyleSheet, Text, View,Image } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { AuthContext } from "../context"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
@@ -31,19 +31,19 @@ const UpcomingLiveCard = (item) => {
         }
     }
     useEffect(() => {
-      checkMultiPermissions()
+        checkMultiPermissions()
     }, [])
-  
+
 
     const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
-    let date,time,image,readabletime,timestamp
-    item.image ? image = ADMIN_UPLOADS_URL + JSON.parse(item.image)[0].name : null
-    item.time ? date = item.time.split('T')[0]:null
-    item.time ? time = item.time.split('T')[1].split('.')[0]:null
+    let date, time, image, readabletime, timestamp
+    item.image ? image = ADMIN_UPLOADS_URL + JSON.parse(item.image)[0].name.replace('/var/www/html/admin/', '') : null
+    item.time ? date = item.time.split('T')[0] : null
+    item.time ? time = item.time.split('T')[1].split('.')[0] : null
     item.time ? readabletime = tConvert(time).split(':')[0] + ':' + tConvert(time).split(':')[1] + ' ' + tConvert(time).split(':')[2][2] + tConvert(time).split(':')[2][3] : null
-    item.time ? timestamp = Date.parse(item.time.split('Z'))[0]:null
-    item.time ? timestamp = Date.parse(item.time.split('Z')[0]) :null
- 
+    item.time ? timestamp = Date.parse(item.time.split('Z'))[0] : null
+    item.time ? timestamp = Date.parse(item.time.split('Z')[0]) : null
+    console.log(image)
     function secondsDiff(d1, d2) {
         // console.log("d1:"+d1+"d2:"+d2)
         let secDiff = Math.floor((new Date(d2) - new Date(d1)) / 1000 % 60)
@@ -53,79 +53,82 @@ const UpcomingLiveCard = (item) => {
     const subbedLive = {
         id: item.id,
         title: item.title,
-        description:item.description,
+        description: item.description,
     }
     let subHistory = subbedLive
-    
-  
+
+
     const doNotify = () => {
         // console.log(item)
         // Prepare the notification channel
         alert("Notification Turned on for this live video!")
         // Prepare the notification channel
-        Notifications.setNotificationChannelAsync('new-emails', {
-            name: 'E-mail notifications',
-            importance: Notifications.AndroidImportance.HIGH,
-            sound: 'email-sound.wav', // <- for Android 8.0+, see channelId property below
-        });
+        // Notifications.setNotificationChannelAsync('new-emails', {
+        //     name: 'E-mail notifications',
+        //     importance: Notifications.AndroidImportance.HIGH,
+        //     sound: 'email-sound.wav', // <- for Android 8.0+, see channelId property below
+        // });
 
         // Eg. schedule the notification
         Notifications.scheduleNotificationAsync({
             content: {
-                title: item.title +" is now live",
+                title: item.title + " is now live",
                 body: 'Watch it on Marvel Creative Learning App.',
                 sound: 'email-sound.wav', // <- for Android below 8.0
             },
             trigger: {
-                seconds: secondsDiff(new Date(),item.time) ,
-                channelId: 'new-emails', // <- for Android 8.0+, see definition above
+                seconds: secondsDiff(new Date(), item.time),
+                // channelId: 'new-emails', // <- for Android 8.0+, see definition above
             },
         });
     }
-     const onNotifyHandler = () => {    
-         AsyncStorage.getItem('sublivehistory')
-             .then(val => {
-                 if (val !== null) {
-                     let valJson = JSON.parse(val)
-                     if (!valJson.find(elem => elem.id === item.id)) {
-                         subHistory = [...valJson, subbedLive]
-                         AsyncStorage.setItem('sublivehistory', JSON.stringify(subHistory))
-                             .then(() => {
-                                 doNotify()
+    const onNotifyHandler = () => {
+        AsyncStorage.getItem('sublivehistory')
+            .then(val => {
+                if (val !== null) {
+                    let valJson = JSON.parse(val)
+                    if (!valJson.find(elem => elem.id === item.id)) {
+                        subHistory = [...valJson, subbedLive]
+                        AsyncStorage.setItem('sublivehistory', JSON.stringify(subHistory))
+                            .then(() => {
+                                doNotify()
 
-                             })
-                             .catch((error) => {
-                                 console.log(error)
-                             })
-                     }
-                 }
-                 else {
-                     AsyncStorage.setItem('sublivehistory', JSON.stringify([subHistory]))
-                         .then(() => {
-                             doNotify()
-                         })
-                         .catch((error) => {
-                             console.log(error)
-                         })
-                 }
-             })
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+                    }
+                    else {
+                        alert("Already enabled Notification!")
+                    }
+                }
+                else {
+                    AsyncStorage.setItem('sublivehistory', JSON.stringify([subHistory]))
+                        .then(() => {
+                            doNotify()
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                }
+            })
 
     }
 
     return (
         <View style={styles.container}>
-            <Image source={{uri:image}} style={styles.image}/>
+            <Image source={{ uri: image }} style={styles.image} />
             <View style={styles.rightcontainer}>
-              <Text style={{fontSize:16,fontWeight:'bold'}} numberOfLines={1}>{item.title}</Text>
-              <Text>{date}</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }} numberOfLines={1}>{item.title}</Text>
+                <Text>{date}</Text>
                 <Text>{readabletime}</Text>
                 <View style={styles.buttoncontainer}>
                     <Pressable onPress={() => onNotifyHandler()}>
-                        <Text style={{color:"blue",fontSize:14}}>Notify</Text>
+                        <Text style={{ color: "blue", fontSize: 14 }}>Notify</Text>
                     </Pressable>
                 </View>
             </View>
-            
+
         </View>
     )
 }
@@ -133,24 +136,24 @@ const UpcomingLiveCard = (item) => {
 export default UpcomingLiveCard
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        flexDirection:'row',
-        margin:10,
-        backgroundColor:'white'
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        margin: 10,
+        backgroundColor: 'white'
     },
-    image:{
-        flex:1,
-        height:150
+    image: {
+        flex: 1,
+        height: 150
     },
-    rightcontainer:{
-        flex:1,
-        alignItems:'center',
-    
+    rightcontainer: {
+        flex: 1,
+        alignItems: 'center',
+
     },
-    buttoncontainer:{
-        flex:1,
-        justifyContent:'flex-end',
-        paddingBottom:30
+    buttoncontainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingBottom: 30
     }
 })
