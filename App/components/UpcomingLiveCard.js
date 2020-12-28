@@ -5,6 +5,7 @@ import { AuthContext } from "../context"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
+import { CONTACTS } from 'expo-permissions';
 
 
 
@@ -38,10 +39,10 @@ const UpcomingLiveCard = (item) => {
     const { ADMIN_UPLOADS_URL } = React.useContext(AuthContext)
     let date, time, image, readabletime, timestamp
     item.image ? image = ADMIN_UPLOADS_URL + JSON.parse(item.image)[0].name.replace('/var/www/html/admin/', '') : null
-    item.time ? date = item.time.split('T')[0] : null
-    item.time ? time = item.time.split('T')[1].split('.')[0] : null
-    item.time ? readabletime = tConvert(time).split(':')[0] + ':' + tConvert(time).split(':')[1] + ' ' + tConvert(time).split(':')[2][2] + tConvert(time).split(':')[2][3] : null
-    item.time ? timestamp = Date.parse(item.time.split('Z'))[0] : null
+    // item.time ? date = item.time.split('T')[0] : null
+    // item.time ? time = item.time.split('T')[1].split('.')[0] : null
+    // item.time ? readabletime = tConvert(time).split(':')[0] + ':' + tConvert(time).split(':')[1] + ' ' + tConvert(time).split(':')[2][2] + tConvert(time).split(':')[2][3] : null
+    // item.time ? timestamp = Date.parse(item.time.split('Z'))[0] : null
     // function secondsDiff(d1, d2) {
     //     // console.log("d1:"+d1+"d2:"+d2)
     //     let secDiff = Math.floor((new Date(d2).getTime() - new Date(d1).getTime()) / 1000)
@@ -49,21 +50,18 @@ const UpcomingLiveCard = (item) => {
     //     return Math.abs(secDiff)
     // }
     function secondsDiff(d1, d2) {
-        // console.log("d1:"+d1+"d2:"+d2)
-        let secDiff = Math.floor((new Date(d1).getTime() - new Date(d2).getTime()) / 1000)
-        // console.log("time d1" + d1)
-        // console.log("time d2" + d2)
-        // let td1 = new Date(d1).getTime()
-        // let td2 = new Date(d2).getTime()
-        // let diff = Math.floor((td1 - td2) / 1000)
-        // console.log("d1: " + td1)
-        // console.log("d2: " + td2)
-        // console.log("diff: " + diff)
-        // console.log(secDiff)
-        return Math.abs(Math.ceil(secDiff))
+        // console.log(new Date(d2.replace(' ', 'T')).getTime())
+        d2 = d2.replace(' ', 'T')
+        let cd = new Date().getTime() + 19800 * 1000
+        let ld = new Date(d2).getTime()
+
+        let secDiff = Math.floor((ld - cd) / 1000)
+
+        return secDiff
     }
-    secondsDiff(new Date(), new Date('2020-12-29T00:46:02.000Z'))
+
     // console.log(item.time)
+    // secondsDiff(new Date(), item.time)
     const subbedLive = {
         id: item.id,
         title: item.title,
@@ -90,7 +88,7 @@ const UpcomingLiveCard = (item) => {
             },
             trigger: {
 
-                seconds: item.time * 3600,
+                seconds: secondsDiff(new Date(), item.time)
                 // channelId: 'new-emails', // <- for Android 8.0+, see definition above
             },
         });
@@ -133,8 +131,8 @@ const UpcomingLiveCard = (item) => {
             <Image source={{ uri: image }} style={styles.image} />
             <View style={styles.rightcontainer}>
                 <Text style={{ fontSize: 16, fontWeight: 'bold' }} numberOfLines={1}>{item.title}</Text>
-                <Text>{date}</Text>
-                <Text>{readabletime}</Text>
+                <Text>{item.time}</Text>
+                {/* <Text>{readabletime}</Text> */}
                 <View style={styles.buttoncontainer}>
                     <Pressable onPress={() => onNotifyHandler()}>
                         <Text style={{ color: "blue", fontSize: 14 }}>Notify</Text>
