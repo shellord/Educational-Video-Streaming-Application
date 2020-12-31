@@ -1,11 +1,11 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native'
 import { AuthContext } from "../context"
 import Firebase from "../../config/Firebase"
 import UpcomingLiveCard from '../components/UpcomingLiveCard'
 import colors from '../styles/styles'
 
-const UpcomingLive = ({route,navigation}) => {
+const UpcomingLive = ({ route, navigation }) => {
 
     const { API_URL } = React.useContext(AuthContext)
     const [userclass, setUserClass] = useState('')
@@ -19,18 +19,18 @@ const UpcomingLive = ({route,navigation}) => {
                 setUserClass(json.response[0]["class"])
                 setsyllabus(json.response[0].syllabus)
                 fetch(API_URL + `/api/upcominglive/${userclass}/${syllabus}`)
-                .then((response) => response.json())
-                .then((json) => {
-                    setupcominglivevids(json.response)
-                })
-                .catch((error) => {
-                })
+                    .then((response) => response.json())
+                    .then((json) => {
+                        setupcominglivevids(json.response)
+                    })
+                    .catch((error) => {
+                    })
             })
             .catch((error) => {
                 alert("Error!")
             })
-    }, [userclass,syllabus,upcominglivevids])
-    
+    }, [userclass, syllabus, upcominglivevids])
+
     // if (upcominglivevids) {
     //     if (upcominglivevids[0].length == 1) {
     //         return (
@@ -43,7 +43,7 @@ const UpcomingLive = ({route,navigation}) => {
     // }
     return (
         <ScrollView style={styles.container}>
-            {upcominglivevids?
+            {upcominglivevids ?
                 <FlatList
                     data={upcominglivevids}
                     renderItem={({ item }) => (
@@ -58,10 +58,10 @@ const UpcomingLive = ({route,navigation}) => {
 
                     )}
                     keyExtractor={(item, index) => index.toString()}
-                />:null
+                /> : null
             }
-               
-            
+
+
         </ScrollView>
     )
 }
@@ -69,8 +69,8 @@ const UpcomingLive = ({route,navigation}) => {
 export default UpcomingLive
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
         backgroundColor: colors.BACKGROUND_COLOR
 
     }
