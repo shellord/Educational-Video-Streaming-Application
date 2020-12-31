@@ -38,12 +38,12 @@ const Home = ({ navigation }) => {
 		} catch (e) {
 			// console.log(e)
 		}
-	}  
+	}
 
 	if (useIsFocused()) {
 		getData()
-		if(userImage){
-			if(userImage.includes('default-user.png')){
+		if (userImage) {
+			if (userImage.includes('default-user.png')) {
 				fetch(API_URL + `/api/users/email/${Firebase.auth().currentUser.email}`)
 					.then((response) => response.json())
 					.then((json) => {
@@ -80,7 +80,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert(error)
 			})
-		fetch(API_URL + "/api/subjects/" + userclass+"/"+ syllabus)
+		fetch(API_URL + "/api/subjects/" + userclass + "/" + syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setSubjects(json.response)
@@ -89,7 +89,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert(error)
 			})
-		fetch(API_URL + "/api/videos/featured/" + userclass+"/"+syllabus)
+		fetch(API_URL + "/api/videos/featured/" + userclass + "/" + syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setFeaturedvids(json.response)
@@ -97,7 +97,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[2]")
 			})
-		fetch(API_URL + "/api/popularvideos/" + userclass+"/"+syllabus)
+		fetch(API_URL + "/api/popularvideos/" + userclass + "/" + syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setpopularVideos(json.response)
@@ -105,7 +105,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[3]")
 			})
-		fetch(API_URL + "/api/livevideos/" +userclass+"/"+syllabus)
+		fetch(API_URL + "/api/livevideos/" + userclass + "/" + syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setlivevideos(json.response)
@@ -113,7 +113,7 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[3]")
 			})
-		fetch(API_URL + "/api/videos/latest/" + userclass+"/"+syllabus)
+		fetch(API_URL + "/api/videos/latest/" + userclass + "/" + syllabus)
 			.then((response) => response.json())
 			.then((json) => {
 				setLatestvids(json.response)
@@ -121,15 +121,15 @@ const Home = ({ navigation }) => {
 			.catch((error) => {
 				alert("Network Issue!.Check your internet connection[4]")
 			})
-	}, [userclass,syllabus])
-	
+	}, [userclass, syllabus])
+
 	return (
 		<ScrollView style={styles.container}>
 			<HeaderWelcome navigation={navigation} username={username} userimage={userImage} />
 			<View style={styles.CarouselContainer}>
 				{/* <HeaderCarousel /> */}
 			</View>
-			{!subscribtionStatus ? <UpgradeCard navigation={navigation}/> : null}
+			{!subscribtionStatus ? <UpgradeCard navigation={navigation} /> : null}
 			<HorizontalScroll
 				subjects={subjects}
 				navigation={navigation}
@@ -144,16 +144,15 @@ const Home = ({ navigation }) => {
 					userclass={userclass}
 				/>
 			) : (
-				null
-			)}
-			{livevideos ?
-				<LiveCarousel
-					title="Live Classes"
-					data={livevideos}
-					nav={navigation}
-					userclass={userclass}
-				/> : null}
-{/* 
+					null
+				)}
+			<LiveCarousel
+				title="Live Classes"
+				data={livevideos}
+				nav={navigation}
+				userclass={userclass}
+			/>
+			{/* 
 			{latestvids ? (
 				<VideoList
 					title="Latest Videos"
@@ -164,13 +163,13 @@ const Home = ({ navigation }) => {
 			) : (
 				<></>
 			)} */}
-			{featuredvids?(	<Carousel
+			{featuredvids ? (<Carousel
 				title="Featured Videos"
 				data={featuredvids}
 				nav={navigation}
 				userclass={userclass}
-			/>):null}
-		
+			/>) : null}
+
 			{popularVideos ? (
 				<VideoList
 					title="Popular Videos"
@@ -179,9 +178,9 @@ const Home = ({ navigation }) => {
 					userclass={userclass}
 				/>
 			) : (
-				<></>
-			)} 
-	
+					<></>
+				)}
+
 
 
 		</ScrollView>

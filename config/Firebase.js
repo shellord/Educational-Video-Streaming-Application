@@ -1,16 +1,15 @@
 import firebase from 'firebase'
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAQT5HpICWK7Rc1Av4Jo4hVLAr4cmSV05o",
-    authDomain: "marvel-884ea.firebaseapp.com",
-    databaseURL: "https://marvel-884ea.firebaseio.com",
-    projectId: "marvel-884ea",
-    storageBucket: "marvel-884ea.appspot.com",
-    messagingSenderId: "957738891750",
-    appId: "1:957738891750:web:e25d6ad991558dc398fe27",
-    measurementId: "G-WCBXVWLS6R"
-  }
+var firebaseConfig = {
+  apiKey: "AIzaSyBnDy_S-bFN7hNO3qvw3LYg-1unnoZ5PxM",
+  authDomain: "marvelapp-9d24b.firebaseapp.com",
+  projectId: "marvelapp-9d24b",
+  storageBucket: "marvelapp-9d24b.appspot.com",
+  messagingSenderId: "186055597146",
+  appId: "1:186055597146:web:fbd89572d04e746cfa0c63",
+  measurementId: "G-ZBP93X999Q"
+}
 
 const Firebase = firebase.initializeApp(firebaseConfig)
 

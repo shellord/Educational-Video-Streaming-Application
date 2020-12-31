@@ -22,6 +22,7 @@ const UpcomingLive = ({ route, navigation }) => {
                     .then((response) => response.json())
                     .then((json) => {
                         setupcominglivevids(json.response)
+                        console.log(11)
                     })
                     .catch((error) => {
                     })
