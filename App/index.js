@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { AsyncStorage, View, TouchableOpacity } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -85,7 +85,7 @@ const AuthStackScreen = () => (
 				headerShown: false,
 			}}
 		/>
-			<AuthStack.Screen
+		<AuthStack.Screen
 			name="ForgotPwd"
 			component={ForgotPwd}
 			options={{
@@ -343,7 +343,7 @@ const AnnouncementStackScreen = () => (
 	</AnnouncementStack.Navigator>
 )
 
-const TabsScreen = ( ) => (
+const TabsScreen = () => (
 	<Tabs.Navigator
 		screenOptions={({ route }) => ({
 			tabBarIcon: ({ focused, color, size }) => {
@@ -436,7 +436,7 @@ const DrawerScreen = () => (
 		}}
 		screenOptions={
 			{
-				gestureEnabled:false
+				gestureEnabled: false
 			}
 		}
 	>
@@ -495,22 +495,22 @@ const RootStackScreen = ({ userToken, isFinishedSignup, showIntroScreen }) => (
 		{showIntroScreen ? (
 			<RootStack.Screen name="IntroScreen" component={IntroScreen} />
 		) : userToken ? (
-				<RootStack.Screen
-					name="App"
-					component={DrawerScreen}
-					options={{
-						animationEnabled: false,
-					}}
-				/>
-		) : (
 			<RootStack.Screen
-				name="Auth"
-				component={AuthStackScreen}
+				name="App"
+				component={DrawerScreen}
 				options={{
 					animationEnabled: false,
 				}}
 			/>
-		)}
+		) : (
+					<RootStack.Screen
+						name="Auth"
+						component={AuthStackScreen}
+						options={{
+							animationEnabled: false,
+						}}
+					/>
+				)}
 	</RootStack.Navigator>
 )
 
@@ -520,7 +520,7 @@ export default () => {
 	const [isFinishedSignup, setisFinishedSignup] = useState(0)
 	const [showIntroScreen, setShowIntroScreen] = useState(1)
 
-	
+
 	AsyncStorage.getItem("showIntro").then((val) => {
 		if (val !== null) setShowIntroScreen(0)
 	})
@@ -554,7 +554,7 @@ export default () => {
 		setInitializing(false)
 
 	})
-	const uploadImage = (email,image) => {
+	const uploadImage = (email, image) => {
 		let uri = image.uri
 		let fileExtension = uri.substr(uri.lastIndexOf(".") + 1)
 
@@ -594,12 +594,12 @@ export default () => {
 	// 		.catch((err) => console.log(err))
 	// }
 
-	const adduserData = (fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode,syllabus) => {
+	const adduserData = (fname, lname, date, phone, selectedValue, email, address, school, street, city, pincode, syllabus) => {
 		// console.log("API CALL: "+API_URL +
 		// 	`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/scert/${address}/${date}/${school}/${street}/${city}/${pincode}`)
 		fetch(
 			API_URL +
-				`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/${syllabus} /${address}/${date}/${school}/${street}/${city}/${pincode}`
+			`/api/users/register/${fname}/${lname}/${email}/${phone}/${selectedValue}/${syllabus} /${address}/${date}/${school}/${street}/${city}/${pincode}`
 		)
 			.then((response) => response.json())
 			.then((json) => {
@@ -608,48 +608,47 @@ export default () => {
 				alert(error)
 			})
 	}
-	
-	const handleSignUp = (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus) => {
-	  Firebase.auth()
-	      .createUserWithEmailAndPassword(email,password)
-		  .then(()=>
-		  {
-			adduserData(fname,lname,date,phone,selectedValue,email,address,school,street,city,pincode,syllabus)
-			uploadImage(email,image)
-			// setUserToken(Firebase.auth().currentUser)
-		  }
-		  )
-	      .catch(error => {
-	              alert(error.message)
-	      })
+
+	const handleSignUp = (selectedValue, fname, lname, date, email, password, phone, address, image, school, street, city, pincode, syllabus) => {
+		Firebase.auth()
+			.createUserWithEmailAndPassword(email, password)
+			.then(() => {
+				adduserData(fname, lname, date, phone, selectedValue, email, address, school, street, city, pincode, syllabus)
+				uploadImage(email, image)
+				// setUserToken(Firebase.auth().currentUser)
+			}
+			)
+			.catch(error => {
+				alert(error.message)
+			})
 	}
 
-	const handleSignIn =(email,password) =>{
-	  Firebase.auth().signInWithEmailAndPassword(email,password)
-	          .then(() =>setUserToken(Firebase.auth().currentUser))
-	          .catch(error =>{
-	              alert(error.message)
-	          })
+	const handleSignIn = (email, password) => {
+		Firebase.auth().signInWithEmailAndPassword(email, password)
+			.then(() => setUserToken(Firebase.auth().currentUser))
+			.catch(error => {
+				alert(error.message)
+			})
 	}
 
 	const authContext = React.useMemo(() => {
 		return {
-			signIn: (email,password) => {
-			  handleSignIn(email,password)
+			signIn: (email, password) => {
+				handleSignIn(email, password)
 			},
-			signUp: (selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus) => {
-			  handleSignUp(selectedValue,fname,lname,date,email,password,phone,address,image,school,street,city,pincode,syllabus)
+			signUp: (selectedValue, fname, lname, date, email, password, phone, address, image, school, street, city, pincode, syllabus) => {
+				handleSignUp(selectedValue, fname, lname, date, email, password, phone, address, image, school, street, city, pincode, syllabus)
 			},
 			signOut: () => {
 				Firebase.auth().signOut()
 			},
 			passwordReset: email => {
 				Firebase.auth().sendPasswordResetEmail(email)
-				.then(function (user) {
-					alert('Please check your email...')
-				}).catch(function (e) {
-					alert(e)
-				})
+					.then(function (user) {
+						alert('Please check your email...')
+					}).catch(function (e) {
+						alert(e)
+					})
 			},
 			finishLogin: () => {
 				setisFinishedSignup(1)
@@ -660,7 +659,7 @@ export default () => {
 			},
 			API_URL: API_URL,
 			ASSETS_URL: ASSETS_URL,
-			ADMIN_UPLOADS_URL:ADMIN_UPLOADS_URL
+			ADMIN_UPLOADS_URL: ADMIN_UPLOADS_URL
 		}
 	}, [])
 

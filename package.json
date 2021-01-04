@@ -29,6 +29,7 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.0.tar.gz",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-autocomplete-input": "^4.2.0",
     "react-native-custom-picker": "^0.4.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^2.0.0",
