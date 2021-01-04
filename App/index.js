@@ -35,6 +35,7 @@ import { StatusBar } from "expo-status-bar"
 import Signin from "./screens/Signin"
 import Signup1 from "./screens/Signup1"
 import Signup2 from "./screens/Signup2"
+import Signup3 from "./screens/Signup3"
 import colors from "./styles/styles"
 import ForgotPwd from './screens/ForgotPwd'
 import UpcomingLive from './screens/UpcomingLive'
@@ -104,6 +105,14 @@ const AuthStackScreen = () => (
 		<AuthStack.Screen
 			name="Signup2"
 			component={Signup2}
+			options={{
+				title: "Signup",
+				headerShown: false,
+			}}
+		/>
+		<AuthStack.Screen
+			name="Signup3"
+			component={Signup3}
 			options={{
 				title: "Signup",
 				headerShown: false,

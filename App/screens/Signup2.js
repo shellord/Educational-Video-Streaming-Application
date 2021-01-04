@@ -9,46 +9,11 @@ import Autocomplete from 'react-native-autocomplete-input';
 
 const Signup2 = ({ navigation, route }) => {
 
-    const { signUp, API_URL } = React.useContext(AuthContext)
-    const [school, setschool] = useState('')
     const [street, setstreet] = useState('')
     const [pincode, setpincode] = useState('')
     const [city, setcity] = useState('')
     const [address, setaddress] = useState('')
-    const [Schools, setSchools] = useState([])
-    // For Filtered Data
-    const [filteredSchools, setFilteredSchools] = useState([])
-    // For Selected Data
-    const [selectedSchoolValue, setSelectedSchoolValue] = useState('')
-    const [schoolname, setschoolname] = useState('')
-    useEffect(() => {
-        fetch(API_URL + '/api/schoollist')
-            .then((res) => res.json())
-            .then((json) => {
-                // const { resonse: Schools } = json;
-                setSchools(json.response)
-                console.log(json.response)
-                //setting the data in the Schools state
-            })
-            .catch((e) => {
-                alert(e);
-            });
-    }, []);
 
-    const findSchool = (query) => {
-        // Method called every time when we change the value of the input
-        if (query) {
-            // Making a case insensitive regular expression
-            const regex = new RegExp(`${query.trim()}`, 'i');
-            // Setting the filtered School array according the query
-            setFilteredSchools(
-                Schools.filter((School) => School.title.search(regex) >= 0)
-            );
-        } else {
-            // If the query is null then return blank
-            setFilteredSchools([]);
-        }
-    };
 
     const onCompleteHandler = () => {
         let selectedValue = route.params.selectedValue
@@ -60,17 +25,12 @@ const Signup2 = ({ navigation, route }) => {
         let phone = route.params.phone
         let image = route.params.image
         let syllabus = route.params.syllabus
-        let userschool
-        selectedSchoolValue ? userschool = selectedSchoolValue : userschool = schoolname
-        if (!/^[a-zA-Z]+$/.test(school) || !/^[a-zA-Z]+$/.test(street) || !/^[a-zA-Z]+$/.test(city)) {
+
+        if (!/^[a-zA-Z]+$/.test(street) || !/^[a-zA-Z]+$/.test(city)) {
             alert("use only valid characters!")
             return
         }
 
-        if (school.length < 4) {
-            alert("Your school name is not complete!")
-            return
-        }
 
         if (street.length < 5) {
             alert("Your street name is not complete!")
@@ -84,12 +44,13 @@ const Signup2 = ({ navigation, route }) => {
             alert("Your Pincode is not complete!")
             return
         }
-        if (!school || !street || !pincode || !city || !address || !address || !userschool) {
+        if (!street || !pincode || !city || !address || !address) {
             alert("You need to enter all details to complete signing up")
             return
         }
+        navigation.push("Signup3", { selectedValue: selectedValue, fname: fname, lname: lname, date: date, email: email, password: password, phone: phone, address: address, image: image, street: street, city: city, pincode, pincode, syllabus })
 
-        signUp(selectedValue, fname, lname, date, email, password, phone, address, image, userschool, street, city, pincode, syllabus)
+        // signUp(selectedValue, fname, lname, date, email, password, phone, address, image, userschool, street, city, pincode, syllabus)
     }
 
     return (
@@ -100,63 +61,6 @@ const Signup2 = ({ navigation, route }) => {
         >
 
 
-
-            {/* <TextInput style={styles.inputText}
-                onChangeText={text => setschool(text.replace(/['"]+/g, ''))}
-                value={school}
-                placeholder="School Name"
-            /> */}
-
-            {/* <View style={styles.descriptionContainer}>
-                {Schools.length > 0 ? (
-                    <>
-                        <Text style={styles.infoText}>
-                            Selected Data
-              </Text>
-                        <Text style={styles.infoText}>
-                            {JSON.stringify(selectedSchoolValue)}
-                        </Text>
-                    </>
-                ) : (
-                        <Text style={styles.infoText}>
-                            Enter The School Title
-                        </Text>
-                    )}
-            </View> */}
-            <Autocomplete
-                autoCapitalize="none"
-                autoCorrect={false}
-                containerStyle={styles.autocompleteContainer}
-                // Data to show in suggestion
-                inputContainerStyle={styles.autocompleteInputText}
-                data={filteredSchools}
-                // Default value if you want to set something in input
-                defaultValue={
-                    JSON.stringify(selectedSchoolValue) === '{}' ?
-                        '' :
-                        selectedSchoolValue.title
-                }
-                // Onchange of the text changing the state of the query
-                // Which will trigger the findSchool method
-                // To show the suggestions
-                onChangeText={(text) => {
-                    setschoolname(text)
-                    findSchool(text)
-                }}
-                placeholder="Enter the School title"
-                renderItem={({ item }) => (
-                    // For the suggestion view
-                    <TouchableOpacity
-                        onPress={() => {
-                            setSelectedSchoolValue(item);
-                            setFilteredSchools([]);
-                        }}>
-                        <Text style={styles.itemText}>
-                            {item.title}
-                        </Text>
-                    </TouchableOpacity>
-                )}
-            />
             <TextInput style={styles.inputText}
                 onChangeText={text => setaddress(text.replace(/['"]+/g, ''))}
                 value={address}
@@ -180,7 +84,7 @@ const Signup2 = ({ navigation, route }) => {
             />
 
             <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>
-                <Text style={styles.buttonText}>Sign Up</Text>
+                <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                 <Text style={styles.buttonText}>Back</Text>
