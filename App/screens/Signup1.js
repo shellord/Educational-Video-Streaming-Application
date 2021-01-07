@@ -118,7 +118,7 @@ const Signup1 = ({ navigation }) => {
                     <View style={{ flexDirection: 'row', width: 320, justifyContent: 'space-between', }}>
                         <CustomPicker
                             options={options}
-                            placeholder="Choose Class"
+                            placeholder="Choose Class *"
                             getLabel={(item) => item.value}
                             // defaultValue={6}
                             onValueChange={(value) => {
@@ -127,48 +127,65 @@ const Signup1 = ({ navigation }) => {
                         />
                         <CustomPicker
                             options={syllabusoption}
-                            placeholder="Choose Syllabus"
+                            placeholder="Choose Syllabus *"
                             // defaultValue={'scert'}
                             onValueChange={value => {
                                 setsyllabus(value)
                             }}
                         />
                     </View>
-                    <TextInput style={styles.inputText}
-                        onChangeText={text => setfname(text.replace(/['"]+/g, ''))}
-                        value={fname}
-                        placeholder="First Name"
-                    />
-                    <TextInput style={styles.inputText}
-                        onChangeText={text => setlname(text.replace(/['"]+/g, ''))}
-                        value={lname}
-                        placeholder="Last Name"
-                    />
 
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <TextInput style={styles.inputText}
+                            onChangeText={text => setfname(text.replace(/['"]+/g, ''))}
+                            value={fname}
+                            placeholder="First Name"
+                        />
+                        <Text style={styles.requiredStyle}>*</Text>
+                    </View>
 
-                    <TextInput style={styles.inputText}
-                        onChangeText={text => setEmail(text.replace(/['"]+/g, ''))}
-                        value={email}
-                        placeholder="someone@example.com"
-                        keyboardType='email-address' />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 
+                        <TextInput style={styles.inputText}
+                            onChangeText={text => setlname(text.replace(/['"]+/g, ''))}
+                            value={lname}
+                            placeholder="Last Name"
+                        />
+                        <Text style={styles.requiredStyle}>*</Text>
+                    </View>
 
-                    <TextInput style={styles.inputText}
-                        onChangeText={text => setPassword(text.replace(/['"]+/g, ''))}
-                        value={password}
-                        placeholder="Password"
-                        secureTextEntry={true} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <TextInput style={styles.inputText}
+                            onChangeText={text => setEmail(text.replace(/['"]+/g, ''))}
+                            value={email}
+                            placeholder="someone@example.com"
+                            keyboardType='email-address' />
+                        <Text style={styles.requiredStyle}>*</Text>
+                    </View>
 
-                    <TextInput style={styles.inputText}
-                        onChangeText={text => setPhone(text.replace(/['"]+/g, ''))}
-                        value={phone}
-                        placeholder="Phone Number"
-                        keyboardType="number-pad"
-                    />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <TextInput style={styles.inputText}
+                            onChangeText={text => setPassword(text.replace(/['"]+/g, ''))}
+                            value={password}
+                            placeholder="Password"
+                            secureTextEntry={true} />
+                        <Text style={styles.requiredStyle}>*</Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <TextInput style={styles.inputText}
+                            onChangeText={text => setPhone(text.replace(/['"]+/g, ''))}
+                            value={phone}
+                            placeholder="Phone Number"
+                            keyboardType="number-pad"
+                        />
+                        <Text style={styles.requiredStyle}>*</Text>
+                    </View>
+
                     <View style={{ width: "80%", marginTop: 10, backgroundColor: 'white', borderColor: 'black', borderWidth: 1 }}>
                         <DatePicker
                             style={{ width: 320 }}
-                            placeholder="Date of birth"
+                            placeholder="Date of birth *"
                             date={date}
                             mode="date"
                             format="YYYY-MM-DD"
@@ -225,6 +242,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.BACKGROUND_COLOR
 
+    },
+    requiredStyle: {
+        fontSize: 16,
+        marginTop: 20
     },
     inputText: {
         fontSize: 14,

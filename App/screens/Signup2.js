@@ -60,29 +60,44 @@ const Signup2 = ({ navigation, route }) => {
             style={styles.container}
         >
 
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 
-            <TextInput style={styles.inputText}
-                onChangeText={text => setaddress(text.replace(/['"]+/g, ''))}
-                value={address}
-                placeholder="Address"
-            />
-            <TextInput style={styles.inputText}
-                onChangeText={text => setstreet(text.replace(/['"]+/g, ''))}
-                value={street}
-                placeholder="Street Name"
-            />
-            <TextInput style={styles.inputText}
-                onChangeText={text => setcity(text.replace(/['"]+/g, ''))}
-                value={city}
-                placeholder="City"
-            />
-            <TextInput style={styles.inputText}
-                onChangeText={text => setpincode(text.replace(/['"]+/g, ''))}
-                value={pincode}
-                placeholder="Pincode"
-                keyboardType={"number-pad"}
-            />
+                <TextInput style={styles.inputText}
+                    onChangeText={text => setaddress(text.replace(/['"]+/g, ''))}
+                    value={address}
+                    placeholder="Address"
+                />
+                <Text style={styles.requiredStyle}>*</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 
+                <TextInput style={styles.inputText}
+                    onChangeText={text => setstreet(text.replace(/['"]+/g, ''))}
+                    value={street}
+                    placeholder="Street Name"
+                />
+                <Text style={styles.requiredStyle}>*</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+                <TextInput style={styles.inputText}
+                    onChangeText={text => setcity(text.replace(/['"]+/g, ''))}
+                    value={city}
+                    placeholder="City"
+                />
+                <Text style={styles.requiredStyle}>*</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+                <TextInput style={styles.inputText}
+                    onChangeText={text => setpincode(text.replace(/['"]+/g, ''))}
+                    value={pincode}
+                    placeholder="Pincode"
+                    keyboardType={"number-pad"}
+                />
+                <Text style={styles.requiredStyle}>*</Text>
+            </View>
             <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
@@ -104,6 +119,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: Constants.statusBarHeight,
         backgroundColor: colors.BACKGROUND_COLOR
+    },
+    requiredStyle: {
+        fontSize: 16,
+        marginTop: 20
     },
     ScrollViewContainer: {
         flex: 1,

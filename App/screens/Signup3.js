@@ -71,6 +71,7 @@ const Signup3 = ({ navigation, route }) => {
     }
     return (
         <View style={styles.container}>
+
             <Autocomplete
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -91,7 +92,7 @@ const Signup3 = ({ navigation, route }) => {
                     setschoolname(text)
                     findSchool(text)
                 }}
-                placeholder="Enter the School title"
+                placeholder="Enter the School title *"
                 renderItem={({ item }) => (
                     // For the suggestion view
                     <TouchableOpacity
@@ -105,6 +106,7 @@ const Signup3 = ({ navigation, route }) => {
                     </TouchableOpacity>
                 )}
             />
+
             <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 100 }}>
                 <TouchableOpacity style={styles.loginButton} onPress={() => onCompleteHandler()}>
                     <Text style={styles.buttonText}>Sign Up</Text>
@@ -130,6 +132,10 @@ const styles = StyleSheet.create({
     autocompleteContainer: {
         marginTop: 10,
         maxHeight: "20%"
+    },
+    requiredStyle: {
+        fontSize: 16,
+        marginTop: 20
     },
     autocompleteInputText: {
 
