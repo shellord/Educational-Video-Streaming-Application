@@ -54,14 +54,19 @@ const Signup3 = ({ navigation, route }) => {
         let city = route.params.city
         let pincode = route.params.pincode
         let userschool
-        console.log(11)
-        if (schoolname.length > selectedSchoolValue.title.length) {
-            userschool = schoolname
+
+        if (selectedSchoolValue.title) {
+            if (schoolname.length > selectedSchoolValue.title.length) {
+                userschool = schoolname
+            }
+            else {
+                userschool = selectedSchoolValue.title
+            }
         }
         else {
-            userschool = selectedSchoolValue.title
+            userschool = schoolname
+
         }
-        console.log(userschool)
         if (!userschool) {
             alert("You need to enter school name to Signup!")
             return
