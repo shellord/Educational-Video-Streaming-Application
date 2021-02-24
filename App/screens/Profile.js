@@ -4,6 +4,8 @@ import { WebView } from 'react-native-webview'
 import Firebase from '../../config/Firebase'
 import colors from '../styles/styles'
 import { AuthContext } from "../context"
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const { width, height } = Dimensions.get('window')
 
@@ -43,9 +45,15 @@ const Profile = ({ navigation }) => {
     // </View>
 
     <View style={styles.container}>
-      <View style={{ marginTop: 10 }}>
-        <Button onPress={onShare} title="Share with your friends" />
-      </View>
+
+      <TouchableOpacity onPress={onShare} style={{ backgroundColor: '#03a9f4', flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10, flexDirection: 'row' }}>
+          <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'white' }}>SHARE WITH YOUR FRIENDS </Text>
+          <FontAwesome name='share-alt' size={14} color='#fff' style={{ paddingLeft: 10 }} />
+
+        </View>
+      </TouchableOpacity>
+
       <View style={styles.webviewStyle}>
         <WebView
           source={{
